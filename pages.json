@@ -1,0 +1,76 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/home/index",
+			"style": {
+				"navigationBarTitleText": "首页"
+			}
+		},
+		{
+			"path": "pages/news/index",
+			"style": {
+				"navigationBarTitleText": "资讯"
+			}
+		},
+		{
+			"path": "pages/monitor/index",
+			"style": {
+				"navigationBarTitleText": "监控"
+			}
+		},
+		{
+			"path": "pages/user/index",
+			"style": {
+				"navigationBarTitleText": "我的"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#1e50c5",
+		"borderStyle": "white",
+		"backgroundColor": "#f4f5f7",
+		"custom": true,
+		"list": [{
+				"pagePath": "pages/home/index",
+				"iconPath": "https://cdn.uviewui.com/uview/common/min_button.png",
+				"selectedIconPath": "https://cdn.uviewui.com/uview/common/min_button_select.png",
+				"text": "首页",
+				"count": 2,
+				"isDot": true,
+				"customIcon": false
+			},
+			{
+				"pagePath": "pages/news/index",
+				"iconPath": "https://cdn.uviewui.com/uview/common/min_button.png",
+				"selectedIconPath": "https://cdn.uviewui.com/uview/common/min_button_select.png",
+				"text": "资讯",
+				"customIcon": false
+			},
+			{
+				"pagePath": "pages/monitor/index",
+
+				"iconPath": "https://cdn.uviewui.com/uview/common/min_button.png",
+				"selectedIconPath": "https://cdn.uviewui.com/uview/common/min_button_select.png",
+				"text": "监控",
+				"midButton": true,
+				"customIcon": false
+			},
+			{
+				"pagePath": "pages/user/index",
+				"iconPath": "https://cdn.uviewui.com/uview/common/min_button.png",
+				"selectedIconPath": "https://cdn.uviewui.com/uview/common/min_button_select.png",
+				"text": "我的",
+				"customIcon": false
+			}
+		],
+		"current": 0
+	}
+
+}
