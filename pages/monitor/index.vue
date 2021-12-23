@@ -1,55 +1,62 @@
 <template>
 	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">{{ title }}</text>
-		</view>
-		<u-cell-group>
-			<u-cell icon="setting-fill" title="个人设置"></u-cell>
-			<u-cell icon="integral-fill" title="会员等级" value="新版本"></u-cell>
-		</u-cell-group>
+		<topTabbar :tabBars="tabBars" @TarTap="TarData" :tabIndex="tabIndex" ></topTabbar>
+		<!-- 每个tab标题对应的具体组件内容 -->
+		<component v-bind:is="currentTabComponent"></component>
 	</view>
 </template>
 
 <script>
+import topTabbar from '../../components/topTabbar/topTabbar.vue'
+import homeTabComponentNews from '../../components/topTabbarComponent/homeTabComponentNews.vue'
+import homeTabComponentMonitor from '../../components/topTabbarComponent/homeTabComponentMonitor.vue'
+import homeTabComponentTest from '../../components/topTabbarComponent/homeTabComponentTest.vue'
 export default {
+	components: {
+		topTabbar,
+		homeTabComponentNews,
+		homeTabComponentMonitor,
+		homeTabComponentTest
+	},
 	data() {
 		return {
-			title: 'Hello'
+			tabIndex: "homeTabComponentNews",
+			tabBars:[
+				{
+					name: "资讯头条",
+					id: "homeTabComponentNews"
+				},
+				{
+					name:"风险监控",
+					id:"homeTabComponentMonitor"
+				},
+				
+				
+			],
+			currentTabComponent: "homeTabComponentNews"
+			
 		};
 	},
-	onLoad() {
-		console.log(uni.$u.config.v);
+	onLoad(option) {
+	
 	},
-	methods: {}
+	methods: {
+		TarData(item){
+			//设置id，来显示选中那个标签，显示下划线
+			this.tabIndex = item.id;
+			//显示标签对应的组件内容
+			this.currentTabComponent = item.id
+		}
+
+	}
 };
 </script>
 
 <style lang="scss">
 @import '@/uni_modules/uview-ui/index.scss';
 .content {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
-
-.logo {
-	height: 200rpx;
-	width: 200rpx;
-	margin-top: 200rpx;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 50rpx;
-}
-
-.text-area {
-	display: flex;
-	justify-content: center;
-}
-
-.title {
-	font-size: 36rpx;
-	color: #8f8f94;
+	.tabs {
+		
+	}
 }
 </style>

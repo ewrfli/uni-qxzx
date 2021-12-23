@@ -1,56 +1,169 @@
 <template>
 	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">{{ title }}</text>
+		<view class="top">
+			<view class="top-title">企险资讯</view>
+			<view class="top-subtitle">企险资讯企险资讯企险资讯企险资讯企险资讯</view>
 		</view>
-		<u-cell-group>
-			<u-cell icon="setting-fill" title="个人设置"></u-cell>
-			<u-cell icon="integral-fill" title="会员等级" value="新版本"></u-cell>
-		</u-cell-group>
-		<tab-bar></tab-bar>
+		<u-sticky offset-top="0" customNavHeight="0" bgColor="#007aff">
+			<view class="u-search"><u-search shape="square" placeholder="搜索企业/老板/新闻" v-model="keyword" :show-action="false"></u-search></view>
+		</u-sticky>
+
+		<view class="iconfunc">
+			<u-grid :border="false" col="3">
+				<u-grid-item v-for="(listItem, listIndex) in iconList" :key="listIndex">
+					<u-icon :customStyle="{ paddingTop: 30 + 'rpx' }" :name="listItem.name" :size="22"></u-icon>
+					<text class="grid-text">{{ listItem.title }}</text>
+				</u-grid-item>
+			</u-grid>
+		</view>
+		
+		<view class="swiper">
+			 <u-swiper
+				:list="swiperList"
+				keyName="image"
+				showTitle
+				indicator
+				indicatorMode="line"
+				circular
+				height="60"
+			 ></u-swiper>
+		</view>
+		<view class="curtab">
+			<topTabbar :tabBars="tabBars" @TarTap="TarData" :tabIndex="tabIndex" ></topTabbar>
+			<!-- 每个tab标题对应的具体组件内容 -->
+			<component v-bind:is="currentTabComponent"></component>
+		</view>
+		<view class="news-hot-list"></view>
+		<view class="news-list"></view>
 	</view>
 </template>
 
 <script>
+import topTabbar from '../../components/topTabbar/topTabbar.vue'
+import homeTabComponentNews from '../../components/topTabbarComponent/homeTabComponentNews.vue'
+import homeTabComponentMonitor from '../../components/topTabbarComponent/homeTabComponentMonitor.vue'
 export default {
+	components: {
+		topTabbar,
+		homeTabComponentNews,
+		homeTabComponentMonitor
+	},
 	data() {
 		return {
-			title: 'Hello1'
+			title: 'Hello1',
+			keyword: '',
+			iconList: [
+				{
+				name: 'photo',
+				title: '图片'
+				},
+				{
+					name: 'lock',
+					title: '锁头'
+				},
+				{
+					name: 'star',
+					title: '星星'
+				},
+				{
+					name: 'hourglass',
+					title: '沙漏'
+				},
+				{
+					name: 'home',
+					title: '首页'
+				},
+				{
+					name: 'star',
+					title: '音量'
+				},
+			],
+			swiperList: [
+				{
+					image: 'https://cdn.uviewui.com/uview/swiper/swiper2.png',
+					title: '昨夜星辰昨夜风，画楼西畔桂堂东',
+				},{
+					image: 'https://cdn.uviewui.com/uview/swiper/swiper1.png',
+					title: '身无彩凤双飞翼，心有灵犀一点通'
+				},{
+					image: 'https://cdn.uviewui.com/uview/swiper/swiper3.png',
+					title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
+				}
+			],
+			tabIndex: "homeTabComponentNews",
+			tabBars:[
+				{
+					name: "资讯头条",
+					id: "homeTabComponentNews"
+				},
+				{
+					name:"风险监控",
+					id:"homeTabComponentMonitor"
+				},
+				
+				
+			],
+			currentTabComponent: "homeTabComponentNews"
 		};
+	},
+	onShow() {
+		// uni.hideTabBar({
+		// 	animation: false
+		// })
 	},
 	onLoad() {
 		console.log(uni.$u.config.v);
 	},
-	methods: {}
+	methods: {
+		TarData(item){
+			//设置id，来显示选中那个标签，显示下划线
+			this.tabIndex = item.id;
+			//显示标签对应的组件内容
+			this.currentTabComponent = item.id
+		}
+	}
 };
 </script>
 
 <style lang="scss">
 @import '@/uni_modules/uview-ui/index.scss';
 .content {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
-
-.logo {
-	height: 200rpx;
-	width: 200rpx;
-	margin-top: 200rpx;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 50rpx;
-}
-
-.text-area {
-	display: flex;
-	justify-content: center;
-}
-
-.title {
-	font-size: 36rpx;
-	color: #8f8f94;
+	height: 2000px;
+	.top {
+		height: 150px;
+		background-color: $uni-color-primary;
+		.top-title {
+			height: 100px;
+			line-height: 100px;
+			color: #ffffff;
+			font-size: 30px;
+			text-align: center;
+		}
+		.top-subtitle {
+			height: 10px;
+			line-height: 10px;
+			color: #ffffff;
+			font-size: 16px;
+			text-align: center;
+		}
+	}
+	.u-search {
+		background-color: $uni-color-primary;
+		padding: 5px 5px 5px 5px;
+	}
+	.iconfunc {
+		.grid-text {
+			font-size: 14px;
+			color: #909399;
+			padding: 10rpx 0 20rpx 0rpx;
+			/* #ifndef APP-PLUS */
+			box-sizing: border-box;
+			/* #endif */
+		}
+	}
+	.swiper {
+	}
+	.curtab {
+	}
 }
 </style>

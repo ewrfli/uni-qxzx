@@ -2,8 +2,8 @@ import App from './App'
 
 import Vue from 'vue'
 import uView from '@/uni_modules/uview-ui'
-import tabBar from "components/tabBar/tabBar.vue"//引入我们自己定义的tabBar组件
-Vue.component('tab-bar', tabBar)//使用全局tabBar组件
+import bottomTabBar from "components/bottomTabBar/bottomTabBar.vue"//引入我们自己定义的tabBar组件
+Vue.component('bottomTabBar', bottomTabBar)//使用全局tabBar组件
 Vue.use(uView)
 
 Vue.config.productionTip = false
