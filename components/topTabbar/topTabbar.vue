@@ -55,14 +55,14 @@
 		text-align: center;
 		width: 100%;
 		white-space: nowrap;
-		line-height: 100rpx;
-		height: 100rpx;
+		line-height: 66rpx;
+		height: 66rpx;
 		// border-bottom: 1px solid #eee;
 	}
 	.uni-tab-item-title{
 		color: #969696;
 		font-weight: bold;
-		font-size: 26rpx;
+		font-size: 24rpx;
 		width: 150rpx;
 		display: inline-block;
 		text-align: center;
@@ -75,10 +75,10 @@
 		display: block;
 		border-bottom: 2rpx solid #007aff;
 		border-top: 2rpx solid #007aff;
-		width: 86rpx;
+		width: 30rpx;
 		margin: 0 auto;
 		border-radius: 40rpx;
-		margin-top: -10px;
+		margin-top: -4px;
 		background-color: #007aff;
 		box-sizing: border-box;
 	}
