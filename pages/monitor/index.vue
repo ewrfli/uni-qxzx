@@ -2,7 +2,7 @@
 	<view class="content">
 		<topTabbar :tabBars="tabBars" @TarTap="TarData" :tabIndex="tabIndex" ></topTabbar>
 		<!-- 每个tab标题对应的具体组件内容 -->
-		<component v-bind:is="currentTabComponent"></component>
+		<!-- <component v-bind:is="currentTabComponent"></component> -->
 	</view>
 </template>
 

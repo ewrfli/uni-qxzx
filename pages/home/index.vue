@@ -1,10 +1,13 @@
 <template>
 	<view class="content">
+		<view class="status-bar" style="height: 80px; background-color: #007aff; position: sticky; top: 0px; z-index: 999;">
+			
+		</view>
 		<view class="top">
 			<view class="top-title">企险资讯</view>
 			<view class="top-subtitle">企险资讯企险资讯企险资讯企险资讯企险资讯</view>
 		</view>
-		<u-sticky offset-top="0" customNavHeight="0" bgColor="#007aff">
+		<u-sticky offset-top="0" customNavHeight="80" bgColor="#007aff">
 			<view class="u-search"><u-search shape="square" placeholder="搜索企业/老板/新闻" v-model="keyword" :show-action="false"></u-search></view>
 		</u-sticky>
 
