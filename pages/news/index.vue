@@ -1,15 +1,15 @@
 <template>
 	<view class="content">
 		<image class="logo" src="/static/logo.png"></image>
-		<homeTabComponentNews></homeTabComponentNews>
+		<homeTabComponentNewsHot></homeTabComponentNewsHot>
 	</view>
 </template>
 
 <script>
-import homeTabComponentNews from '../../components/topTabbarComponent/homeTabComponentNews.vue'
+import homeTabComponentNewsHot from '../../components/topTabbarComponent/homeTabComponentNewsHot.vue'
 export default {
 	components: {
-		homeTabComponentNews,
+		homeTabComponentNewsHot,
 	},
 	data() {
 		return {

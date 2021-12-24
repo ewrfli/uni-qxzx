@@ -31,7 +31,15 @@
 		<view class="curtab">
 			<topTabbar :tabBars="tabBars" @TarTap="TarData" :tabIndex="tabIndex" ></topTabbar>
 			<!-- 每个tab标题对应的具体组件内容 -->
-			<component v-bind:is="currentTabComponent"></component>
+			<view class="currentTabComponentNews" v-show="currentTabComponent=='homeTabComponentNews'">
+				<homeTabComponentNewsHot></homeTabComponentNewsHot>
+				<homeTabComponentNewsList></homeTabComponentNewsList>
+			</view>
+			<view class="currentTabComponentMonitor" v-show="currentTabComponent=='homeTabComponentMonitor'">
+				<homeTabComponentMonitor></homeTabComponentMonitor>
+			</view>
+			<!-- 动态组件 -->
+			<!-- <component v-bind:is="currentTabComponent"></component> -->
 		</view>
 		<view class="news-hot-list"></view>
 		<view class="news-list"></view>
@@ -40,12 +48,14 @@
 
 <script>
 import topTabbar from '../../components/topTabbar/topTabbar.vue'
-import homeTabComponentNews from '../../components/topTabbarComponent/homeTabComponentNews.vue'
+import homeTabComponentNewsHot from '../../components/topTabbarComponent/homeTabComponentNewsHot.vue'
+import homeTabComponentNewsList from '../../components/topTabbarComponent/homeTabComponentNewsList.vue'
 import homeTabComponentMonitor from '../../components/topTabbarComponent/homeTabComponentMonitor.vue'
 export default {
 	components: {
 		topTabbar,
-		homeTabComponentNews,
+		homeTabComponentNewsHot,
+		homeTabComponentNewsList,
 		homeTabComponentMonitor
 	},
 	data() {
@@ -94,16 +104,18 @@ export default {
 			tabBars:[
 				{
 					name: "资讯头条",
-					id: "homeTabComponentNews"
+					id: "homeTabComponentNews",
+					index: 0
 				},
 				{
 					name:"风险监控",
-					id:"homeTabComponentMonitor"
+					id:"homeTabComponentMonitor",
+					index: 1
 				},
 				
 				
 			],
-			currentTabComponent: "homeTabComponentNews"
+			currentTabComponent: 'homeTabComponentNews'
 		};
 	},
 	onShow() {
@@ -128,6 +140,7 @@ export default {
 <style lang="scss">
 @import '@/uni_modules/uview-ui/index.scss';
 .content {
+	background-color: $uni-color-backgroundColor;
 	height: 2000px;
 	.top {
 		height: 150px;
@@ -152,6 +165,7 @@ export default {
 		padding: 5px 5px 5px 5px;
 	}
 	.iconfunc {
+		background-color: $uni-color-content;
 		.grid-text {
 			font-size: 14px;
 			color: #909399;
@@ -164,6 +178,7 @@ export default {
 	.swiper {
 	}
 	.curtab {
+		
 	}
 }
 </style>

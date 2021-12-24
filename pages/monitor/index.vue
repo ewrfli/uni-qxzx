@@ -8,23 +8,23 @@
 
 <script>
 import topTabbar from '../../components/topTabbar/topTabbar.vue'
-import homeTabComponentNews from '../../components/topTabbarComponent/homeTabComponentNews.vue'
+import homeTabComponentNewsHot from '../../components/topTabbarComponent/homeTabComponentNewsHot.vue'
 import homeTabComponentMonitor from '../../components/topTabbarComponent/homeTabComponentMonitor.vue'
 import homeTabComponentTest from '../../components/topTabbarComponent/homeTabComponentTest.vue'
 export default {
 	components: {
 		topTabbar,
-		homeTabComponentNews,
+		homeTabComponentNewsHot,
 		homeTabComponentMonitor,
 		homeTabComponentTest
 	},
 	data() {
 		return {
-			tabIndex: "homeTabComponentNews",
+			tabIndex: "homeTabComponentNewsHot",
 			tabBars:[
 				{
 					name: "资讯头条",
-					id: "homeTabComponentNews"
+					id: "homeTabComponentNewsHot"
 				},
 				{
 					name:"风险监控",
@@ -33,7 +33,7 @@ export default {
 				
 				
 			],
-			currentTabComponent: "homeTabComponentNews"
+			currentTabComponent: "homeTabComponentNewsHot"
 			
 		};
 	},

@@ -42,6 +42,7 @@
 
 <style lang="scss">
 	.tabs{
+		background-color: $uni-color-content;
 		display: flex;
 		// flex: 1;
 		justify-content: space-around;
@@ -55,7 +56,7 @@
 		text-align: center;
 		width: 100%;
 		white-space: nowrap;
-		line-height: 66rpx;
+		line-height: 56rpx;
 		height: 66rpx;
 		// border-bottom: 1px solid #eee;
 	}

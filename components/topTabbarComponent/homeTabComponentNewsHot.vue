@@ -39,7 +39,7 @@
 
 <script>
 	export default {
-		name:"homeTabComponentNews",
+		name:"homeTabComponentNewsHot",
 		data() {
 			return {
 				itemList:[
@@ -79,8 +79,11 @@
 
 <style lang="scss">
 	.card {
-		padding: 10px 10px;
+		margin-top: 10px;
+		padding: 10px 10px 0px 10px;
+		background-color: $uni-color-content;
 		.top-title {
+
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
@@ -91,6 +94,9 @@
 				font-size: 12px;
 				color: #007AFF;
 			}
+		}
+		.itemList {
+			background-color: $uni-color-content;
 		}
 		.item {
 			display: flex;
