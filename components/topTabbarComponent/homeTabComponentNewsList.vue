@@ -137,6 +137,7 @@
 				font-size: 14px;
 			}
 			.right-title {
+				margin-top: 2px;
 				font-size: 12px;
 				color: #007AFF;
 			}

@@ -39,7 +39,7 @@
 				<homeTabComponentNewsList></homeTabComponentNewsList>
 			</view>
 			<view class="currentTabComponentMonitor" v-show="currentTabComponent=='homeTabComponentMonitor'">
-				<homeTabComponentMonitor></homeTabComponentMonitor>
+				<homeTabComponentMonitorAdvice></homeTabComponentMonitorAdvice>
 			</view>
 			<!-- 动态组件 -->
 			<!-- <component v-bind:is="currentTabComponent"></component> -->
@@ -53,13 +53,13 @@
 import topTabbar from '../../components/topTabbar/topTabbar.vue'
 import homeTabComponentNewsHot from '../../components/topTabbarComponent/homeTabComponentNewsHot.vue'
 import homeTabComponentNewsList from '../../components/topTabbarComponent/homeTabComponentNewsList.vue'
-import homeTabComponentMonitor from '../../components/topTabbarComponent/homeTabComponentMonitor.vue'
+import homeTabComponentMonitorAdvice from '../../components/topTabbarComponent/homeTabComponentMonitorAdvice.vue'
 export default {
 	components: {
 		topTabbar,
 		homeTabComponentNewsHot,
 		homeTabComponentNewsList,
-		homeTabComponentMonitor
+		homeTabComponentMonitorAdvice
 	},
 	data() {
 		return {
