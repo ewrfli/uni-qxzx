@@ -1,14 +1,14 @@
 <template>
 	<view class="content">
-		<view class="status-bar" style="height: 80px; background-color: #007aff; position: sticky; top: 0px; z-index: 999;">
+		<view class="status-bar" style="height: 0px; background-color: #007aff; position: sticky; top: 0px; z-index: 999;">
 			
 		</view>
 		<view class="top">
 			<view class="top-title">企险资讯</view>
 			<view class="top-subtitle">企险资讯企险资讯企险资讯企险资讯企险资讯</view>
 		</view>
-		<u-sticky offset-top="0" customNavHeight="80" bgColor="#007aff">
-			<view class="u-search"><u-search shape="square" placeholder="搜索企业/老板/新闻" v-model="keyword" :show-action="false"></u-search></view>
+		<u-sticky offset-top="0" customNavHeight="0" bgColor="#007aff">
+			<view class="u-search"><u-search shape="square" placeholder="搜索企业/Y老板/新闻" v-model="keyword" :show-action="false"></u-search></view>
 		</u-sticky>
 
 		<view class="iconfunc">
@@ -21,16 +21,9 @@
 		</view>
 		
 		<view class="swiper">
-			 <u-swiper
-				:list="swiperList"
-				keyName="image"
-				showTitle
-				indicator
-				indicatorMode="line"
-				circular
-				height="60"
-			 ></u-swiper>
+			<homeBanner></homeBanner>
 		</view>
+		
 		<view class="curtab">
 			<topTabbar :tabBars="tabBars" @TarTap="TarData" :tabIndex="tabIndex" ></topTabbar>
 			<!-- 每个tab标题对应的具体组件内容 -->
@@ -38,14 +31,14 @@
 				<homeTabComponentNewsHot></homeTabComponentNewsHot>
 				<homeTabComponentNewsList></homeTabComponentNewsList>
 			</view>
+			
 			<view class="currentTabComponentMonitor" v-show="currentTabComponent=='homeTabComponentMonitor'">
 				<homeTabComponentMonitorAdvice></homeTabComponentMonitorAdvice>
 			</view>
 			<!-- 动态组件 -->
 			<!-- <component v-bind:is="currentTabComponent"></component> -->
 		</view>
-		<view class="news-hot-list"></view>
-		<view class="news-list"></view>
+
 	</view>
 </template>
 
@@ -54,16 +47,17 @@ import topTabbar from '../../components/topTabbar/topTabbar.vue'
 import homeTabComponentNewsHot from '../../components/topTabbarComponent/homeTabComponentNewsHot.vue'
 import homeTabComponentNewsList from '../../components/topTabbarComponent/homeTabComponentNewsList.vue'
 import homeTabComponentMonitorAdvice from '../../components/topTabbarComponent/homeTabComponentMonitorAdvice.vue'
+import homeBanner from '../../components/homeBanner/homeBanner.vue'
 export default {
 	components: {
 		topTabbar,
 		homeTabComponentNewsHot,
 		homeTabComponentNewsList,
-		homeTabComponentMonitorAdvice
+		homeTabComponentMonitorAdvice,
+		homeBanner
 	},
 	data() {
 		return {
-			title: 'Hello1',
 			keyword: '',
 			iconList: [
 				{
@@ -91,18 +85,7 @@ export default {
 					title: '音量'
 				},
 			],
-			swiperList: [
-				{
-					image: 'https://cdn.uviewui.com/uview/swiper/swiper2.png',
-					title: '昨夜星辰昨夜风，画楼西畔桂堂东',
-				},{
-					image: 'https://cdn.uviewui.com/uview/swiper/swiper1.png',
-					title: '身无彩凤双飞翼，心有灵犀一点通'
-				},{
-					image: 'https://cdn.uviewui.com/uview/swiper/swiper3.png',
-					title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
-				}
-			],
+			
 			tabIndex: "homeTabComponentNews",
 			tabBars:[
 				{
@@ -115,8 +98,6 @@ export default {
 					id:"homeTabComponentMonitor",
 					index: 1
 				},
-				
-				
 			],
 			currentTabComponent: 'homeTabComponentNews'
 		};

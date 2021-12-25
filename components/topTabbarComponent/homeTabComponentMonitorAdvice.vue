@@ -1,5 +1,5 @@
 <template>
-	<view class="card">
+	<view class="ComponentMA">
 		<view class="top-title">
 			<view class="left-title">
 				推荐监控
@@ -94,13 +94,12 @@
 </script>
 
 <style lang="scss">
-	.u-scroll-list {
-		padding-bottom: 0px !important; 
-	}
-	.card {
+	
+	.ComponentMA {
 		margin-top: 10px;
 		padding: 10px 10px 0px 10px;
 		background-color: $uni-color-content;
+		
 		.top-title {
 
 			display: flex;
@@ -114,31 +113,34 @@
 				color: #007AFF;
 			}
 		}
-		.itemList {
+
+		.itemCard {
 			background-color: $uni-color-content;
-			.itemCard {
-				position: relative;
-				.close {
-					position: absolute;
-					right: 15px;
-					top: 10px;
-					color: #7e8186;
-					font-size: 14px;
-				}
+			position: relative;
+			.close {
+				position: absolute;
+				right: 15px;
+				top: 10px;
+				color: #7e8186;
+				font-size: 14px;
+				
 			}
 			.Card {
-				margin: 10px 10px 10px 0px;
+				margin: 10px 10px 0px 0px;
 				background-color: #ffffff;
 				width: 160px;
 				border-radius: 5px;
 				box-shadow: rgba(0,0,0,.2) 1px 0px 5px;
+				
 				.topDiv {
+					background-color: #ffffff;
 					display: flex;
 					flex-direction: row;
 					.content {
 						padding: 4px 13px 0px 4px;
 						text-overflow: ellipsis;
 						overflow: hidden;
+						height: 78px;
 						.name {
 							font-size: 14px;
 							white-space: nowrap;
@@ -154,8 +156,6 @@
 							font-size: 12px;
 							line-height: 14px;
 							width: 90px;
-							overflow: hidden;
-							text-overflow: ellipsis;
 						}
 					}
 				}
@@ -166,8 +166,11 @@
 					color: #007AFF;
 					padding: 5px 10px 5px 10px;
 					background-color: rgba($color: #6cacff, $alpha: .2);
+					border-radius: 0px 0px 5px 5px;
 				}
 			}
+			
+
 		}
 	}	
 </style>
