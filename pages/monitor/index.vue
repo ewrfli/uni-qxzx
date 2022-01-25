@@ -10,13 +10,12 @@
 <script>
 import topTabbar from '../../components/topTabbar/topTabbar.vue'
 import homeTabComponentNewsHot from '../../components/topTabbarComponent/homeTabComponentNewsHot.vue'
-import homeTabComponentMonitor from '../../components/topTabbarComponent/homeTabComponentMonitor.vue'
+
 import homeTabComponentTest from '../../components/topTabbarComponent/homeTabComponentTest.vue'
 export default {
 	components: {
 		topTabbar,
 		homeTabComponentNewsHot,
-		homeTabComponentMonitor,
 		homeTabComponentTest
 	},
 	data() {
@@ -25,11 +24,13 @@ export default {
 			tabBars:[
 				{
 					name: "资讯头条",
-					id: "homeTabComponentNewsHot"
+					id: "homeTabComponentNewsHot",
+					index: 0
 				},
 				{
 					name:"风险监控",
-					id:"homeTabComponentMonitor"
+					id:"homeTabComponentMonitor",
+					index: 1
 				},
 				
 				

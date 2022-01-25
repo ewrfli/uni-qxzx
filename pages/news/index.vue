@@ -1,32 +1,87 @@
 <template>
 	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<homeTabComponentNewsHot></homeTabComponentNewsHot>
+		<u-sticky offset-top="0" customNavHeight="0" bgColor="#007aff">
+			<view class="u-search"><u-search shape="square" placeholder="搜索企业/老板/新闻" v-model="searchkeyword" :show-action="false"></u-search></view>
+		</u-sticky>
+		<view class="swiper">
+			<homeBanner></homeBanner>
+		</view>
+		<view class="curtab">
+			<topTabbar :tabBars="tabBars" @TarTap="TarData" :tabIndex="tabIndex" ></topTabbar>
+			<!-- 每个tab标题对应的具体组件内容 -->
+			<view class="currentTabNews" v-show="currentTabComponent=='currentTabNews'">
+				<tabNewsHot></tabNewsHot>
+				<tabNewsList></tabNewsList>
+			</view>
+			
+			<view class="currentTabAttention" v-show="currentTabComponent=='currentTabAttention'">
+				<tabBlogCategory></tabBlogCategory>
+			</view>
+		</view>
 	</view>
 </template>
 
 <script>
-import homeTabComponentNewsHot from '../../components/topTabbarComponent/homeTabComponentNewsHot.vue'
+import topTabbar from '../../components/topTabbar/topTabbar.vue'
+import homeBanner from '../../components/homeBanner/homeBanner.vue'
+import tabNewsHot from '../../components/news/tabNewsHot.vue'
+import tabNewsList from '../../components/news/tabNewsList.vue'
+import tabBlogCategory from '../../components/blog/tabBlogCategory.vue'
 export default {
 	components: {
-		homeTabComponentNewsHot,
+		topTabbar,
+		homeBanner,
+		tabNewsHot,
+		tabNewsList,
+		tabBlogCategory
 	},
 	data() {
 		return {
-			title: 'Hello'
+			searchkeyword: '',
+			tabIndex: "currentTabNews",
+			tabBars:[
+				{
+					name: "推荐",
+					id: "currentTabNews",
+					index: 0
+				},
+				{
+					name:"关注",
+					id:"currentTabAttention",
+					index: 1
+				},
+				
+				
+			],
+			currentTabComponent: "currentTabNews"
 		};
 	},
 	onLoad() {
 		console.log(uni.$u.config.v);
 	},
-	methods: {}
+	methods: {
+		//tab栏
+		TarData(item){
+			//设置id，来显示选中那个标签，显示下划线
+			this.tabIndex = item.id;
+			//显示标签对应的组件内容
+			this.currentTabComponent = item.id
+		}
+	}
 };
 </script>
 
 <style lang="scss">
 @import '@/uni_modules/uview-ui/index.scss';
 .content {
-
+	background-color: $uni-color-backgroundColor;
+	.u-search {
+		background-color: $uni-color-primary;
+		padding: 5px 5px 5px 5px;
+	}
+	.swiper {
+		padding: 5px 8px;
+	}
 }
 
 </style>
