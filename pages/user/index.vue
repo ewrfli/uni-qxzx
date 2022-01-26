@@ -14,7 +14,7 @@
 							<text space="nbsp" class="user-data">普通用户 未认证</text>
 						</view>
 					</view>
-					<view class="userhomepage"><view class="touser">个人主页></view></view>
+					<view class="userhomepage" @click="toUserHomePage"><view class="touser">个人主页></view></view>
 			</view>
 			<view class="tips-div">
 				<view class="div1">
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import commonFuncDiv from '../../components/user/commonFuncDiv.vue'
+import commonFuncDiv from '../../components/userComponent/commonFuncDiv.vue'
 import homeBanner from '../../components/homeBanner/homeBanner.vue'//vipBanner
 import vipBanner from '../../components/homeBanner/vipBanner.vue'
 export default {
@@ -85,7 +85,9 @@ export default {
 		console.log(uni.$u.config.v);
 	},
 	methods: {
-
+		toUserHomePage(){
+			
+		}
 	}
 };
 </script>

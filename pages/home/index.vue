@@ -37,12 +37,12 @@
 </template>
 
 <script>
-import homeFuncDiv from '../../components/home/homeFuncDiv.vue'
+import homeFuncDiv from '../../components/homeComponent/homeFuncDiv.vue'
 import topTabbar from '../../components/topTabbar/topTabbar.vue'
-import homeTabComponentNewsHot from '../../components/topTabbarComponent/homeTabComponentNewsHot.vue'
-import homeTabComponentNewsList from '../../components/topTabbarComponent/homeTabComponentNewsList.vue'
-import homeTabComponentMonitorAdvice from '../../components/topTabbarComponent/homeTabComponentMonitorAdvice.vue'
-import homeTabComponentMonitorDaily from '../../components/topTabbarComponent/homeTabComponentMonitorDaily.vue'
+import homeTabComponentNewsHot from '../../components/newsComponent/tabNewsHot.vue'
+import homeTabComponentNewsList from '../../components/newsComponent/tabNewsList.vue'
+import homeTabComponentMonitorAdvice from '../../components/monitorComponent/tabMonitorAdvice.vue'
+import homeTabComponentMonitorDaily from '../../components/monitorComponent/tabMonitorDaily.vue'
 import homeBanner from '../../components/homeBanner/homeBanner.vue'
 export default {
 	components: {

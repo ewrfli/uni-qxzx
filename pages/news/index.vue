@@ -32,10 +32,10 @@
 <script>
 import topTabbar from '../../components/topTabbar/topTabbar.vue'
 import homeBanner from '../../components/homeBanner/homeBanner.vue'
-import tabNewsHot from '../../components/news/tabNewsHot.vue'
-import tabNewsList from '../../components/news/tabNewsList.vue'
-import tabBlogCategory from '../../components/blog/tabBlogCategory.vue'
-import tabBlogList from '../../components/blog/tabBlogList.vue'
+import tabNewsHot from '../../components/newsComponent/tabNewsHot.vue'
+import tabNewsList from '../../components/newsComponent/tabNewsList.vue'
+import tabBlogCategory from '../../components/blogComponent/tabBlogCategory.vue'
+import tabBlogList from '../../components/blogComponent/tabBlogList.vue'
 export default {
 	components: {
 		topTabbar,

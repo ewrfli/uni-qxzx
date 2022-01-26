@@ -41,7 +41,7 @@
 
 <script>
 export default {
-    name: 'newItemDetails',
+    name: 'blogThemeList',
     data() {
         return {
             current: 0,
