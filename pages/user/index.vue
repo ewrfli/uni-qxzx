@@ -1,55 +1,171 @@
 <template>
-	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">{{ title }}</text>
+	<view class="wrap">
+		<view class="top">
+			<view class="avatar-div">
+					<view class="user-img">
+						<image :src="userData.userImg" mode=""></image>
+					</view>
+					<view class="user-content">
+						<view class="user-name">
+							{{userData.userName}}
+						</view>
+						
+						<view class="user-sub">
+							<text space="nbsp" class="user-data">普通用户 未认证</text>
+						</view>
+					</view>
+					<view class="userhomepage"><view class="touser">个人主页></view></view>
+			</view>
+			<view class="tips-div">
+				<view class="div1">
+					<text style="color: #37a4fd;">{{totalTips[0]}}</text>
+					<text class="div1-text">企业认证</text>
+				</view>
+				<view class="div1">
+					<text class="data-text">{{totalTips[1]}}</text>
+					<text class="div1-text">监控动态</text>
+				</view>
+				<view class="div1">
+					<text class="data-text">{{totalTips[2]}}</text>
+					<text class="div1-text">积分</text>
+				</view>
+				<view class="div1">
+					<text class="data-text">{{totalTips[3]}}</text>
+					<text class="div1-text">消息通知</text>
+				</view>
+			</view>
 		</view>
-		<u-cell-group>
-			<u-cell icon="setting-fill" title="个人设置"></u-cell>
-			<u-cell icon="integral-fill" title="会员等级" value="新版本"></u-cell>
-		</u-cell-group>
+
+		<view class="mid">
+			<view class="vip-div">
+				<vipBanner></vipBanner>
+			</view>
+			<view class="banner-div">
+				<homeBanner></homeBanner>
+			</view>
+		</view>
+		<view class="low">
+			<commonFuncDiv></commonFuncDiv>
+		</view>
 	</view>
 </template>
 
 <script>
+import commonFuncDiv from '../../components/user/commonFuncDiv.vue'
+import homeBanner from '../../components/homeBanner/homeBanner.vue'//vipBanner
+import vipBanner from '../../components/homeBanner/vipBanner.vue'
 export default {
+	components: {
+		vipBanner,
+		homeBanner,
+		commonFuncDiv
+    },
 	data() {
 		return {
+			userData:{
+				id: '',
+				userImg: 'https://img.36krcdn.com/20200410/v2_6905947498bc4ec0af228afed409f771_img_png',
+				userName:'杨洋样',
+				time:2,
+				readNum:2233,
+				contentTitle: '自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶',
+				contentText: 'XXXXXXXXXXXXXXXX',
+				relatedCompany: '自动驾驶',
+				repostNum:11,
+				commentNum:22,
+				likeNum: 99,
+				icon: ''
+			},
+			
+			totalTips: ['未认证', 123 ,22, 33],
 			title: 'Hello'
 		};
 	},
 	onLoad() {
 		console.log(uni.$u.config.v);
 	},
-	methods: {}
+	methods: {
+
+	}
 };
 </script>
 
 <style lang="scss">
-@import '@/uni_modules/uview-ui/index.scss';
-.content {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
 
-.logo {
-	height: 200rpx;
-	width: 200rpx;
-	margin-top: 200rpx;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 50rpx;
-}
+.wrap {
+	.top{
+		.avatar-div {
+			padding: 10px 18px;
+			background-color: #eaf4fe;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			.user-img {
+				image{
+					margin-top: 8px; 
+					width: 50px; 
+					height: 50px; 
+					border-radius: 25px;
+				}
+			}
+			.user-content {
+				height: 42px;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				margin-left: 10px;
+				.user-name {
+					font-weight: 800;
+				}
+				.user-sub {
+					font-size: 12px;
+					color: #777777;
+				}
+			}
+			.userhomepage{
+				flex-grow: 1;//这三个元素只有它在有空余空间时可伸缩，也就是它占据了所有剩余空间
+				display: flex;//将它设置为flex,就可以单独对他进行主轴右对齐
+				justify-content: flex-end;
+				.touser{
+					width: 68px;
+					height: 20px;
+					font-size: 14px;
+					color: #777777;
+				}
+				
+			}
+		}
+		.tips-div {
+			background-color: #eaf4fe;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-around;
+			color: #303133;
+			border-radius: 5px;
+			.div1{
+				height: 55px;
+				text-align: center;
+				.data-text{
+					font-weight: 600;
+				}
+				.div1-text {
+					display: block; 
+					margin-top: 5px;
+					font-size: 15px;
+				}
+			}
+		}
+	}
+	.mid{
+		.vip-div{
+			padding: 0px 5px;
+		}
+		.banner-div{
+			padding: 0px 5px;
+		}
+	}
+	.low{
 
-.text-area {
-	display: flex;
-	justify-content: center;
-}
-
-.title {
-	font-size: 36rpx;
-	color: #8f8f94;
+	}
 }
 </style>
