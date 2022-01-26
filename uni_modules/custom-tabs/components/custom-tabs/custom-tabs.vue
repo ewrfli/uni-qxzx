@@ -125,15 +125,15 @@
 		}
 
 		.tab-bar {
-			border-bottom: 1rpx solid #ccc;
-			height: 90rpx;
+			background-color: #ffffff;
+			height: 72rpx;
 			white-space: nowrap;
-			margin-bottom: 30rpx;
+			margin-bottom: 12rpx;
 
 			&-item {
 				display: inline-block;
-				height: 90rpx;
-				line-height: 90rpx;
+				height: 70rpx;
+				line-height: 70rpx;
 				font-size: 30rpx;
 				color: #222;
 				text-align: center;
@@ -146,7 +146,7 @@
 				&.active::after {
 					content: '';
 					width: 80rpx;
-					height: 2rpx;
+					height: 4rpx;
 					position: absolute;
 					bottom: 0;
 					left: 50%;

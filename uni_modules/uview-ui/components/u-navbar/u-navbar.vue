@@ -121,6 +121,7 @@
 			right: 0;
 			top: 0;
 			z-index: 11;
+			border-bottom: rgb(226, 226, 226) solid 1px;
 		}
 
 		&__content {

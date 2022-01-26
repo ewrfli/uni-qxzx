@@ -5,10 +5,34 @@
                 <u-icon name="arrow-left" size="22" color="#007aff"></u-icon>
             </view>
         </u-navbar>
-        <view class="wrap" style="margin-top: 44px;">
+        <!-- <u-line style="margin-top: 46px;" length="93%"></u-line>  -->
+        <view class="tabs" style="margin-top: 44px;">
             <custom-tabs index="0" :animation="true" tabPadding="40" :scrollY="true" :flex="false" @changeIndex="changeIndex">
                 <custom-tab-pane v-for="item in themeList" :label="item.tag">
-                    <view style="height: 100px;">{{item.name}}</view>
+                    <view class="tabs-item" v-for="data in themeList">
+                        <view class="item">
+                            <view class="flexDiv">
+                                <view class="left-img">
+                                    <image style="width: 36px; height: 36px; border-radius: 4px;" :src="data.img" mode=""></image>
+                                </view>
+                                <view class="title">
+                                    <view class="Content-title">
+                                        <view class="Content-title-left">
+                                            #{{data.name}}
+                                        </view>
+                                    </view>
+                                    <view class="sub-title">
+                                        {{data.prompt}}
+                                    </view>
+                                </view>
+                            </view>
+                            <view class="right-hotIcon">
+                                <u-button v-if="data.describe" :plain="true" text="已关注"></u-button>
+                                <u-button v-else type="primary" text="关注"></u-button>
+                            </view>                
+                        </view> 
+                        <u-line style="margin: 0 10px;" length="93%"></u-line>     
+                    </view>
                 </custom-tab-pane>
             </custom-tabs>
         </view>
@@ -20,17 +44,6 @@ export default {
     name: 'newItemDetails',
     data() {
         return {
-            list: [
-                {
-                    name: '配电图',
-                },
-                {
-                    name: '最大容量',
-                },
-                {
-                    name: '电力参数',
-                },
-            ],
             current: 0,
             swiperCurrent: 0,
             tabsHeight: 0,
@@ -62,7 +75,7 @@ export default {
                     name: '4北京华峰车空峰车空科技公司',
                     tag: '热门公司4',
                     prompt: '新增一条公告调研报告',
-                    describe: '',
+                    describe: '1',
                     img: 'https://cdn.uviewui.com/uview/goods/4.jpg',
                 },
             ],
@@ -88,158 +101,50 @@ export default {
 .content {
     background-color: $uni-color-backgroundColor;
 }
-
-.newsItem {
-    margin: 50px 5px;
-    padding: 0px 10px 10px;
+.tab {
+    height: 90vh !important;
+}
+.item {
+    padding: 4px 8px;
     background-color: $uni-color-content;
-    margin-bottom: 10px;
-    .up-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .flexDiv {
+        margin-top: 10px;
         display: flex;
         flex-direction: row;
-        align-items: center;
-        .user-img {
-            image {
-                margin-top: 8px;
-                width: 36px;
-                height: 36px;
-                border-radius: 18px;
-            }
+        justify-content: flex-start;
+        .left-img {
         }
-        .user-content {
-            display: flex;
-            flex-direction: column;
-            margin-left: 6px;
-            .user-name {
-            }
-            .user-sub {
-                font-size: 12px;
-                color: #777777;
-            }
-        }
-        .attention-div {
-            flex-grow: 1; //这三个元素只有它在有空余空间时可伸缩，也就是它占据了所有剩余空间
-            display: flex; //将它设置为flex,就可以单独对他进行主轴右对齐
-            justify-content: flex-end;
-            .icon {
-                width: 42px;
-                height: 20px;
+        .title {
+            width: 230px;
+            margin-left: 8px;
+            overflow:hidden; //超出的文本隐藏
+                text-overflow:ellipsis; //溢出用省略号显示
+                white-space:nowrap; //溢出不换行
+            .Content-title {
                 font-size: 14px;
-                padding: 1px 4px;
-                color: #007aff;
-                border: 1px solid #007aff;
-                border-radius: 4px;
+                overflow:hidden; //超出的文本隐藏
+                text-overflow:ellipsis; //溢出用省略号显示
+                white-space:nowrap; //溢出不换行
+            }
+            .sub-title {
+                color: #afafaf;
+                font-size: 10px;
+                margin-top: 3px;
             }
         }
     }
-
-    .mid-block {
-        margin: 6px 6px 6px 6px;
-    }
-
-    .low-block {
-        margin: 0 5px;
-        display: flex;
-        flex-direction: column;
-        .companyDiv {
-            display: flex;
-            justify-content: space-between;
-            .companyFont {
-                line-height: 23px;
-                font-size: 12px;
-                color: #565656;
-                display: inline-block;
-                padding: 1px 6px;
-                border-radius: 4px;
-                background-color: #e5e5e5;
-            }
-            .star {
-                color: #565656;
-            }
+    .right-hotIcon {
+        margin-top: 12px;
+        .u-button {
+            width: 60px !important;
+            height: 30px !important;
         }
     }
 }
 
-.comment {
-    padding: 0px 5px 10px;
-    font-size: 14px;
-    .title {
-        background-color: $uni-color-content;
-        padding: 10px 10px 10px;
-    }
-    .list-card {
-        margin-top: 4px;
 
-        .item {
-            background-color: $uni-color-content;
-            margin-bottom: 5px;
-            padding-bottom: 7px;
-            .up-block {
-                padding-left: 10px;
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                .user-img {
-                    image {
-                        margin-top: 8px;
-                        width: 32px;
-                        height: 32px;
-                        border-radius: 16px;
-                    }
-                }
-                .user-content {
-                    display: flex;
-                    flex-direction: column;
-                    margin-left: 6px;
-                    .user-name {
-                    }
-                    .user-sub {
-                        font-size: 12px;
-                        color: #777777;
-                    }
-                }
-                .attention-div {
-                    flex-grow: 1; //这三个元素只有它在有空余空间时可伸缩，也就是它占据了所有剩余空间
-                    display: flex; //将它设置为flex,就可以单独对他进行主轴右对齐
-                    justify-content: flex-end;
-                    .icon {
-                        width: 42px;
-                        height: 20px;
-                        font-size: 14px;
-                        padding: 1px 4px;
-                        color: #007aff;
-                        border: 1px solid #007aff;
-                        border-radius: 4px;
-                    }
-                }
-            }
-            .mid-block {
-                margin: 6px 20px;
-            }
-            .low-block {
-                padding: 0 20px;
-                display: flex;
-                flex-direction: column;
-                .bottom-Div {
-                    display: flex;
-                    justify-content: space-between;
-                    font-size: 12px;
-                    line-height: 23px;
-                    .time {
-                        line-height: 24px;
-                        color: #565656;
-                    }
-                    .answer {
-                        margin-right: 146px;
-                        color: #007aff;
-                    }
-                    .star {
-                        line-height: 24px;
-                        color: #565656;
-                    }
-                }
-            }
-        }
-    }
-}
+
 </style>
