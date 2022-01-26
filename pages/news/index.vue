@@ -73,6 +73,9 @@ export default {
 		//floatbotton
 		trigger(){
 			console.log('trigger')
+			uni.navigateTo({
+				url: '/pages/news/addBlogArticle'
+			});
 		},
 		//tab栏
 		TarData(item){

@@ -126,7 +126,7 @@ export default {
 @import '@/uni_modules/uview-ui/index.scss';
 .content {
 	background-color: $uni-color-backgroundColor;
-	height: 2000px;
+	// height: 2000px;
 	.top {
 		height: 150px;
 		background-color: $uni-color-primary;

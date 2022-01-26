@@ -64,6 +64,14 @@
 				"navigationStyle":"custom",
 				"navigationBarTextStyle": "white" // 状态栏字体为白色
 			}
+		},
+		{
+			"path": "pages/news/addBlogArticle",
+			"style": {
+				"navigationBarTitleText": "发表讨论",
+				"navigationStyle":"custom",
+				"navigationBarTextStyle": "white" // 状态栏字体为白色
+			}
 		}
 	],
 	"globalStyle": {
