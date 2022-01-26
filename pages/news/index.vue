@@ -19,6 +19,13 @@
 				<tabBlogList></tabBlogList>
 			</view>
 		</view>
+		<view class="float-button">
+			<uni-fab
+            horizontal="right"
+            vertical="bottom"
+            @fabClick="trigger"
+        	></uni-fab>
+		</view>
 	</view>
 </template>
 
@@ -63,6 +70,10 @@ export default {
 		console.log(uni.$u.config.v);
 	},
 	methods: {
+		//floatbotton
+		trigger(){
+			console.log('trigger')
+		},
 		//tab栏
 		TarData(item){
 			//设置id，来显示选中那个标签，显示下划线
@@ -77,6 +88,7 @@ export default {
 <style lang="scss">
 @import '@/uni_modules/uview-ui/index.scss';
 .content {
+	position: relative;
 	background-color: $uni-color-backgroundColor;
 	.u-search {
 		background-color: $uni-color-primary;
@@ -85,6 +97,7 @@ export default {
 	.swiper {
 		padding: 5px 8px;
 	}
+
 }
 
 </style>
