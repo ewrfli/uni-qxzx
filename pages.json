@@ -53,7 +53,7 @@
 			"path": "pages/news/blogItemDetails",
 			"style": {
 				"navigationBarTitleText": "动态详情",
-				"navigationStyle":"custom",
+				// "navigationStyle":"custom",
 				"navigationBarTextStyle": "white" // 状态栏字体为白色
 			}
 		},
@@ -69,6 +69,14 @@
 			"path": "pages/news/addBlogArticle",
 			"style": {
 				"navigationBarTitleText": "发表讨论",
+				"navigationStyle":"custom",
+				"navigationBarTextStyle": "white" // 状态栏字体为白色
+			}
+		},
+		{
+			"path": "pages/user/userHomePage",
+			"style": {
+				"navigationBarTitleText": "用户主页",
 				"navigationStyle":"custom",
 				"navigationBarTextStyle": "white" // 状态栏字体为白色
 			}

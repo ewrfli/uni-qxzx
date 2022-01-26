@@ -86,7 +86,9 @@ export default {
 	},
 	methods: {
 		toUserHomePage(){
-			
+			uni.navigateTo({
+				url: '/pages/user/userHomePage'
+			});
 		}
 	}
 };
@@ -160,7 +162,7 @@ export default {
 	}
 	.mid{
 		.vip-div{
-			padding: 3px 3px;
+			padding: 0px 3px;
 		}
 		.banner-div{
 			padding: 0px 3px;
