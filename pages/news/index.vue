@@ -16,6 +16,7 @@
 			
 			<view class="currentTabAttention" v-show="currentTabComponent=='currentTabAttention'">
 				<tabBlogCategory></tabBlogCategory>
+				<tabBlogList></tabBlogList>
 			</view>
 		</view>
 	</view>
@@ -27,13 +28,15 @@ import homeBanner from '../../components/homeBanner/homeBanner.vue'
 import tabNewsHot from '../../components/news/tabNewsHot.vue'
 import tabNewsList from '../../components/news/tabNewsList.vue'
 import tabBlogCategory from '../../components/blog/tabBlogCategory.vue'
+import tabBlogList from '../../components/blog/tabBlogList.vue'
 export default {
 	components: {
 		topTabbar,
 		homeBanner,
 		tabNewsHot,
 		tabNewsList,
-		tabBlogCategory
+		tabBlogCategory,
+		tabBlogList
 	},
 	data() {
 		return {

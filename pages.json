@@ -48,6 +48,22 @@
 				"navigationStyle":"custom",
 				"navigationBarTextStyle": "white" // 状态栏字体为白色
 			}
+		},
+		{
+			"path": "pages/news/blogItemDetails",
+			"style": {
+				"navigationBarTitleText": "动态详情",
+				"navigationStyle":"custom",
+				"navigationBarTextStyle": "white" // 状态栏字体为白色
+			}
+		},
+		{
+			"path": "pages/news/blogThemeList",
+			"style": {
+				"navigationBarTitleText": "全部话题",
+				"navigationStyle":"custom",
+				"navigationBarTextStyle": "white" // 状态栏字体为白色
+			}
 		}
 	],
 	"globalStyle": {

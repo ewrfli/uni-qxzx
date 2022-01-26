@@ -4,7 +4,7 @@
 			<view class="left-title">
 				关注的话题
 			</view>
-			<view class="right-title">
+			<view class="right-title" @click="toBlogThemeList">
 				全部
 			</view>
 		</view>
@@ -64,7 +64,11 @@
 			
 		},
 		methods: {
-			
+			toBlogThemeList(){
+				uni.navigateTo({
+					url: '/pages/news/blogThemeList'
+				});
+			}
 		},
 	}
 </script>
