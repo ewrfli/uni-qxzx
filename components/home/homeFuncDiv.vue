@@ -1,9 +1,5 @@
 <template>
     <view class="card">
-        <view class="top-title">
-            <view class="left-title"> 常用功能 </view>
-        </view>
-
         <view class="icon-func">
             <u-grid :border="false" col="4">
                 <u-grid-item
@@ -12,7 +8,7 @@
                     @click="clickFunc(listItem.title)"
                 >
                     <u-icon
-                        :customStyle="{ paddingTop: 40 + 'rpx' }"
+                        :customStyle="{ paddingTop: 30 + 'rpx' }"
                         :name="listItem.name"
                         :size="22"
                     ></u-icon>
@@ -25,7 +21,7 @@
 
 <script>
 export default {
-    name: 'commonFuncDiv',
+    name: 'homeFuncDiv',
     data() {
         return {
             iconList: [
@@ -74,21 +70,13 @@ export default {
 
 <style lang="scss">
 .card {
-    margin-top: 6px;
-    padding: 10px 10px 0px 10px;
+    padding: 0px 8px 10px 8px;
     background-color: $uni-color-content;
-    .top-title {
-        padding-left: 14px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        .left-title {
-            font-size: 16px;
-            font-weight: 600;
+    .icon-func{
+        .grid-text{
+            font-size: 14px;
+            color: #5f5f5f;
         }
-    }
-    .itemList {
-        background-color: $uni-color-content;
     }
 }
 </style>

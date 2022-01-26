@@ -41,7 +41,7 @@
 				<vipBanner></vipBanner>
 			</view>
 			<view class="banner-div">
-				<homeBanner></homeBanner>
+				<!-- <homeBanner></homeBanner> -->
 			</view>
 		</view>
 		<view class="low">
@@ -158,10 +158,10 @@ export default {
 	}
 	.mid{
 		.vip-div{
-			padding: 0px 5px;
+			padding: 3px 3px;
 		}
 		.banner-div{
-			padding: 0px 5px;
+			padding: 0px 3px;
 		}
 	}
 	.low{

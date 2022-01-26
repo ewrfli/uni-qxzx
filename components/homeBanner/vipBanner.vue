@@ -25,7 +25,7 @@
 .banner{
     border-radius: 5px;
     background-color: #f7dcba;
-    height: 50px;
+    height: 45px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

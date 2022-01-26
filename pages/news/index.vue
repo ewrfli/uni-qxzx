@@ -98,7 +98,7 @@ export default {
 		padding: 5px 5px 5px 5px;
 	}
 	.swiper {
-		padding: 5px 8px;
+		padding: 0px 0px;
 	}
 
 }

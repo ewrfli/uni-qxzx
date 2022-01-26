@@ -12,12 +12,7 @@
 		</u-sticky>
 
 		<view class="iconfunc">
-			<u-grid :border="false" col="3">
-				<u-grid-item v-for="(listItem, listIndex) in iconList" :key="listIndex">
-					<u-icon :customStyle="{ paddingTop: 30 + 'rpx' }" :name="listItem.name" :size="22"></u-icon>
-					<text class="grid-text">{{ listItem.title }}</text>
-				</u-grid-item>
-			</u-grid>
+			<homeFuncDiv></homeFuncDiv>
 		</view>
 		
 		<view class="swiper">
@@ -42,6 +37,7 @@
 </template>
 
 <script>
+import homeFuncDiv from '../../components/home/homeFuncDiv.vue'
 import topTabbar from '../../components/topTabbar/topTabbar.vue'
 import homeTabComponentNewsHot from '../../components/topTabbarComponent/homeTabComponentNewsHot.vue'
 import homeTabComponentNewsList from '../../components/topTabbarComponent/homeTabComponentNewsList.vue'
@@ -50,6 +46,7 @@ import homeTabComponentMonitorDaily from '../../components/topTabbarComponent/ho
 import homeBanner from '../../components/homeBanner/homeBanner.vue'
 export default {
 	components: {
+		homeFuncDiv,
 		topTabbar,
 		homeTabComponentNewsHot,
 		homeTabComponentNewsList,
