@@ -12,7 +12,7 @@
                 </view>
                 <view class="user-operation">
 					<view class="opera star"><u-icon style="display: inline-block;" name="thumb-up" size="22" color="#999999"></u-icon><span class="data">9</span></view>
-					<view class="opera toedit">编辑资料</view>
+					<view class="opera toedit" @click="toEditUserData">编辑资料</view>
 				</view>
 				
             </view>
@@ -29,8 +29,59 @@
             </view>
         </view>
 
-        <view class="mid"> </view>
-        <view class="low"> </view>
+        <view class="mid">
+            <u-line length="98%" style="margin: 10px auto;"></u-line>
+            <view class="info profession">
+                <u-icon name="coupon" size="40"></u-icon>
+                <view class="data">
+                    <span class="title">行业</span>
+                    <span class="detail">去完善></span>
+                </view>
+            </view>
+            <view class="info company">
+                <u-icon name="calendar" size="40"></u-icon>
+                <view class="data">
+                    <span class="title">公司</span>
+                    <span class="detail">去完善></span>
+                </view>
+            </view>
+            <view class="info school">
+                <u-icon name="bookmark" size="40"></u-icon>
+                <view class="data">
+                    <span class="title">学校</span>
+                    <span class="detail">去完善></span>
+                </view>
+            </view>
+        </view>
+
+        <view class="low">
+            <view class="low-title">我参与的话题</view>
+            <u-line length="100%" style="margin: 0 auto;"></u-line>
+            <view class="tabs-item" v-for="data in themeList">
+                <view class="item">
+                    <view class="flexDiv">
+                        <view class="left-img">
+                            <image style="width: 36px; height: 36px; border-radius: 4px;" :src="data.img" mode=""></image>
+                        </view>
+                        <view class="title">
+                            <view class="Content-title">
+                                <view class="Content-title-left">
+                                    #{{data.name}}
+                                </view>
+                            </view>
+                            <view class="sub-title">
+                                {{data.prompt}}
+                            </view>
+                        </view>
+                    </view>
+                    <!-- <view class="right-hotIcon">
+                        <u-button v-if="data.describe" :plain="true" text="已关注"></u-button>
+                        <u-button v-else type="primary" text="关注"></u-button>
+                    </view>                 -->
+                </view> 
+                <u-line style="margin: 0 10px;" length="93%"></u-line>     
+            </view>            
+        </view>
     </view>
 </template>
 
@@ -62,7 +113,78 @@ export default {
                 likeNum: 99,
                 icon: '',
             },
-
+            themeList: [
+                {
+                    name: '北京华峰车空峰车空科技公司1',
+                    tag: '热门公司1',
+                    prompt: '新增一条公告调研报告',
+                    describe: '',
+                    img: 'https://cdn.uviewui.com/uview/goods/1.jpg',
+                },
+                {
+                    name: '2北京华峰车空xx北京华峰车空峰车空科技公司',
+                    tag: '热门公司2',
+                    prompt: '新增一条公告调研报告',
+                    describe: '',
+                    img: 'https://cdn.uviewui.com/uview/goods/2.jpg',
+                },
+                {
+                    name: '3北京华峰车空峰车空科技公司',
+                    tag: '热门公司3',
+                    prompt: '新增一条公告调研报告',
+                    describe: '',
+                    img: 'https://cdn.uviewui.com/uview/goods/3.jpg',
+                },
+                {
+                    name: '4北京华峰车空峰车空科技公司',
+                    tag: '热门公司4',
+                    prompt: '新增一条公告调研报告',
+                    describe: '1',
+                    img: 'https://cdn.uviewui.com/uview/goods/4.jpg',
+                },
+                 {
+                    name: '4北京华峰车空峰车空科技公司',
+                    tag: '热门公司4',
+                    prompt: '新增一条公告调研报告',
+                    describe: '1',
+                    img: 'https://cdn.uviewui.com/uview/goods/4.jpg',
+                },
+                 {
+                    name: '4北京华峰车空峰车空科技公司',
+                    tag: '热门公司4',
+                    prompt: '新增一条公告调研报告',
+                    describe: '1',
+                    img: 'https://cdn.uviewui.com/uview/goods/4.jpg',
+                },
+                 {
+                    name: '4北京华峰车空峰车空科技公司',
+                    tag: '热门公司4',
+                    prompt: '新增一条公告调研报告',
+                    describe: '1',
+                    img: 'https://cdn.uviewui.com/uview/goods/4.jpg',
+                },
+                 {
+                    name: '4北京华峰车空峰车空科技公司',
+                    tag: '热门公司4',
+                    prompt: '新增一条公告调研报告',
+                    describe: '1',
+                    img: 'https://cdn.uviewui.com/uview/goods/4.jpg',
+                },
+                 {
+                    name: '4北京华峰车空峰车空科技公司',
+                    tag: '热门公司4',
+                    prompt: '新增一条公告调研报告',
+                    describe: '1',
+                    img: 'https://cdn.uviewui.com/uview/goods/4.jpg',
+                },
+                 {
+                    name: '4北京华峰车空峰车空科技公司',
+                    tag: '热门公司4',
+                    prompt: '新增一条公告调研报告',
+                    describe: '1',
+                    img: 'https://cdn.uviewui.com/uview/goods/4.jpg',
+                },
+            ],
             totalTips: ['未认证', 123, 22, 33],
             title: 'Hello',
         };
@@ -72,27 +194,27 @@ export default {
     },
     methods: {
         leftClick() {
-            uni.navigateBack({
-                delta: 1,
-                animationType: 'pop-out',
-                animationDuration: 200,
-            });
+            // uni.navigateBack({
+            //     delta: 1,
+            //     animationType: 'pop-out',
+            //     animationDuration: 200,
+            // });
+            uni.switchTab({
+				url: '/pages/user/index'
+			});
         },
-        toUserHomePage() {},
+        toEditUserData() {
+            uni.navigateTo({
+				url: '/pages/user/editUserData'
+			});
+        },
     },
 };
 </script>
 
 <style lang="scss">
-.u-navbar--fixed {
-    position: fixed !important;
-    left: 0 !important;
-    right: 0 !important;
-    top: 0 !important;
-    z-index: 11 !important;
-    border-bottom: rgb(226, 226, 226) solid 0px !important;
-}
 .wrap {
+    background-color: $uni-color-backgroundColor;
     .top {
         padding: 0 10px 0 18px;
         background: linear-gradient(0deg, #ffffff 0%, #d5e5ff 100%);
@@ -187,14 +309,77 @@ export default {
         }
     }
     .mid {
-        .vip-div {
-            padding: 3px 3px;
-        }
-        .banner-div {
-            padding: 0px 3px;
+        background-color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        padding: 0 10px;
+        justify-content: center;
+        // align-items: center;
+        .info {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 8px;
+            .data{
+                margin-left: 8px;
+                display: flex;
+                flex-direction: column;
+                .title{
+                    margin-bottom: 5px;
+                }
+                .detail{
+                    font-size: 14px;
+					color: #777777;
+                }
+            }
         }
     }
     .low {
+        background-color: $uni-color-content;
+        margin-top: 10px;
+        .low-title {
+            padding: 10px 10px;
+        }
+        .item {
+            padding: 0px 8px 4px;
+            background-color: $uni-color-content;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            .flexDiv {
+                margin-top: 10px;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                .left-img {
+                    margin-top: 1px;
+                }
+                .title {
+                    width: 230px;
+                    margin-left: 8px;
+                    overflow:hidden; //超出的文本隐藏
+                        text-overflow:ellipsis; //溢出用省略号显示
+                        white-space:nowrap; //溢出不换行
+                    .Content-title {
+                        font-size: 14px;
+                        overflow:hidden; //超出的文本隐藏
+                        text-overflow:ellipsis; //溢出用省略号显示
+                        white-space:nowrap; //溢出不换行
+                    }
+                    .sub-title {
+                        color: #afafaf;
+                        font-size: 10px;
+                        margin-top: 3px;
+                    }
+                }
+            }
+            .right-hotIcon {
+                margin-top: 12px;
+                .u-button {
+                    width: 60px !important;
+                    height: 30px !important;
+                }
+            }
+        }
     }
 }
 </style>

@@ -80,6 +80,70 @@
 				"navigationStyle":"custom",
 				"navigationBarTextStyle": "white" // 状态栏字体为白色
 			}
+		},
+		{
+			"path": "pages/user/editUserData",
+			"style": {
+				"navigationBarTitleText": "编辑资料",
+				"navigationStyle":"custom",
+				"navigationBarTextStyle": "white" // 状态栏字体为白色
+			}
+		},
+		{
+			"path": "pages/user/funcDiv/myAttention",
+			"style": {
+				"navigationBarTitleText": "我的关注",
+				"navigationStyle":"custom",
+				"navigationBarTextStyle": "white" // 状态栏字体为白色
+			}
+		},
+		{
+			"path": "pages/user/funcDiv/myCollection",
+			"style": {
+				"navigationBarTitleText": "我的收藏",
+				"navigationStyle":"custom",
+				"navigationBarTextStyle": "white" // 状态栏字体为白色
+			}
+		},
+		{
+			"path": "pages/user/funcDiv/myFriend",
+			"style": {
+				"navigationBarTitleText": "我的好友",
+				"navigationStyle":"custom",
+				"navigationBarTextStyle": "white" // 状态栏字体为白色
+			}
+		},
+		{
+			"path": "pages/user/funcDiv/myMessage",
+			"style": {
+				"navigationBarTitleText": "我的消息",
+				"navigationStyle":"custom",
+				"navigationBarTextStyle": "white" // 状态栏字体为白色
+			}
+		},
+		{
+			"path": "pages/user/funcDiv/myPublish",
+			"style": {
+				"navigationBarTitleText": "我的发布",
+				"navigationStyle":"custom",
+				"navigationBarTextStyle": "white" // 状态栏字体为白色
+			}
+		},
+		{
+			"path": "pages/user/funcDiv/setting",
+			"style": {
+				"navigationBarTitleText": "应用设置",
+				"navigationStyle":"custom",
+				"navigationBarTextStyle": "white" // 状态栏字体为白色
+			}
+		},
+		{
+			"path": "pages/user/funcDiv/vipServe",
+			"style": {
+				"navigationBarTitleText": "VIP服务",
+				"navigationStyle":"custom",
+				"navigationBarTextStyle": "white" // 状态栏字体为白色
+			}
 		}
 	],
 	"globalStyle": {

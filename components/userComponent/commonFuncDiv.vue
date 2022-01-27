@@ -9,7 +9,7 @@
                 <u-grid-item
                     v-for="(listItem, listIndex) in iconList"
                     :key="listIndex"
-                    @click="clickFunc(listItem.title)"
+                    @click="clickFunc(listItem.page)"
                 >
                     <u-icon
                         :customStyle="{ paddingTop: 40 + 'rpx' }"
@@ -32,41 +32,51 @@ export default {
                 {
                     name: 'photo',
                     title: '应用设置',
+                    page: 'pages/user/funcDiv/setting'
                 },
                 {
                     name: 'lock',
                     title: '编辑资料',
+                    page: 'pages/user/editUserData'
                 },
                 {
                     name: 'star',
                     title: '我的发布',
+                    page: 'pages/user/funcDiv/myPublish'
                 },
                 {
                     name: 'hourglass',
                     title: '我的消息',
+                    page: 'pages/user/funcDiv/myMessage'
                 },
                 {
                     name: 'home',
                     title: '我的关注',
+                    page: 'pages/user/funcDiv/myAttention'
                 },
                 {
                     name: 'star',
                     title: '我的收藏',
+                    page: 'pages/user/funcDiv/myCollection'
                 },
                 {
                     name: 'home',
                     title: 'VIP服务',
+                    page: 'pages/user/funcDiv/vipServe'
                 },
                 {
                     name: 'star',
-                    title: '我的粉丝',
+                    title: '我的好友',
+                    page: 'pages/user/funcDiv/myFriend'
                 },
             ],
         };
     },
     methods: {
-        clickFunc(name) {
-            console.log(name)
+        clickFunc(page) {
+            uni.navigateTo({
+                url: '/'+page
+            })
         },
     },
 };
