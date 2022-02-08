@@ -1,6 +1,22 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"navigationStyle":"custom",//隐藏top导航栏
+				"navigationBarTextStyle": "white" // 状态栏字体为白色
+			}
+		},
+		{
+			"path": "pages/login/register",
+			"style": {
+				"navigationBarTitleText": "注册",
+				"navigationStyle":"custom",//隐藏top导航栏
+				"navigationBarTextStyle": "white" // 状态栏字体为白色
+			}
+		},
+		{
 			"path": "pages/news/index",
 			"style": {
 				"navigationBarTitleText": "资讯",

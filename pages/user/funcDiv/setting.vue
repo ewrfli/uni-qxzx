@@ -114,7 +114,7 @@
 				</view>
 			</view>
 
-			<view class="bottom-title">
+			<view class="bottom-title" @click="toLogin">
 				退出当前账号
 			</view>
 		</view>
@@ -129,6 +129,11 @@
 			};
 		},
 		methods: {
+			toLogin(){
+				uni.navigateTo({
+					url: '/pages/login/login'
+				});
+			},
 			leftClick(){
 				uni.navigateBack({
 					delta: 1,
