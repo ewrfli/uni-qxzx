@@ -15,14 +15,114 @@
 		
 		</u-navbar>
 		<view class="card">	
+			<view class="func-item" style="margin-bottom: 7px;">
+				<view class="left-title">
+					账号管理
+				</view>
+				<view class="right-title">
+					<u-icon
+						name="arrow-right"
+						size="16"
+						color="#007aff"
+					></u-icon>
+				</view>
+			</view>
 
+			<view class="func-item">
+				<view class="left-title">
+					推送消息设置
+				</view>
+				<view class="right-title">
+					<u-icon
+						name="arrow-right"
+						size="16"
+						color="#007aff"
+					></u-icon>
+				</view>
+			</view>
+			<view class="func-item">
+				<view class="left-title">
+					清除缓存
+				</view>
+				<view class="right-title">
+					<u-icon
+						name="arrow-right"
+						size="16"
+						color="#007aff"
+					></u-icon>
+				</view>
+			</view>
+			<view class="func-item" style="margin-bottom: 7px;">
+				<view class="left-title">
+					版本更新
+				</view>
+				<view class="right-title">
+					<u-icon
+						name="arrow-right"
+						size="16"
+						color="#007aff"
+					></u-icon>
+				</view>
+			</view>
+			<view class="func-item" style="margin-bottom: 7px;">
+				<view class="left-title">
+					分享app
+				</view>
+				<view class="right-title">
+					<u-icon
+						name="arrow-right"
+						size="16"
+						color="#007aff"
+					></u-icon>
+				</view>
+			</view>
+
+			<view class="func-item">
+				<view class="left-title">
+					关于我们
+				</view>
+				<view class="right-title">
+					<u-icon
+						name="arrow-right"
+						size="16"
+						color="#007aff"
+					></u-icon>
+				</view>
+			</view>
+			<view class="func-item">
+				<view class="left-title">
+					用户协议
+				</view>
+				<view class="right-title">
+					<u-icon
+						name="arrow-right"
+						size="16"
+						color="#007aff"
+					></u-icon>
+				</view>
+			</view>
+			<view class="func-item" style="margin-bottom: 7px;">
+				<view class="left-title">
+					隐私政策
+				</view>
+				<view class="right-title">
+					<u-icon
+						name="arrow-right"
+						size="16"
+						color="#007aff"
+					></u-icon>
+				</view>
+			</view>
+
+			<view class="bottom-title">
+				退出当前账号
+			</view>
 		</view>
 	</view>
 </template>
 
 <script>
 	export default {
-		name:"newsHotDetails",
 		data() {
 			return {
 
@@ -41,41 +141,35 @@
 </script>
 
 <style lang="scss">
-	.content{
+
+	.wrap{
+		height: 100vh;
 		background-color: $uni-color-backgroundColor;
 	}
 	.card {
-		margin: 50px 6px 0;
-		padding: 0px 10px 0px 10px;
+		margin-top: 50px;
+	}
+	.func-item {
+		padding: 14px 10px;
 		background-color: $uni-color-content;
-		.u-navbar__content {
-			background-color: aqua !important;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		.left-title {
+			font-size: 14px;
 		}
-		.itemList {
-			background-color: $uni-color-content;
+		.right-title {
+			margin-top: 2px;
+			font-size: 12px;
+			color: #007AFF;
 		}
-		.item {
-			// background-color: antiquewhite;
-			border-bottom: 0.5px solid $uni-border-color;
-			height: 36px;
-			line-height: 28px;
-			margin-top: 10px;
-			display: flex;
-			flex-direction: row;
-			justify-content: flex-start;
-
-			.left-icon {
-				.u-icon{
-					margin-top: 6px;
-				}
-			}
-			.title {
-				margin-left: 8px;
-				.Content-title {
-					font-size: 16px;
-				}
-
-			}
-		}
+	}
+	.bottom-title {
+		padding: 14px 10px;
+		background-color: $uni-color-content;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		line-height: 20px;
 	}
 </style>
