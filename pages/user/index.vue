@@ -162,7 +162,7 @@ export default {
 	}
 	.mid{
 		.vip-div{
-			padding: 0px 3px;
+			padding: 2px 2px;
 		}
 		.banner-div{
 			padding: 0px 3px;
