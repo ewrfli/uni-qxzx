@@ -52,7 +52,7 @@
 
 <script>
 import commonFuncDiv from '../../components/userComponent/commonFuncDiv.vue'
-import homeBanner from '../../components/homeBanner/homeBanner.vue'//vipBanner
+import homeBanner from '../../components/homeBanner/homeBanner.vue'
 import vipBanner from '../../components/homeBanner/vipBanner.vue'
 export default {
 	components: {

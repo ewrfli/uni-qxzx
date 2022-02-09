@@ -14,9 +14,36 @@
             </view>
 		
 		</u-navbar>
-		<view class="card">	
-
-		</view>
+		<view class="tabs" style="margin-top: 44px;">
+            <custom-tabs index="0" :animation="true" tabPadding="40" :scrollY="true" :flex="false" @changeIndex="changeIndex">
+                <custom-tab-pane v-for="item in themeList" :label="item.tag">
+                    <view class="tabs-item" v-for="data in themeList">
+                        <view class="item">
+                            <view class="flexDiv">
+                                <view class="left-img">
+                                    <image style="width: 36px; height: 36px; border-radius: 4px;" :src="data.img" mode=""></image>
+                                </view>
+                                <view class="title">
+                                    <view class="Content-title">
+                                        <view class="Content-title-left">
+                                            #{{data.name}}
+                                        </view>
+                                    </view>
+                                    <view class="sub-title">
+                                        {{data.prompt}}
+                                    </view>
+                                </view>
+                            </view>
+                            <view class="right-hotIcon">
+                                <u-button v-if="data.describe" :plain="true" text="已关注"></u-button>
+                                <u-button v-else type="primary" text="关注"></u-button>
+                            </view>                
+                        </view> 
+                        <u-line style="margin: 0 10px;" length="93%"></u-line>     
+                    </view>
+                </custom-tab-pane>
+            </custom-tabs>
+        </view>
 	</view>
 </template>
 
@@ -25,10 +52,48 @@
 		name:"newsHotDetails",
 		data() {
 			return {
-
+				current: 0,
+				swiperCurrent: 0,
+				tabsHeight: 0,
+				dx: 0,
+				topic: ['推荐话题', '我关注的', '最近参与', '行业', '名企', '最新话题'],
+				themeList: [
+					{
+						name: '北京华峰车空峰车空科技公司1',
+						tag: '推荐话题',
+						prompt: '新增一条公告调研报告',
+						describe: '',
+						img: 'https://cdn.uviewui.com/uview/goods/1.jpg',
+					},
+					{
+						name: '2北京华峰车空xx北京华峰车空峰车空科技公司',
+						tag: '我关注的',
+						prompt: '新增一条公告调研报告',
+						describe: '',
+						img: 'https://cdn.uviewui.com/uview/goods/2.jpg',
+					},
+					{
+						name: '3北京华峰车空峰车空科技公司',
+						tag: '最近参与',
+						prompt: '新增一条公告调研报告',
+						describe: '',
+						img: 'https://cdn.uviewui.com/uview/goods/3.jpg',
+					},
+					{
+						name: '4北京华峰车空峰车空科技公司',
+						tag: '行业',
+						prompt: '新增一条公告调研报告',
+						describe: '1',
+						img: 'https://cdn.uviewui.com/uview/goods/4.jpg',
+					},
+				],
 			};
 		},
 		methods: {
+			// tab栏切换
+			changeIndex(index) {
+				console.log('改变了index:', index);
+			},
 			leftClick(){
 				uni.navigateBack({
 					delta: 1,
@@ -41,40 +106,49 @@
 </script>
 
 <style lang="scss">
-	.content{
+	.wrap{
 		background-color: $uni-color-backgroundColor;
 	}
-	.card {
-		margin: 50px 6px 0;
-		padding: 0px 10px 0px 10px;
+	.tab {
+		height: 90vh !important;
+	}
+	.item {
+		padding: 4px 8px;
 		background-color: $uni-color-content;
-		.u-navbar__content {
-			background-color: aqua !important;
-		}
-		.itemList {
-			background-color: $uni-color-content;
-		}
-		.item {
-			// background-color: antiquewhite;
-			border-bottom: 0.5px solid $uni-border-color;
-			height: 36px;
-			line-height: 28px;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		.flexDiv {
 			margin-top: 10px;
 			display: flex;
 			flex-direction: row;
 			justify-content: flex-start;
-
-			.left-icon {
-				.u-icon{
-					margin-top: 6px;
-				}
+			.left-img {
 			}
 			.title {
+				width: 230px;
 				margin-left: 8px;
+				overflow:hidden; //超出的文本隐藏
+					text-overflow:ellipsis; //溢出用省略号显示
+					white-space:nowrap; //溢出不换行
 				.Content-title {
-					font-size: 16px;
+					font-size: 14px;
+					overflow:hidden; //超出的文本隐藏
+					text-overflow:ellipsis; //溢出用省略号显示
+					white-space:nowrap; //溢出不换行
 				}
-
+				.sub-title {
+					color: #afafaf;
+					font-size: 10px;
+					margin-top: 3px;
+				}
+			}
+		}
+		.right-hotIcon {
+			margin-top: 12px;
+			.u-button {
+				width: 60px !important;
+				height: 30px !important;
 			}
 		}
 	}
