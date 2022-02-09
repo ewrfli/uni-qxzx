@@ -1,33 +1,72 @@
 <template>
 	<view class="wrap">
-		<u-navbar title="我的发布" @leftClick="leftClick" :autoBack="true" :fixed="true">
-			<view
-                class="u-nav-slot"
-                slot="left"
-            >
-                <u-icon
-                    name="arrow-left"
-                    size="22"
-					color="#007aff"
-                ></u-icon>
-
-            </view>
-		
-		</u-navbar>
+		<view class="navbar">
+			<view class="left-div" @click="leftClick">
+				<u-icon name="arrow-left" size="22" color="#fff"></u-icon>
+			</view>
+			<view class="title">我的发布</view>
+			<view class="right-div"></view>
+		</view>
+		<view class="top">
+			<view class="num-div">
+				<view class="num">00</view>
+				<view class="title">获赞</view>
+			</view>
+			<view class="num-div">
+				<view class="num">00</view>
+				<view class="title">发帖</view>
+			</view>
+			<view class="num-div">
+				<view class="num">00</view>
+				<view class="title">回复</view>
+			</view>
+		</view>
 		<view class="card">	
+			<topTabbar :tabBars="tabBars" @TarTap="TarData" :tabIndex="tabIndex" ></topTabbar>
+			<!-- 每个tab标题对应的具体组件内容 -->
+			<view class="currentTabMyPublish" v-show="currentTabComponent=='currentTabMyPublish'">
 
+			</view>
+
+			<view class="currentTabMyComment" v-show="currentTabComponent=='currentTabMyComment'">
+
+			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+import topTabbar from '../../../components/topTabbar/topTabbar.vue'
 	export default {
+		components: {
+			topTabbar
+		},
 		data() {
 			return {
-
+				tabIndex: "currentTabMyPublish",
+			tabBars:[
+				{
+					name: "我的发帖",
+					id: "currentTabMyPublish",
+					index: 0
+				},
+				{
+					name:"我的回复",
+					id:"currentTabMyComment",
+					index: 1
+				},
+			],
+			currentTabComponent: "currentTabMyPublish"
 			};
 		},
 		methods: {
+		    //tab栏
+			TarData(item){
+				//设置id，来显示选中那个标签，显示下划线
+				this.tabIndex = item.id;
+				//显示标签对应的组件内容
+				this.currentTabComponent = item.id
+			},
 			leftClick(){
 				uni.navigateBack({
 					delta: 1,
@@ -40,41 +79,46 @@
 </script>
 
 <style lang="scss">
-	.content{
+	.wrap{
 		background-color: $uni-color-backgroundColor;
 	}
-	.card {
-		margin: 50px 6px 0;
-		padding: 0px 10px 0px 10px;
-		background-color: $uni-color-content;
-		.u-navbar__content {
-			background-color: aqua !important;
+	.navbar {
+		padding-left: 10px;
+        background: #3982f7;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		height: 40px;
+		.left-div {
+			margin-top: 1px;
 		}
-		.itemList {
-			background-color: $uni-color-content;
+		.title {
+			color: #ffffff;
 		}
-		.item {
-			// background-color: antiquewhite;
-			border-bottom: 0.5px solid $uni-border-color;
-			height: 36px;
-			line-height: 28px;
-			margin-top: 10px;
+		.right-div {
+			width: 26px;
+			background: #3982f7;
+		}
+	}
+	.top {
+		background-color: #3982f7;
+		padding: 10px 10px 10px 14px;
+		display: flex;
+		flex-direction: row;
+		.num-div{
+			margin-right: 10px;
 			display: flex;
-			flex-direction: row;
-			justify-content: flex-start;
-
-			.left-icon {
-				.u-icon{
-					margin-top: 6px;
-				}
-			}
-			.title {
-				margin-left: 8px;
-				.Content-title {
-					font-size: 16px;
-				}
-
+			flex-direction: column;
+			color: #fff;
+			.title{
+				font-size: 14px;
 			}
 		}
+	}
+	.card {
+		margin-top: 3px;
+		background-color: $uni-color-content;
+
 	}
 </style>

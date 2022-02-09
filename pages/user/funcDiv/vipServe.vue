@@ -15,14 +15,20 @@
 		
 		</u-navbar>
 		<view class="card">	
-
+			<view class="vip-div">
+				<vipBanner></vipBanner>
+			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+import vipBanner from '../../../components/homeBanner/vipBanner.vue'
 	export default {
 		name:"newsHotDetails",
+		components: {
+			vipBanner
+		},
 		data() {
 			return {
 
@@ -45,37 +51,7 @@
 		background-color: $uni-color-backgroundColor;
 	}
 	.card {
-		margin: 50px 6px 0;
-		padding: 0px 10px 0px 10px;
-		background-color: $uni-color-content;
-		.u-navbar__content {
-			background-color: aqua !important;
-		}
-		.itemList {
-			background-color: $uni-color-content;
-		}
-		.item {
-			// background-color: antiquewhite;
-			border-bottom: 0.5px solid $uni-border-color;
-			height: 36px;
-			line-height: 28px;
-			margin-top: 10px;
-			display: flex;
-			flex-direction: row;
-			justify-content: flex-start;
+		margin: 44px 0 0 0;
 
-			.left-icon {
-				.u-icon{
-					margin-top: 6px;
-				}
-			}
-			.title {
-				margin-left: 8px;
-				.Content-title {
-					font-size: 16px;
-				}
-
-			}
-		}
 	}
 </style>
