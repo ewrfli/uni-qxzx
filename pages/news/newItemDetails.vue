@@ -9,7 +9,7 @@
             </view>
 		</u-navbar>
 
-			<view class="newsItem" v-for="(data, index) in newsItem">
+			<view class="newsItem" v-for="(data, index) in newsItem2">
 				<!-- 头部 -->
 				<view class="up-block">
 					<view class="user-img">
@@ -28,8 +28,9 @@
 				</view>
 				<!-- 中间 -->
 				<view class="mid-block">
-					<text space="nbsp">{{data.contentTitle}}</text>
-					<image :src="data.userImg" mode=""></image>
+					<rich-text :nodes="data.contentTitle"></rich-text>
+					<!-- <text space="nbsp">{{data.contentTitle}}</text> -->
+					<!-- <image :src="data.coverImg" mode=""></image> -->
 				</view>
 				<!-- 底部 -->
 				<view class="low-block">
@@ -86,9 +87,11 @@
 		name:"newItemDetails",
 		data() {
 			return {
+				newsItem2:[],
 				newsItem: [{
 					id: '',
 					userImg: 'https://img.36krcdn.com/20200410/v2_6905947498bc4ec0af228afed409f771_img_png',
+					coverImg:'',
 					userName:'userName',
 					time:'2022-01-25 08:00',
 					readNum:2233,
@@ -103,6 +106,7 @@
 				commentItem: [{
 					id: '',
 					userImg: 'https://img.36krcdn.com/20200410/v2_6905947498bc4ec0af228afed409f771_img_png',
+					coverImg:'',
 					userName:'userName',
 					time:'2022-01-25 08:00',
 					readNum:2233,
@@ -144,13 +148,57 @@
 				}],
 			};
 		},
+		onLoad(option){
+			// const order = JSON.parse(decodeURIComponent(option.order));
+			console.log('option',option)
+			this.getnew(option.id)
+			
+		},
 		methods: {
 			leftClick(){
-				uni.navigateBack({
-					delta: 1,
-					animationType: 'pop-out',
-    				animationDuration: 200
-				});
+				// uni.navigateBack({
+				// 	delta: 1,
+				// 	animationType: 'pop-out',
+				// 	animationDuration: 200
+				// });
+				uni.switchTab({
+					url: '/pages/home/index'
+					
+				})
+				
+			},
+			getnew(id){
+				let _this = this
+			    uni.request({
+			          url: `${this.$baseUrl}/article/detail?id=${id}`,  //这里的lid,page,pagesize只能是数字或字母
+			          method: 'GET',
+			          success: (res)=>{
+						  console.log(res.data.data)
+						  
+							this.newsItem2.push({
+								id: '',
+								userImg: res.data.data.authorimg,
+								coverImg:res.data.data.coverimg,
+								userName: res.data.data.author,
+								time: res.data.data.createdAt,
+								readNum:res.data.data.readedCount + 12,
+								contentTitle: res.data.data.content ,
+								contentText: 'XXXXXXXXXXXXXXXX',
+								relatedCompany: res.data.data.tag[0],
+								repostNum:11,
+								commentNum: res.data.data.readedCount + 22,
+								likeNum: res.data.data.readedCount,
+								icon: ''
+							})
+						  
+						  console.log('this.newsItem2',this.newsItem2)
+					  },
+			          fail: (err)=>{
+						  console.log(err)
+					  }
+			
+			    })
+			
 			}
 		},
 	}

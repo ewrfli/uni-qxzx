@@ -9,7 +9,7 @@
 			</view>
 		</view>
 		<view class="itemList">
-			<view class="newsItem" v-for="(data, index) in newItemList" @click="toNewDetails">
+			<view class="newsItem" v-for="(data, index) in newItemList2" @click="toNewDetails(data.id)">
 				<!-- 头部 -->
 				<view class="up-block">
 					<view class="user-img">
@@ -60,6 +60,7 @@
 		name:"tabNewsList",
 		data() {
 			return {
+				newItemList2:[],
 				newItemList:[
 					{
 						id: '',
@@ -120,11 +121,51 @@
 				]
 			};
 		},
+		onShow() {
+			console.log('App Show newlist')
+			this.getList()
+		},
+		mounted() {
+			console.log('App mounted newlist')
+			this.getList()
+		},
 		methods: {
-			toNewDetails(){
+			toNewDetails(id){
+				console.log(id)
 				uni.navigateTo({
-					url: '/pages/news/newItemDetails'
+					url: '/pages/news/newItemDetails?id='+id
 				});
+			},
+			getList(){
+			    uni.request({
+			          url: `${this.$baseUrl}/article/list?title=&pageNo=1&pageSize=100`,  //这里的lid,page,pagesize只能是数字或字母
+			          method: 'GET',
+			          success: (res)=>{
+						  console.log(res.data.data)
+						  res.data.data.forEach(item => {
+							  this.newItemList2.push({
+								  id: item.id,
+								  userImg: item.authorimg,
+								  userName:item.author,
+								  time:2,
+								  readNum:2233,
+								  contentTitle: item.summary,
+								  contentText: item.content,
+								  relatedCompany: item.tag[0],
+								  repostNum:11,
+								  commentNum:22,
+								  likeNum: item.readedCount,
+								  icon: ''
+							  })
+						  })
+						  console.log('this.newItemList2',this.newItemList2)
+					  },
+			          fail: (err)=>{
+						  console.log(err)
+					  }
+			
+			    })
+			
 			}
 		},
 	}
