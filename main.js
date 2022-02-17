@@ -7,7 +7,7 @@ Vue.component('bottomTabBar', bottomTabBar)//使用全局tabBar组件
 Vue.use(uView)
 
 Vue.config.productionTip = false
-Vue.prototype.$baseUrl="http://127.0.0.1:3011"  //接口
+Vue.prototype.$baseUrl="http://127.0.0.1:3002"  //接口
 App.mpType = 'app'
 const app = new Vue({
     ...App

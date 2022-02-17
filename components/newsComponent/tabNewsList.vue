@@ -9,7 +9,7 @@
 			</view>
 		</view>
 		<view class="itemList">
-			<view class="newsItem" v-for="(data, index) in newItemList2" @click="toNewDetails(data.id)">
+			<view class="newsItem" v-for="(data, index) in newItemList2 || newItemList" @click="toNewDetails(data.id)">
 				<!-- 头部 -->
 				<view class="up-block">
 					<view class="user-img">
@@ -138,23 +138,23 @@
 			},
 			getList(){
 			    uni.request({
-			          url: `${this.$baseUrl}/article/list?title=&pageNo=1&pageSize=100`,  //这里的lid,page,pagesize只能是数字或字母
+			          url: `${this.$baseUrl}/article/list?article_category=&pageNo=1&pageSize=10`,  //这里的lid,page,pagesize只能是数字或字母
 			          method: 'GET',
 			          success: (res)=>{
 						  console.log(res.data.data)
 						  res.data.data.forEach(item => {
-							  this.newItemList2.push({
-								  id: item.id,
-								  userImg: item.authorimg,
-								  userName:item.author,
+							  	this.newItemList2.push({
+								  id: item.article_id,
+								  userImg: item.article_coverimg,
+								  userName:item.user_id,
 								  time:2,
 								  readNum:2233,
-								  contentTitle: item.summary,
-								  contentText: item.content,
-								  relatedCompany: item.tag[0],
+								  contentTitle: item.article_title,
+								  contentText: item.article_desc,
+								  relatedCompany: item.article_category,
 								  repostNum:11,
 								  commentNum:22,
-								  likeNum: item.readedCount,
+								  likeNum: item.article_read_count,
 								  icon: ''
 							  })
 						  })
