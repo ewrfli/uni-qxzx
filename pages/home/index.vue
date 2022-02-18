@@ -24,7 +24,7 @@
 			<!-- 每个tab标题对应的具体组件内容 -->
 			<view class="currentTabComponentNews" v-show="currentTabComponent=='homeTabComponentNews'">
 				<homeTabComponentNewsHot></homeTabComponentNewsHot>
-				<homeTabComponentNewsList></homeTabComponentNewsList>
+				<homeNewsList></homeNewsList>
 			</view>
 			
 			<view class="currentTabComponentMonitor" v-show="currentTabComponent=='homeTabComponentMonitor'">
@@ -40,7 +40,7 @@
 import homeFuncDiv from '../../components/homeComponent/homeFuncDiv.vue'
 import topTabbar from '../../components/topTabbar/topTabbar.vue'
 import homeTabComponentNewsHot from '../../components/newsComponent/tabNewsHot.vue'
-import homeTabComponentNewsList from '../../components/newsComponent/tabNewsList.vue'
+import homeNewsList from '../../components/homeNewsComponent/homeNewsList.vue'
 import homeTabComponentMonitorAdvice from '../../components/monitorComponent/tabMonitorAdvice.vue'
 import homeTabComponentMonitorDaily from '../../components/monitorComponent/tabMonitorDaily.vue'
 import homeBanner from '../../components/homeBanner/homeBanner.vue'
@@ -49,7 +49,7 @@ export default {
 		homeFuncDiv,
 		topTabbar,
 		homeTabComponentNewsHot,
-		homeTabComponentNewsList,
+		homeNewsList,
 		homeTabComponentMonitorAdvice,
 		homeTabComponentMonitorDaily,
 		homeBanner

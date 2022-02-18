@@ -2,51 +2,42 @@
 	<view class="card">
 		<view class="top-title">
 			<view class="left-title">
-				资讯列表
+				实时快讯
 			</view>
 			<view class="right-title">
 				查看全部
 			</view>
 		</view>
 		<view class="itemList">
-			<view class="newsItem" v-for="(data, index) in newItemList2 || newItemList" @click="toNewDetails(data.id)">
-				<!-- 头部 -->
-				<view class="up-block">
-					<view class="user-img">
-						<image style="margin-top: 8px; width: 36px; height: 36px; border-radius: 18px;" :src="data.userImg" mode=""></image>
+			<view class="borderDiv">
+				<view class="newsItem" v-for="(data, index) in newItemList2 || newItemList" @click="toNewDetails(data.id)">
+					<!-- 头部 -->
+					<view class="up-block">
+						<view class="news-title">
+							<view class="item-title">
+								{{data.contentTitle}}
+							</view>
+						</view>
+
+						<view class="news-sub">
+							<view class="point"></view>
+							<view class="news-times">
+								<text space="nbsp" class="user-data">{{data.time}}    热度 {{data.readNum}}</text>
+							</view>
+						</view>
 					</view>
-					<view class="user-content">
-						<view class="user-name">
-							{{data.userName}}
-						</view>
-						
-						<view class="user-sub">
-							<text space="nbsp" class="user-data">{{data.time}}小时前    阅读 {{data.readNum}}</text>
+					<!-- 中间 -->
+					<view class="mid-block">
+						<text class="contentText" space="nbsp">{{data.contentText}}</text>
+						<view class="coverimg" v-if="data.article_coverimg">
+							<image style="margin-top: 8px; width: 350px; height: 160px; border-radius: 2px;" :src="data.article_coverimg" mode=""></image>
 						</view>
 					</view>
-				</view>
-				<!-- 中间 -->
-				<view class="mid-block">
-					<text space="nbsp">{{data.contentTitle}}</text>
-				</view>
-				<!-- 底部 -->
-				<view class="low-block">
-					<view class="companyDiv">
-						<text class="companyFont">{{data.relatedCompany}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
-						
-					</view>
-					<view class="threeIcon">
-						<view class="threeIcon1">
-							<u-icon name="share-square" color="#565656" size="20"></u-icon>
-							<text>{{data.repostNum}}</text>
-						</view>
-						<view class="threeIcon1">
-							<u-icon name="chat" color="#565656" size="20"></u-icon>
-							<text>{{data.commentNum}}</text>
-						</view>
-						<view class="threeIcon1">
-							<u-icon name="thumb-up" color="#565656" size="20"></u-icon>
-							<text>{{data.likeNum}}</text>
+					<!-- 底部 -->
+					<view class="low-block">
+						<view class="companyDiv">
+							<text class="companyFont">{{data.relatedCompany}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
+							<text class="companyFont">{{data.relatedCompany}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
 						</view>
 					</view>
 				</view>
@@ -145,9 +136,9 @@
 						  res.data.data.forEach(item => {
 							  	this.newItemList2.push({
 								  id: item.article_id,
-								  userImg: item.article_coverimg,
+								  article_coverimg: item.article_coverimg,
 								  userName:item.user_id,
-								  time:2,
+								  time:item.updatedAt,
 								  readNum:2233,
 								  contentTitle: item.article_title,
 								  contentText: item.article_desc,
@@ -177,7 +168,6 @@
 		.top-title {
 			padding: 10px 10px 10px;
 			background-color: $uni-color-content;
-			margin-bottom: 4px;
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
@@ -191,35 +181,43 @@
 			}
 		}
 		.itemList {
-			
+			padding-left: 14px;
+		}
+		.borderDiv{
+			border-left: 0.5px solid #93bfee;
+		}
+		.point {
+			width: 6px;
+			height: 6px;
+			border-radius: 3px;
+			top: 11px;
+			left: -19px;
+			background-color: #007aff;
+    		position: relative;
 		}
 		.newsItem {
 			padding: 0px 10px;
 			background-color: $uni-color-content;
-			margin-bottom: 10px;
+			margin-bottom: 26px;
+			margin-left: 6px;
 			.up-block {
-				display: flex;
-				flex-direction: row;
-				align-items: center;
-				.user-img {
-					
+				.news-title {
+					margin: 5px 0 0 0;
+					font-weight: 800;
 				}
-				.user-content {
-					display: flex;
-					flex-direction: column;
-					margin-left: 6px;
-					.user-name {
-						
-					}
-					.user-sub {
-						font-size: 12px;
+				.news-sub {
+					.news-times {
+						font-size: 13px;
 						color: #777777;
 					}
 				}
 			}
 			
 			.mid-block {
-				margin: 6px 6px 6px 6px;
+				margin: 6px 6px 10px 3px;
+				.contentText{
+					color: #313131;
+				}
 			}
 			
 			.low-block {
@@ -227,6 +225,7 @@
 				flex-direction: column;
 				.companyDiv {
 					.companyFont {
+						margin-right: 6px;
 						line-height: 23px;
 						font-size: 12px;
 						color: #565656;
@@ -236,19 +235,7 @@
 						background-color: #e5e5e5;	
 					}
 				}	
-				.threeIcon {
-					font-size: 12px;
-					color: #565656;
-					margin: 10px 0px;
-					display: flex;
-					flex-direction: row;
-					justify-content: space-around;
-					.threeIcon1 {
-						display: flex;
-						flex-direction: row;
-						align-items: center;
-					}
-				}
+
 			}
 		}
 
