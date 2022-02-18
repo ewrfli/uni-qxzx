@@ -2,7 +2,7 @@
 	<view class="card">
 		<view class="top-title">
 			<view class="left-title">
-				热点榜
+				资讯热榜
 			</view>
 			<view class="right-title" @click="toNewsHotDetails">
 				查看全部
@@ -10,22 +10,22 @@
 		</view>
 		
 		<view class="itemList">
-			<view class="item" v-for="(data, index) in itemList">
+			<view class="item" v-for="(data, index) in newItemList2">
 				<view class="flexDiv">
 					<view class="left-img">
-						 <image style="width: 36px; height: 36px; border-radius: 4px;" :src="data.img" mode=""></image>
+						 <image style="width: 36px; height: 36px; border-radius: 4px;" :src="data.article_coverimg" mode=""></image>
 					</view>
 					<view class="title">
 						<view class="Content-title">
 							<view class="Content-title-left">
-								{{data.topTitle}}
+								{{data.article_title}}
 							</view>
 							<!-- <view class="top-title-right-hotIcon">
 								<u-icon name="photo" color="#F63A34" size="20"></u-icon>
 							</view> -->
 						</view>
 						<view class="sub-title">
-							{{data.subTitle}}
+							{{data.article_desc}}
 						</view>
 					</view>
 				</view>
@@ -42,6 +42,7 @@
 		name:"tabNewsHot",
 		data() {
 			return {
+				newItemList2:[],
 				itemList:[
 					{
 						id: '',
@@ -74,12 +75,34 @@
 				]
 			};
 		},
+		mounted() {
+			console.log('App mounted newlist热点榜')
+			this.getList()
+		},
 		methods: {
 			toNewsHotDetails(){
-				console.log('toNewsHotDetails')
+				console.log('toNewsHotDetails热点榜')
 				uni.navigateTo({
 					url: '/pages/news/newsHotDetails'
 				});
+			},
+			getList(){
+			    uni.request({
+			          url: `${this.$baseUrl}/article/list?article_category=热点榜&pageNo=1&pageSize=30`,  //这里的lid,page,pagesize只能是数字或字母
+			          method: 'GET',
+			          success: (res)=>{
+						  console.log(res.data.data)
+						  res.data.data.forEach(item => {
+							  	this.newItemList2.push(item)
+						  })
+						  console.log('this.newItemList2热点榜',this.newItemList2)
+					  },
+			          fail: (err)=>{
+						  console.log(err)
+					  }
+			
+			    })
+			
 			}
 		}
 	}
@@ -96,7 +119,8 @@
 			flex-direction: row;
 			justify-content: space-between;
 			.left-title {
-				font-size: 14px;
+				font-size: 16px;
+				font-weight: 800;
 			}
 			.right-title {
 				font-size: 12px;

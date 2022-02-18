@@ -11,11 +11,11 @@
 		
 		<view style="margin-top: 6px;" class="itemList">
 			    <u-scroll-list :indicator="false">
-					<view class="itemCard" v-for="(item, index) in MonitorAdviceList" :key="index">
+					<view class="itemCard" v-for="(item, index) in MonitorAdviceList2" :key="index">
 						<view class="topDiv">							
-							<image :src="item.img"></image>
+							<image :src="item.tag_coverimg"></image>
 							<view class="text">
-								{{item.name}}
+								{{item.tag_name}}
 							</view>
 						</view>
 					</view>
@@ -29,6 +29,7 @@
 		name:"tabBlogCategory",
 		data() {
 			return {
+				MonitorAdviceList2: null,
 				 MonitorAdviceList: [
 					{
 						name: "北京华峰车空峰车空科技公司",
@@ -61,13 +62,29 @@
 			};
 		},
 		created() {
-			
+			this.getList()
 		},
 		methods: {
 			toBlogThemeList(){
 				uni.navigateTo({
 					url: '/pages/news/blogThemeList'
 				});
+			},
+			getList(){
+			    uni.request({
+			          url: `${this.$baseUrl}/tag/list?tag_name=&pageNo=1&pageSize=20`,  //这里的lid,page,pagesize只能是数字或字母
+			          method: 'GET',
+			          success: (res)=>{
+						  console.log('话题列表tag/list',res.data.data)
+						  this.MonitorAdviceList2 = res.data.data
+						  console.log('this.newItemList2话题列表',this.MonitorAdviceList2)
+					  },
+			          fail: (err)=>{
+						  console.log(err)
+					  }
+			
+			    })
+			
 			}
 		},
 	}

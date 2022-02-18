@@ -10,25 +10,25 @@
 		</view>
 		<view class="itemList">
 			<view class="borderDiv">
-				<view class="newsItem" v-for="(data, index) in newItemList2 || newItemList" @click="toNewDetails(data.id)">
+				<view class="newsItem" v-for="(data, index) in newItemList2 || newItemList" @click="toNewDetails(data.article_id)">
 					<!-- 头部 -->
 					<view class="up-block">
 						<view class="news-title">
 							<view class="item-title">
-								{{data.contentTitle}}
+								{{data.article_title}}
 							</view>
 						</view>
 
 						<view class="news-sub">
 							<view class="point"></view>
 							<view class="news-times">
-								<text space="nbsp" class="user-data">{{data.time}}    热度 {{data.readNum}}</text>
+								<text space="nbsp" class="user-data">{{data.article_updatedAt}}    热度 {{data.article_read_count}}</text>
 							</view>
 						</view>
 					</view>
 					<!-- 中间 -->
 					<view class="mid-block">
-						<text class="contentText" space="nbsp">{{data.contentText}}</text>
+						<text class="contentText" space="nbsp">{{data.article_desc}}</text>
 						<view class="coverimg" v-if="data.article_coverimg">
 							<image style="margin-top: 8px; width: 350px; height: 160px; border-radius: 2px;" :src="data.article_coverimg" mode=""></image>
 						</view>
@@ -36,8 +36,8 @@
 					<!-- 底部 -->
 					<view class="low-block">
 						<view class="companyDiv">
-							<text class="companyFont">{{data.relatedCompany}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
-							<text class="companyFont">{{data.relatedCompany}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
+							<text class="companyFont">{{data.article_tag}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
+							<text class="companyFont">{{data.article_company}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
 						</view>
 					</view>
 				</view>
@@ -114,7 +114,7 @@
 		},
 		onShow() {
 			console.log('App Show newlist')
-			this.getList()
+			// this.getList()
 		},
 		mounted() {
 			console.log('App mounted newlist')
@@ -129,25 +129,12 @@
 			},
 			getList(){
 			    uni.request({
-			          url: `${this.$baseUrl}/article/list?article_category=首页推荐&pageNo=1&pageSize=30`,  //这里的lid,page,pagesize只能是数字或字母
+			          url: `${this.$baseUrl}/article/list?article_category=实时快讯&pageNo=1&pageSize=30`,  //这里的lid,page,pagesize只能是数字或字母
 			          method: 'GET',
 			          success: (res)=>{
 						  console.log(res.data.data)
 						  res.data.data.forEach(item => {
-							  	this.newItemList2.push({
-								  id: item.article_id,
-								  article_coverimg: item.article_coverimg,
-								  userName:item.user_id,
-								  time:item.updatedAt,
-								  readNum:2233,
-								  contentTitle: item.article_title,
-								  contentText: item.article_desc,
-								  relatedCompany: item.article_tag,
-								  repostNum:11,
-								  commentNum:22,
-								  likeNum: item.article_read_count,
-								  icon: ''
-							  })
+							  	this.newItemList2.push(item)
 						  })
 						  console.log('this.newItemList2',this.newItemList2)
 					  },

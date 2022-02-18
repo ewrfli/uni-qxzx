@@ -9,36 +9,42 @@
             </view>
 		</u-navbar>
 
-			<view class="newsItem" v-for="(data, index) in newsItem2">
+			<view class="newsItem">
 				<!-- 头部 -->
 				<view class="up-block">
 					<view class="user-img">
-						<image :src="data.userImg" mode=""></image>
+						<!--  v-for="(user, index) in data.qx_user" -->
+						<image :src="newsItem2.qx_user ? newsItem2.qx_user.user_avatarimg : 'xxx'" mode=""></image>
 					</view>
 					<view class="user-content">
 						<view class="user-name">
-							{{data.userName}}
+							{{newsItem2.qx_user ? newsItem2.qx_user.user_name : 'xxx'}}
+							<u-icon class="username-v" name="level" color="#007aff" size="20"></u-icon>
 						</view>
 						
 						<view class="user-sub">
-							<text space="nbsp" class="user-data">{{data.time}}    阅读 {{data.readNum}}</text>
+							<text space="nbsp" class="user-data">{{newsItem2.updatedAt}}    阅读 {{newsItem2.article_read_count}}</text>
 						</view>
 					</view>
 					<view class="attention-div"><view class="icon">+关注</view></view>
 				</view>
 				<!-- 中间 -->
 				<view class="mid-block">
-					<rich-text :nodes="data.contentTitle"></rich-text>
+					<view style="font-weight: 600; font-size: 22px; margin-bottom: 6px;"><text space="nbsp">{{newsItem2.article_title}}</text></view>
+					<rich-text style="color: #3b3b3b;" :nodes="newsItem2.article_content"></rich-text>
 					<!-- <text space="nbsp">{{data.contentTitle}}</text> -->
 					<!-- <image :src="data.coverImg" mode=""></image> -->
 				</view>
 				<!-- 底部 -->
 				<view class="low-block">
 					<view class="companyDiv">
-						<text class="companyFont">{{data.relatedCompany}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
+						<span>
+							<text class="companyFont">{{newsItem2.article_tag}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
+							<text class="companyFont">{{newsItem2.article_company}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
+						</span>
 						<text class="star">
 							<u-icon style="display: inline-block; margin-left: 4px;" name="thumb-up" color="#565656" size="20"></u-icon>
-							{{data.likeNum}}
+							{{newsItem2.article_like_count || 0}}
 						</text>
 					</view>
 
@@ -87,7 +93,10 @@
 		name:"newItemDetails",
 		data() {
 			return {
-				newsItem2:[],
+				newid: null,
+				newsItem2:{
+					qx_user: {}
+				},
 				newsItem: [{
 					id: '',
 					userImg: 'https://img.36krcdn.com/20200410/v2_6905947498bc4ec0af228afed409f771_img_png',
@@ -150,48 +159,34 @@
 		},
 		onLoad(option){
 			// const order = JSON.parse(decodeURIComponent(option.order));
-			console.log('option',option)
-			this.getnew(option.id)
+			this.newid = option.id
+			console.log('this.newid',option,this.newid)
+			this.getnewList(option.id)
 			
 		},
 		methods: {
 			leftClick(){
-				// uni.navigateBack({
-				// 	delta: 1,
-				// 	animationType: 'pop-out',
-				// 	animationDuration: 200
-				// });
-				uni.switchTab({
-					url: '/pages/home/index'
+				uni.navigateBack({
+					delta: 1,
+					animationType: 'pop-out',
+					animationDuration: 200
+				});
+				// uni.switchTab({
+				// 	url: '/pages/home/index'
 					
-				})
+				// })
 				
 			},
-			getnew(id){
+			getnewList(id){
 				let _this = this
 			    uni.request({
-			          url: `${this.$baseUrl}/article/detail?id=${id}`,  //这里的lid,page,pagesize只能是数字或字母
+			          url: `${this.$baseUrl}/article/details?id=${id}`,  //这里的lid,page,pagesize只能是数字或字母
 			          method: 'GET',
 			          success: (res)=>{
 						  console.log(res.data.data)
+							this.newsItem2 = res.data.data
 						  
-							this.newsItem2.push({
-								id: '',
-								userImg: res.data.data.authorimg,
-								coverImg:res.data.data.coverimg,
-								userName: res.data.data.author,
-								time: res.data.data.createdAt,
-								readNum:res.data.data.readedCount + 12,
-								contentTitle: res.data.data.content ,
-								contentText: 'XXXXXXXXXXXXXXXX',
-								relatedCompany: res.data.data.tag[0],
-								repostNum:11,
-								commentNum: res.data.data.readedCount + 22,
-								likeNum: res.data.data.readedCount,
-								icon: ''
-							})
-						  
-						  console.log('this.newsItem2',this.newsItem2)
+						  console.log('this.newsItem2详细',this.newsItem2)
 					  },
 			          fail: (err)=>{
 						  console.log(err)
@@ -221,10 +216,11 @@
 				align-items: center;
 				.user-img {
 					image{
+						border: #007AFF solid 1px;
 						margin-top: 8px; 
 						width: 36px; 
 						height: 36px; 
-						border-radius: 18px;
+						border-radius: 2px;
 					}
 				}
 				.user-content {
@@ -232,7 +228,11 @@
 					flex-direction: column;
 					margin-left: 6px;
 					.user-name {
-						
+						display: flex;
+						flex-direction: row;
+						.username-v {
+							margin-top: 1px;
+						}
 					}
 					.user-sub {
 						font-size: 12px;
@@ -268,6 +268,7 @@
 					display: flex;
 					justify-content: space-between;
 					.companyFont {
+						margin-right: 4px;
 						line-height: 23px;
 						font-size: 12px;
 						color: #565656;
