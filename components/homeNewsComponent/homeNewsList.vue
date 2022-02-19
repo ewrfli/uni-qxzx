@@ -215,11 +215,11 @@
 						margin-right: 6px;
 						line-height: 23px;
 						font-size: 12px;
-						color: #565656;
+						color: #007AFF;
 						display: inline-block;
 						padding: 1px 6px;
 						border-radius: 4px;
-						background-color: #e5e5e5;	
+						background-color: #dfeeff;	
 					}
 				}	
 

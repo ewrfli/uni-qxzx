@@ -8,27 +8,28 @@
         <!-- <u-line style="margin-top: 46px;" length="93%"></u-line>  -->
         <view class="tabs" style="margin-top: 44px;">
             <custom-tabs index="0" :animation="true" tabPadding="40" :scrollY="true" :flex="false" @changeIndex="changeIndex">
-                <custom-tab-pane v-for="item in themeList" :label="item.tag">
-                    <view class="tabs-item" v-for="data in themeList">
+                <custom-tab-pane v-for="item in topic2" :label="item">
+                    <view class="tabs-item" v-for="data in themeList2">
                         <view class="item">
                             <view class="flexDiv">
                                 <view class="left-img">
-                                    <image style="width: 36px; height: 36px; border-radius: 4px;" :src="data.img" mode=""></image>
+                                    <image style="width: 36px; height: 36px; border-radius: 4px;" :src="data.tag_coverimg" mode=""></image>
                                 </view>
                                 <view class="title">
                                     <view class="Content-title">
                                         <view class="Content-title-left">
-                                            #{{data.name}}
+                                            #{{data.tag_name}}
                                         </view>
                                     </view>
                                     <view class="sub-title">
-                                        {{data.prompt}}
+                                        {{data.tag_desc}}
                                     </view>
                                 </view>
                             </view>
                             <view class="right-hotIcon">
-                                <u-button v-if="data.describe" :plain="true" text="已关注"></u-button>
-                                <u-button v-else type="primary" text="关注"></u-button>
+                                <u-button v-if="data.updatedAt" type="primary" text="关注"></u-button>
+                                <u-button v-else :plain="true" text="已关注"></u-button>
+                                
                             </view>                
                         </view> 
                         <u-line style="margin: 0 10px;" length="93%"></u-line>     
@@ -48,7 +49,9 @@ export default {
             swiperCurrent: 0,
             tabsHeight: 0,
             dx: 0,
+            topic2:['我的关注'],
             topic: ['推荐话题', '我关注的', '最近参与', '行业', '名企', '最新话题'],
+            themeList2: [],
             themeList: [
                 {
                     name: '北京华峰车空峰车空科技公司1',
@@ -81,6 +84,12 @@ export default {
             ],
         };
     },
+    mounted() {
+        console.log('App mounted newlist热点榜')
+        this.getTopTitle()
+        // this.getList(1)
+        this.getmyList()
+    },
     methods: {
         leftClick() {
             uni.navigateBack({
@@ -91,8 +100,68 @@ export default {
         },
         // tab栏切换
         changeIndex(index) {
+            if(index === 0){
+                this.themeList2 = []
+                this.getmyList()
+            }else{
+                this.themeList2 = []
+                this.getList(index)
+            }
             console.log('改变了index:', index);
         },
+        async getTopTitle() {
+            uni.request({
+                url: `${this.$baseUrl}/tag/list?tag_father_id=0&pageNo=1&pageSize=30`,  //这里的lid,page,pagesize只能是数字或字母
+                method: 'GET',
+                success: (res)=>{
+                    res.data.data.forEach(item => {
+                        this.topic2.push(item.tag_name)
+                    })
+                },
+                fail: (err)=>{
+                    console.log(err)
+                }
+        
+            })
+        },
+        getList(id){
+            uni.request({
+                url: `${this.$baseUrl}/tag/list?tag_father_id=${id}&pageNo=1&pageSize=30`,  //这里的lid,page,pagesize只能是数字或字母
+                method: 'GET',
+                success: (res)=>{
+                    console.log(res.data.data)
+                    this.themeList2 = res.data.data
+                    // res.data.data.forEach(item => {
+                    //     // console.log(item)
+                    //     this.themeList2.push(item)
+                    // })
+                    console.log('this.themeList2 ',this.themeList2)
+                },
+                fail: (err)=>{
+                    console.log(err)
+                }
+        
+            })
+        },
+        getmyList(){
+            uni.request({
+                url: `${this.$baseUrl}/star/mytaglist?user_id=1`,  //这里的lid,page,pagesize只能是数字或字母
+                method: 'GET',
+                success: (res)=>{
+                    console.log(res.data.data)
+                    // this.themeList2 = res.data.data
+                    res.data.data.forEach(item => {
+                        // console.log(item)
+                        this.themeList2.push(item.qx_tag)
+                    })
+                    console.log('this.themeList2 ',this.themeList2)
+                },
+                fail: (err)=>{
+                    console.log(err)
+                }
+        
+            })
+        }
     },
 };
 </script>

@@ -25,11 +25,11 @@
 			<topTabbar :tabBars="tabBars" @TarTap="TarData" :tabIndex="tabIndex" ></topTabbar>
 			<!-- 每个tab标题对应的具体组件内容 -->
 			<view class="currentTabMyPublish" v-show="currentTabComponent=='currentTabMyPublish'">
-
+				<currentTabMyPublish></currentTabMyPublish>
 			</view>
 
 			<view class="currentTabMyComment" v-show="currentTabComponent=='currentTabMyComment'">
-
+				<currentTabMyComment></currentTabMyComment>
 			</view>
 		</view>
 	</view>
@@ -37,9 +37,13 @@
 
 <script>
 import topTabbar from '../../../components/topTabbar/topTabbar.vue'
+import currentTabMyPublish from '../../../components/funcMyPublish/currentTabMyPublish.vue'
+import currentTabMyComment from '../../../components/funcMyPublish/currentTabMyComment.vue'
 	export default {
 		components: {
-			topTabbar
+			topTabbar,
+			currentTabMyPublish,
+			currentTabMyComment
 		},
 		data() {
 			return {

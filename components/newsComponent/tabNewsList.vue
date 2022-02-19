@@ -34,7 +34,7 @@
 				<!-- 底部 -->
 				<view class="low-block">
 					<view class="companyDiv">
-						<text class="companyFont">{{data.article_tag}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
+						<!-- <text class="companyFont">{{data.article_tag}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text> -->
 						<text class="companyFont">{{data.article_company}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
 					</view>
 					<view class="threeIcon">
@@ -77,49 +77,7 @@
 						commentNum:22,
 						likeNum: 99,
 						icon: ''
-					},
-					{
-						id: '',
-						userImg: 'https://img.36krcdn.com/20200410/v2_6905947498bc4ec0af228afed409f771_img_png',
-						userName:'userName',
-						time:2,
-						readNum:2233,
-						contentTitle: '自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶',
-						contentText: 'XXXXXXXXXXXXXXXX',
-						relatedCompany: '自动驾驶xxxx',
-						repostNum:11,
-						commentNum:22,
-						likeNum: 99,
-						icon: ''
-					},
-					{
-						id: '',
-						userImg: 'https://img.36krcdn.com/20200410/v2_6905947498bc4ec0af228afed409f771_img_png',
-						userName:'userName',
-						time:2,
-						readNum:2233,
-						contentTitle: '自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶',
-						contentText: 'XXXXXXXXXXXXXXXX',
-						relatedCompany: '自动驾驶',
-						repostNum:11,
-						commentNum:22,
-						likeNum: 99,
-						icon: ''
-					},
-					{
-						id: '',
-						userImg: 'https://img.36krcdn.com/20200410/v2_6905947498bc4ec0af228afed409f771_img_png',
-						userName:'userName',
-						time:2,
-						readNum:2233,
-						contentTitle: '自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶',
-						contentText: 'XXXXXXXXXXXXXXXX',
-						relatedCompany: '自动驾驶',
-						repostNum:11,
-						commentNum:22,
-						likeNum: 99,
-						icon: ''
-					},
+					}
 				]
 			};
 		},
@@ -236,11 +194,11 @@
 						margin-right: 4px;
 						line-height: 23px;
 						font-size: 12px;
-						color: #565656;
+						color: #007AFF;
 						display: inline-block;
 						padding: 1px 6px;
 						border-radius: 2px;
-						background-color: #e5e5e5;	
+						background-color: #dfeeff;	
 					}
 				}	
 				.threeIcon {

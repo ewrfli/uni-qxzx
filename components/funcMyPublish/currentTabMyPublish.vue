@@ -36,7 +36,7 @@
 					<view class="mid-block" >
 						<view class="title">
 							<text class="article-title" space="nbsp">{{data.article_title}}</text> 
-							<u-icon class="star" name="star-fill" color="#FFE793" size="20"></u-icon>
+							<u-icon class="star" name="share" color="#40A1FF" size="20"></u-icon>
 						</view> 
 						<view class="time">{{data.updatedAt}}</view>
 						<view class="article-desc" space="nbsp">{{data.article_desc}}</view>
@@ -136,11 +136,11 @@
 
 <style lang="scss">
 	.wrap{
-		height: 100vh;
+		height: 81vh;
 		background-color: $uni-color-backgroundColor;
 	}
 	.card {
-		margin-top: 52px;
+		margin-top: 10px;
 		.newsItem {
 			padding: 10px 10px 0;
 			background-color: $uni-color-content;
