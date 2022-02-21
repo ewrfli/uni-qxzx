@@ -9,7 +9,7 @@
 			</view>
 		</view>
 		<view class="itemList">
-			<view class="newsItem" v-for="(data, index) in newItemList2" @click="toNewDetails">
+			<view class="newsItem" v-for="(data, index) in newItemList2" @click="toNewDetails(data.article_id)">
 				<!-- 头部 -->
 				<view class="up-block">
 					<view class="user-img">
@@ -88,7 +88,7 @@
 		methods: {
 			toNewDetails(id){
 				uni.navigateTo({
-					url: '/pages/news/blogItemDetails?id='+id
+					url: '/pages/news/newItemDetails?id='+id
 				});
 			},
 			getList(){

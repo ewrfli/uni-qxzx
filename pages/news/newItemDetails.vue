@@ -52,47 +52,28 @@
 			</view>
 
 			<view class="comment">
-				<view class="title"><text>评论动态</text></view>
-				<view class="list-card">
-					<view class="item" v-for="(data, index) in commentItem">
+				<newItemComment :toCommentArtId="toCommentArtId"></newItemComment>
+			</view>
 
-						<view class="up-block">
-							<view class="user-img">
-								<image :src="data.userImg" mode=""></image>
-							</view>
-							<view class="user-content">
-								<view class="user-name">
-									{{data.userName}}
-								</view>
-							</view>
-						</view>
-
-						<view class="mid-block">
-							<text space="nbsp">{{data.contentTitle}}</text>
-						</view>
-
-						<view class="low-block">
-							<view class="bottom-Div">
-								<text class="time">{{data.time}} </text>
-								<text class="answer">回复 </text>
-								<text class="star">
-									<u-icon style="display: inline-block;" name="thumb-up" color="#565656" size="19"></u-icon>
-									<span style="line-height: 23px;">{{data.likeNum}}</span>
-								</text>
-							</view>
-						</view>
-						
-					</view>
-				</view>
+			<view class="float-button">
+				<uni-fab
+				horizontal="right"
+				vertical="bottom"
+				@fabClick="trigger"
+				></uni-fab>
 			</view>
 	</view>
 </template>
 
 <script>
+import newItemComment from "../../components/newItemComment/newItemComment.vue";
 	export default {
-		name:"newItemDetails",
+		components: {
+			newItemComment
+		},
 		data() {
 			return {
+				toCommentArtId: null,
 				newid: null,
 				newsItem2:{
 					qx_user: {}
@@ -111,58 +92,15 @@
 					commentNum:22,
 					likeNum: 99,
 					icon: ''
-				}],
-				commentItem: [{
-					id: '',
-					userImg: 'https://img.36krcdn.com/20200410/v2_6905947498bc4ec0af228afed409f771_img_png',
-					coverImg:'',
-					userName:'userName',
-					time:'2022-01-25 08:00',
-					readNum:2233,
-					contentTitle: '自动驾驶自驾驶自自动驶自驾驶自动驾驶自动驾驶自动驾驶自动驾驶驾驶自动驾驶自动驾驶自动驾驶自动驾驶驾驶自动驾驶自动驾驶自动驾驶自动驾驶驾驶自动驾驶自动驾驶自动驾驶自动驾驶',
-					contentText: 'XXXXXXXXXXXXXXXX',
-					relatedCompany: '自动驾驶',
-					repostNum:11,
-					commentNum:22,
-					likeNum: 99,
-					icon: ''
-				},
-				{
-					id: '',
-					userImg: 'https://img.36krcdn.com/20200410/v2_6905947498bc4ec0af228afed409f771_img_png',
-					userName:'userName',
-					time:'2022-01-25 08:00',
-					readNum:2233,
-					contentTitle: '自动驾驶自驾驶自自动驶自驾驶自动驾驶自动驾驶自动驾驶自动驾驶驾驶自动驾驶自动驾驶自动驾驶自动驾驶驾驶自动驾驶自动驾驶自动驾驶自动驾驶驾驶自动驾驶自动驾驶自动驾驶自动驾驶',
-					contentText: 'XXXXXXXXXXXXXXXX',
-					relatedCompany: '自动驾驶',
-					repostNum:11,
-					commentNum:22,
-					likeNum: 99,
-					icon: ''
-				},
-				{
-					id: '',
-					userImg: 'https://img.36krcdn.com/20200410/v2_6905947498bc4ec0af228afed409f771_img_png',
-					userName:'userName',
-					time:'2022-01-25 08:00',
-					readNum:2233,
-					contentTitle: '自动驾驶自驾驶自自动驶自驾驶自动驾驶自动驾驶自动驾驶自动驾驶驾驶自动驾驶自动驾驶自动驾驶自动驾驶驾驶自动驾驶自动驾驶自动驾驶自动驾驶驾驶自动驾驶自动驾驶自动驾驶自动驾驶',
-					contentText: 'XXXXXXXXXXXXXXXX',
-					relatedCompany: '自动驾驶',
-					repostNum:11,
-					commentNum:22,
-					likeNum: 99,
-					icon: ''
-				}],
+				}]
 			};
 		},
 		onLoad(option){
 			// const order = JSON.parse(decodeURIComponent(option.order));
 			this.newid = option.id
-			console.log('this.newid',option,this.newid)
+			console.log('this.newid 资讯详情',option,this.newid)
 			this.getnewList(option.id)
-			
+			this.toCommentArtId = option.id
 		},
 		methods: {
 			leftClick(){
@@ -270,12 +208,16 @@
 					.companyFont {
 						margin-right: 4px;
 						line-height: 23px;
+						width: 90px;
 						font-size: 12px;
 						color: #565656;
 						display: inline-block;
 						padding: 1px 6px;
 						border-radius: 4px;
 						background-color: #e5e5e5;	
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
 					}
 					.star{
 						color: #565656;

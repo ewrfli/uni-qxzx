@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<u-navbar title="资讯详情" @leftClick="leftClick" :autoBack="true" :fixed="true">
+		<u-navbar title="动态详情" @leftClick="leftClick" :autoBack="true" :fixed="true">
 			<view class="u-nav-slot" slot="left">
                 <u-icon name="arrow-left" size="22" color="#007aff"></u-icon>
             </view>
@@ -144,6 +144,13 @@
 				}],
 			};
 		},
+		onLoad(option){
+			// const order = JSON.parse(decodeURIComponent(option.order));
+			this.newid = option.id
+			console.log('this.newid',option,this.newid)
+			this.getnewList(option.id)
+			
+		},
 		methods: {
 			leftClick(){
 				uni.navigateBack({
@@ -161,9 +168,11 @@
 		background-color: $uni-color-backgroundColor;
 
 	}
-
+	.u-navbar__content{
+		background-color: #007AFF !important;
+	}
 		.newsItem {
-			margin: 50px 5px;
+			margin: 45px 5px;
 			padding: 0px 10px 10px;
 			background-color: $uni-color-content;
 			margin-bottom: 10px;
