@@ -16,7 +16,7 @@
 		</u-navbar>
 		<view class="card">	
 			<view class="itemList">
-				<view class="newsItem" v-for="(data, index) in newItemList2" @click="toNewDetails">
+				<view class="newsItem" v-for="(data, index) in newItemList2" @click="toNewDetails(data.article_id)">
 					<!-- 头部 -->
 					<!-- <view class="up-block">
 						<view class="user-img">
@@ -99,9 +99,9 @@
 			this.getmyList()
 		},
 		methods: {
-			toNewDetails(){
+			toNewDetails(id){
 				uni.navigateTo({
-					url: '/pages/news/newItemDetails'
+					url: '/pages/news/newItemDetails?id='+id
 				});
 			},
 			leftClick(){

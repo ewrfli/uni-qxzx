@@ -139,7 +139,7 @@ import newItemComment from "../../components/newItemComment/newItemComment.vue";
 <style lang="scss">
 	.content{
 		background-color: $uni-color-backgroundColor;
-
+		height: 66vh
 	}
 
 		.newsItem {
