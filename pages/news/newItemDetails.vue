@@ -52,7 +52,7 @@
 			</view>
 
 			<view class="comment">
-				<newItemComment :toCommentArtId="toCommentArtId"></newItemComment>
+				<newItemComment></newItemComment>
 			</view>
 
 			<view class="float-button">
@@ -73,7 +73,6 @@ import newItemComment from "../../components/newItemComment/newItemComment.vue";
 		},
 		data() {
 			return {
-				toCommentArtId: null,
 				newid: null,
 				newsItem2:{
 					qx_user: {}
@@ -98,9 +97,9 @@ import newItemComment from "../../components/newItemComment/newItemComment.vue";
 		onLoad(option){
 			// const order = JSON.parse(decodeURIComponent(option.order));
 			this.newid = option.id
-			console.log('this.newid 资讯详情',option,this.newid)
+			// console.log('this.newid 资讯详情',option,this.newid)
 			this.getnewList(option.id)
-			this.toCommentArtId = option.id
+			this.$store.commit('setCurArticleId', option.id);//把setCurArticleId 传到 vuex 再到 comment子组件
 		},
 		methods: {
 			leftClick(){
@@ -121,10 +120,10 @@ import newItemComment from "../../components/newItemComment/newItemComment.vue";
 			          url: `${this.$baseUrl}/article/details?id=${id}`,  //这里的lid,page,pagesize只能是数字或字母
 			          method: 'GET',
 			          success: (res)=>{
-						  console.log(res.data.data)
+						//   console.log(res.data.data)
 							this.newsItem2 = res.data.data
 						  
-						  console.log('this.newsItem2详细',this.newsItem2)
+						//   console.log('this.newsItem2详细',this.newsItem2)
 					  },
 			          fail: (err)=>{
 						  console.log(err)

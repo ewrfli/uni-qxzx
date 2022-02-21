@@ -193,7 +193,7 @@
 			},
 			{
 				"pagePath": "pages/user/index",
-				"iconPath": "https://cdn.uviewui.com/uview/common/min_button.png",
+				"iconPath": "static/logo.png",
 				"selectedIconPath": "https://cdn.uviewui.com/uview/common/min_button_select.png",
 				"text": "我的"
 			}

@@ -3,30 +3,30 @@
 			<view class="comment">
 				<view class="title"><text>评论动态</text></view>
 				<view class="list-card">
-					<view class="item" v-for="(data, index) in commentItem">
+					<view class="item" v-for="(data, index) in commentItem2">
 
 						<view class="up-block">
 							<view class="user-img">
-								<image :src="data.userImg" mode=""></image>
+								<image :src="data.qx_user.user_avatarimg" mode=""></image>
 							</view>
 							<view class="user-content">
 								<view class="user-name">
-									{{data.userName}}
+									{{data.qx_user.user_name}}
 								</view>
 							</view>
 						</view>
 
 						<view class="mid-block">
-							<text space="nbsp">{{data.contentTitle}}</text>
+							<text space="nbsp">{{data.comment_content}}</text>
 						</view>
 
 						<view class="low-block">
 							<view class="bottom-Div">
-								<text class="time">{{data.time}} </text>
+								<text class="time">{{data.updatedAt}} </text>
 								<text class="answer">回复 </text>
 								<text class="star">
 									<u-icon style="display: inline-block;" name="thumb-up" color="#565656" size="19"></u-icon>
-									<span style="line-height: 23px;">{{data.likeNum}}</span>
+									<span style="line-height: 23px;">{{data.comment_like_count}}</span>
 								</text>
 							</view>
 						</view>
@@ -40,15 +40,12 @@
 <script>
 	export default {
         props: {
-            toCommentArtId: {
-                type: String,
-                default: null
-            }
+
         },
 		name:"newItemDetails",
 		data() {
 			return {
-				articleId: toCommentArtId,
+				articleid: null,
                 commentItem2:[],
 				commentItem: [{
 					id: '',
@@ -82,12 +79,13 @@
 			};
 		},
         mounted() {
-            console.log('评论列表组件',articleId)
+            console.log('评论列表组件', this.$store.state.curArticleId)
+			this.getCommentList(this.$store.state.curArticleId)
         },
 		methods: {
-			getnewList(id){
+			getCommentList(id){
 			    uni.request({
-			          url: `${this.$baseUrl}/comment/list?id=${id}`,  //这里的lid,page,pagesize只能是数字或字母
+			          url: `${this.$baseUrl}/comment/curarticle?id=${id}`,  //这里的lid,page,pagesize只能是数字或字母
 			          method: 'GET',
 			          success: (res)=>{
 						  console.log(res.data.data)
