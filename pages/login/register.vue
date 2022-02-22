@@ -7,38 +7,38 @@
 
 		<view class="mid">
             <view class="item">
-                 <u--input
+                 <u-input
                     v-model="userData.account"
                     placeholder="请输入手机号"
                     border="surround"
                     clearable
-                ></u--input>
+                ></u-input>
 			</view>
              <view class="item">
-				<u--input
+				<u-input
                     v-model="userData.password"
                     placeholder="请输入密码"
-                    password="true"
+                    password='password'
                     border="surround"
                     clearable
-                ></u--input>
+                ></u-input>
 			</view>
             <view class="item">
-				<u--input
+				<u-input
                     v-model="userData.password"
                     placeholder="请再次输入密码"
-                    password="true"
+                    password='password'
                     border="surround"
                     clearable
-                ></u--input>
+                ></u-input>
 			</view>
             <view class="item">
-                 <u--input
+                 <u-input
                     v-model="userData.name"
                     placeholder="请输入姓名"
                     border="surround"
                     clearable
-                ></u--input>
+                ></u-input>
 			</view>
 
             <view class="item">

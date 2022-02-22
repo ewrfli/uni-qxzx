@@ -7,21 +7,21 @@
 
 		<view class="mid">
             <view class="item">
-                 <u--input
-                    v-model="userData.account"
+                 <u-input
+                    v-model="userData.user_phone"
                     placeholder="请输入账号"
                     border="surround"
                     clearable
-                ></u--input>
+                ></u-input>
 			</view>
              <view class="item">
-				<u--input
-                    v-model="userData.password"
+				<u-input
+                    v-model="userData.user_password"
                     placeholder="请输入密码"
-                    password="true"
+                    password = 'password'
                     border="surround"
                     clearable
-                ></u--input>
+                ></u-input>
 			</view>
             <view class="item">
                     <view>
@@ -65,9 +65,10 @@
 export default {
 	data() {
 		return {
+            userInfo: undefined,
 			userData:{
-                account: '1232141',
-                password: '****'
+                user_phone: null,
+                user_password: null
 			},
             checkboxValue1:[],
             // 基本案列数据
@@ -83,16 +84,44 @@ export default {
 	},
 	methods: {
         toLogin(){
-            this.$refs.uToast.show({
-                type: 'success',
-                title: '登录成功',
-                message: "登录成功",
-                iconUrl: 'https://cdn.uviewui.com/uview/demo/toast/success.png',
-                complete() {
-                    uni.switchTab({
-                        url: '/pages/home/index'
-                    });
-                }
+            uni.request({
+                    url: `${this.$baseUrl}/user/login`,  //这里的lid,page,pagesize只能是数字或字母
+                    method: 'POST',
+                    data:this.userData,
+                    success: (res)=>{
+                        console.log(res.data)
+                        this.userInfo = res.data.data
+                        console.log('this用户信息',this.userInfo)
+                        if(res.data.code === 200){
+                            uni.setStorageSync('token', res.data.token);	// 将登录信息以token的方式存在手机硬盘中
+							uni.setStorageSync('userInfo',res.data.data);	// 将用户信息存储在手机硬盘中
+                            this.$refs.uToast.show({
+                                type: 'success',
+                                title: '登录成功',
+                                message: "登录成功",
+                                iconUrl: 'https://cdn.uviewui.com/uview/demo/toast/success.png',
+                                complete() {
+                                    uni.switchTab({
+                                        url: '/pages/home/index'
+                                    });
+                                }
+                            })
+                        }else{
+                            this.$refs.uToast.show({
+                                type: 'console.error();',
+                                title: res.data.msg,
+                                message: res.data.msg,
+                                iconUrl: 'https://cdn.uviewui.com/uview/demo/toast/error.png',
+                                complete() {
+
+                                }
+                            })
+                        }
+                    },
+                    fail: (err)=>{
+                        console.log(err)
+                    }
+        
             })
             
         },

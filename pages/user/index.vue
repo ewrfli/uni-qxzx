@@ -3,13 +3,17 @@
 		<view class="top">
 			<view class="avatar-div">
 					<view class="user-img">
-						<image :src="userData.userImg" mode=""></image>
+						<image :src="userInfo.user_avatarimg " mode="" v-if="userInfo"></image>
+						<image src="../../static/logo.png" v-else></image>
 					</view>
 					<view class="user-content">
-						<view class="user-name">
-							{{userData.userName}}
+						<view class="user-name" v-if="userInfo">
+							{{userInfo.user_name}}
 						</view>
-						
+						<view class="user-name" v-else>
+							未登录
+						</view>
+
 						<view class="user-sub">
 							<text space="nbsp" class="user-data">普通用户 未认证</text>
 						</view>
@@ -76,13 +80,21 @@ export default {
 				likeNum: 99,
 				icon: ''
 			},
-			
+			userInfo:undefined,
 			totalTips: ['未认证', 123 ,22, 33],
 			title: 'Hello'
 		};
 	},
+	onShow(){
+		console.log('onshow')
+		this.userInfo = uni.getStorageSync('userInfo')
+	},
 	onLoad() {
 		console.log(uni.$u.config.v);
+	},
+	mounted() {
+		console.log('getsyncloc',uni.getStorageSync('userInfo'))
+		// this.userInfo = uni.getStorageSync('userInfo')
 	},
 	methods: {
 		toUserHomePage(){
