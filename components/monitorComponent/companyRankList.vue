@@ -5,7 +5,7 @@
 				企业排行
 			</view>
 			<view class="right-title">
-				查看
+				查看全部
 			</view>
 		</view>
 		

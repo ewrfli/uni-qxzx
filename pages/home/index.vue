@@ -29,7 +29,7 @@
 			
 			<view class="currentTabComponentMonitor" v-show="currentTabComponent=='homeTabComponentMonitor'">
 				<homeTabComponentMonitorAdvice></homeTabComponentMonitorAdvice>
-				<homeTabComponentMonitorDaily></homeTabComponentMonitorDaily>
+				<companyRankList></companyRankList>
 			</view>
 		</view>
 
@@ -37,12 +37,14 @@
 </template>
 
 <script>
+import commonFuncDiv from '../../components/userComponent/commonFuncDiv.vue'
 import homeFuncDiv from '../../components/homeComponent/homeFuncDiv.vue'
 import topTabbar from '../../components/topTabbar/topTabbar.vue'
 import homeTabComponentNewsHot from '../../components/newsComponent/tabNewsHot.vue'
 import homeNewsList from '../../components/homeNewsComponent/homeNewsList.vue'
 import homeTabComponentMonitorAdvice from '../../components/monitorComponent/tabMonitorAdvice.vue'
 import homeTabComponentMonitorDaily from '../../components/monitorComponent/tabMonitorDaily.vue'
+import companyRankList from '../../components/monitorComponent/companyRankList.vue'
 import homeBanner from '../../components/homeBanner/homeBanner.vue'
 export default {
 	components: {
@@ -51,7 +53,8 @@ export default {
 		homeTabComponentNewsHot,
 		homeNewsList,
 		homeTabComponentMonitorAdvice,
-		homeTabComponentMonitorDaily,
+		companyRankList,
+		
 		homeBanner
 	},
 	data() {

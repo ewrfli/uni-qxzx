@@ -30,7 +30,7 @@
 					</view>
 				</view>
 				<view class="right-hotIcon">
-					<u-icon name="photo" color="#F63A34" size="20"></u-icon>
+					<image style="width: 20px; height: 20px;" src="../../static/hot.png" mode=""></image>
 				</view>
 			</view>
 		</view>

@@ -175,26 +175,26 @@
 		"backgroundColor": "#f4f5f7",
 		"list": [{
 				"pagePath": "pages/home/index",
-				"iconPath": "https://cdn.uviewui.com/uview/common/min_button.png",
-				"selectedIconPath": "https://cdn.uviewui.com/uview/common/min_button_select.png", 	 
+				"iconPath": "static/tabber/home.png",
+				"selectedIconPath": "static/tabber/ihome.png", 	 
 				"text": "首页"
 			},
 			{
 				"pagePath": "pages/news/index",
-				"iconPath": "https://cdn.uviewui.com/uview/common/min_button.png",
-				"selectedIconPath": "https://cdn.uviewui.com/uview/common/min_button_select.png",
+				"iconPath": "static/tabber/new.png",
+				"selectedIconPath": "static/tabber/inew.png",
 				"text": "资讯"
 			},
 			{
 				"pagePath": "pages/monitor/index",
-				"iconPath": "https://cdn.uviewui.com/uview/common/min_button.png",
-				"selectedIconPath": "https://cdn.uviewui.com/uview/common/min_button_select.png",
+				"iconPath": "static/tabber/monitor.png",
+				"selectedIconPath": "static/tabber/imonitor.png",
 				"text": "监控"
 			},
 			{
 				"pagePath": "pages/user/index",
-				"iconPath": "static/logo.png",
-				"selectedIconPath": "https://cdn.uviewui.com/uview/common/min_button_select.png",
+				"iconPath": "static/tabber/me.png",
+				"selectedIconPath": "static/tabber/ime.png",
 				"text": "我的"
 			}
 		]

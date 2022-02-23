@@ -49,7 +49,7 @@
 			</view>
 		</view>
 		<view class="low">
-			<commonFuncDiv></commonFuncDiv>
+			<commonFuncDiv :indexPage="indexPage"></commonFuncDiv>
 		</view>
 	</view>
 </template>
@@ -66,6 +66,7 @@ export default {
     },
 	data() {
 		return {
+			indexPage:'',
 			userData:{
 				id: '',
 				userImg: 'https://img.36krcdn.com/20200410/v2_6905947498bc4ec0af228afed409f771_img_png',
@@ -86,7 +87,8 @@ export default {
 		};
 	},
 	onShow(){
-		console.log('onshow')
+		console.log('当前页面',this.$mp.page.route)
+		this.indexPage = this.$mp.page.route
 		this.userInfo = uni.getStorageSync('userInfo')
 	},
 	onLoad() {
