@@ -79,11 +79,40 @@ export default {
             ],
 		};
 	},
+    onShow(){
+        console.log('onshow从vuex获取RegisterUserDate', this.$store.state.registerUserDate)
+        this.userData.user_phone = this.$store.state.registerUserDate.user_phone
+        this.userData.user_password = this.$store.state.registerUserDate.user_password
+    },
 	onLoad() {
 		console.log(uni.$u.config.v);
 	},
 	methods: {
+         open() {
+            this.$refs.popup.open()
+        },
+        /**
+         * 点击取消按钮触发
+         * @param {Object} done
+         */
+        close() {
+            // TODO 做一些其他的事情，before-close 为true的情况下，手动执行 close 才会关闭对话框
+            // ...
+            this.$refs.popup.close()
+        },
+        checkboxChange(){
+            this.checkboxList1[0].disabled ? this.checkboxList1[0].disabled = false : this.checkboxList1[0].disabled = true
+            console.log(this.checkboxList1[0].disabled)
+        },
         toLogin(){
+            if(!this.checkboxList1[0].disabled){
+                this.$refs.uToast.show({
+                    type: 'error',
+                    title: '未勾选用户协议',
+                    message: "未勾选用户协议"
+                })
+                return
+            }
             uni.request({
                     url: `${this.$baseUrl}/user/login`,  //这里的lid,page,pagesize只能是数字或字母
                     method: 'POST',
@@ -176,6 +205,7 @@ export default {
 				color: #afafaf;
 			}
             .contract {
+                color: #3c9cff;
                 font-size: 15px;
             }
         }
