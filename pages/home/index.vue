@@ -8,7 +8,7 @@
 			<view class="top-subtitle">为用户实时了解最新风险信息及相关企业相关风险新闻</view>
 		</view>
 		<u-sticky offset-top="0" customNavHeight="0" bgColor="#007aff">
-			<view class="u-search"><u-search shape="square" placeholder="搜索企业/老板/新闻" v-model="keyword" :show-action="false"></u-search></view>
+			<view class="u-search"><u-search :disabled=true @click="toSearch" shape="square" placeholder="搜索企业/老板/新闻" v-model="keyword" :show-action="false"></u-search></view>
 		</u-sticky>
 
 		<view class="iconfunc">
@@ -117,6 +117,12 @@ export default {
 			this.tabIndex = item.id;
 			//显示标签对应的组件内容
 			this.currentTabComponent = item.id
+		},
+		toSearch(){
+			console.log('toSearch')
+			uni.navigateTo({
+				url: '/pages/home/search'
+			});
 		}
 	}
 };

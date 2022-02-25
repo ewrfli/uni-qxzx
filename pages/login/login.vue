@@ -2,7 +2,7 @@
 	<view class="wrap">
 		<view class="top">
             <view class="title">企险资讯</view>
-            <view class="title-desc">资讯企险资讯企险资讯企险资讯</view>
+            <view class="title-desc">为用户实时了解最新风险信息及相关企业相关风险新闻</view>
 		</view>
 
 		<view class="mid">

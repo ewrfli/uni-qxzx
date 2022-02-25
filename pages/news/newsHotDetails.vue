@@ -14,39 +14,18 @@
             </view>
 		
 		</u-navbar>
-		<view class="card">	
-			<view class="itemList">
-				<view class="item" v-for="(data, index) in itemList2" :key="data.article_id">
-					<view class="flexDiv">
-						<view class="left-img">
-							<image style="width: 36px; height: 36px; border-radius: 4px;" :src="data.article_coverimg" mode=""></image>
-						</view>
-						<view class="title">
-							<view class="Content-title">
-								<view class="Content-title-left">
-									{{data.article_title}}
-								</view>
-								<!-- <view class="top-title-right-hotIcon">
-									<u-icon name="photo" color="#F63A34" size="20"></u-icon>
-								</view> -->
-							</view>
-							<view class="sub-title">
-								{{data.article_desc}}
-							</view>
-						</view>
-					</view>
-					<view class="right-hotIcon">
-						<image style="width: 20px; height: 20px;" src="../../static/hot.png" mode=""></image>
-					</view>
-				</view>
-			</view>
+		<view class="card">
+			<NewsHotList></NewsHotList>
 		</view>
 	</view>
 </template>
 
 <script>
+import NewsHotList from '../../components/newsComponent/NewsHotList.vue'
 	export default {
-		name:"newsHotDetails",
+		components: {
+			NewsHotList
+		},
 		data() {
 			return {
 				itemList2:[],
@@ -93,7 +72,6 @@
 		},
 		mounted() {
 			console.log('App mounted newlist')
-			this.getList()
 		},
 		methods: {
 			leftClick(){
@@ -102,28 +80,6 @@
 					animationType: 'pop-out',
     				animationDuration: 200
 				});
-			},
-			toNewDetails(id){
-				console.log(id)
-				uni.navigateTo({
-					url: '/pages/news/newItemDetails?id='+id
-				});
-			},
-			getList(){
-			    uni.request({
-			          url: `${this.$baseUrl}/article/list?article_category=&pageNo=1&pageSize=30`,  //这里的lid,page,pagesize只能是数字或字母
-			          method: 'GET',
-			          success: (res)=>{
-						  console.log(res.data.data)
-						  res.data.data.forEach(item => {
-							  	this.itemList2.push(item)
-						  })
-						  console.log('this.newItemList2资讯列表热门榜单',this.itemList2)
-					  },
-			          fail: (err)=>{
-						  console.log(err)
-					  }
-			    })
 			}
 		}
 	}

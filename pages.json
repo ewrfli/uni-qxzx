@@ -32,7 +32,14 @@
 				"navigationBarTextStyle": "white" // 状态栏字体为白色
 			}
 		},
-
+		{
+			"path": "pages/home/search",
+			"style": {
+				"navigationBarTitleText": "搜索",
+				"navigationStyle":"custom",//隐藏top导航栏
+				"navigationBarTextStyle": "white" // 状态栏字体为白色
+			}
+		},
 		{
 			"path": "pages/monitor/index",
 			"style": {
