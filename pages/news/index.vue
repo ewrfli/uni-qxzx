@@ -51,12 +51,12 @@ export default {
 			tabIndex: "currentTabNews",
 			tabBars:[
 				{
-					name: "推荐",
+					name: "推荐热点",
 					id: "currentTabNews",
 					index: 0
 				},
 				{
-					name:"关注",
+					name:"关注话题",
 					id:"currentTabAttention",
 					index: 1
 				},

@@ -4,7 +4,7 @@
 			<view class="avatar-div">
 					<view class="user-img">
 						<image :src="userInfo.user_avatarimg " mode="" v-if="userInfo"></image>
-						<image src="../../static/logo.png" v-else></image>
+						<image src="../../static/unlogin.png" v-else></image>
 					</view>
 					<view class="user-content">
 						<view class="user-name" v-if="userInfo">
@@ -27,11 +27,11 @@
 				</view>
 				<view class="div1">
 					<text class="data-text">{{totalTips[1]}}</text>
-					<text class="div1-text">监控动态</text>
+					<text class="div1-text">追踪动态</text>
 				</view>
 				<view class="div1">
 					<text class="data-text">{{totalTips[2]}}</text>
-					<text class="div1-text">积分</text>
+					<text class="div1-text">我的发布</text>
 				</view>
 				<view class="div1">
 					<text class="data-text">{{totalTips[3]}}</text>
@@ -120,6 +120,7 @@ export default {
 			align-items: center;
 			.user-img {
 				image{
+					margin-left: 10px;
 					margin-top: 8px; 
 					width: 50px; 
 					height: 50px; 

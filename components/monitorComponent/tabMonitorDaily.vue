@@ -3,7 +3,7 @@
 		<view class="item-card" v-for="(data, index) in listData">
 			<view class="top-div">
 				<view class="left-title">
-					监控日报<text style="font-size: 14px; color: #000000; ">{{data.date}}</text>
+					追踪日报<text style="font-size: 14px; color: #000000; ">{{data.date}}</text>
 				</view>
 				<view class="right-title">
 					共<text style="font-size: 14px; color: #000000;">{{data.totalTips[0] + data.totalTips[1] + data.totalTips[2] + data.totalTips[3]}}</text>条动态
@@ -12,7 +12,7 @@
 			
 			<view class="tips-div">
 				<view class="div1">
-					<text class="div1-text">高风险</text>
+					<text class="div1-text">风险</text>
 					<text style="color: #ff0000;">{{data.totalTips[0]}}</text>
 				</view>
 				<view class="div1">
@@ -20,13 +20,13 @@
 					<text style="color: #ffaa00;">{{data.totalTips[1]}}</text>
 				</view>
 				<view class="div1">
-					<text class="div1-text">提示</text>
+					<text class="div1-text">追踪</text>
 					<text style="color: #515256;">{{data.totalTips[2]}}</text>
 				</view>
-				<view class="div1">
+				<!-- <view class="div1">
 					<text class="div1-text">利好</text>
 					<text style="color: #00aa00;">{{data.totalTips[3]}}</text>
-				</view>
+				</view> -->
 			</view>
 			
 			<view class="content-div">

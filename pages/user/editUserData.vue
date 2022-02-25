@@ -5,17 +5,17 @@
                 <u-icon name="arrow-left" size="22" color="#007aff"></u-icon>
             </view>
 			<view class="u-nav-slot" slot="right">
-                <u-button type="primary" text="保存"></u-button>
+                <u-button type="primary" text="更新"></u-button>
             </view>
 		</u-navbar>
 		<view class="top-card">	
 			<view class="avatar">
-				<image :src="userData.userImg" mode=""></image>
+				<image :src="userInfo.user_avatarimg" mode=""></image>
 			</view>
 			<view class="right-div">
-				<view class="name">用户111</view>
-				<view class="accountnum">账号：11111111</view>
-				<view class="perfect">资料完善度</view>
+				<view class="name">{{userInfo.user_name}}</view>
+				<view class="accountnum">账号：{{userInfo.user_phone}}</view>
+				<view class="perfect">资料完善度99%</view>
 			</view>
 		</view>
 		<view class="mid-card">
@@ -23,19 +23,43 @@
             <u-line length="100%" style="margin: 0 auto;"></u-line>
 			<view class="item">
 				<view class="title">介绍</view>
-				<view class="desc">xxxxxxxx</view>
+				<view class="desc"><input v-model="userInfo.user_desc"/></view>
 			</view>
 			<u-line length="100%" style="margin: 0 auto;"></u-line> 
 			<view class="item">
 				<view class="title">性别</view>
-				<view class="desc"><input v-model="userData.sex"/></view>
+				<view class="desc"><input v-model="userInfo.user_sex"/></view>
 			</view>
 			<u-line length="100%" style="margin: 0 auto;"></u-line>
 			<view class="item">
-				<view class="title">公司</view>
-				<view class="desc">xxxxxxxx公司</view>
+				<view class="title">手机</view>
+				<view class="desc"><input v-model="userInfo.user_phone"/></view>
 			</view>
 			<u-line length="100%" style="margin: 0 auto;"></u-line>
+			<view class="item">
+				<view class="title">邮箱</view>
+				<view class="desc"><input v-model="userInfo.user_email"/></view>
+			</view>
+			<u-line length="100%" style="margin: 0 auto;"></u-line>
+			<view class="item">
+				<view class="title">生日</view>
+				<view class="desc"><input v-model="userInfo.user_birthday"/></view>
+			</view>
+			<u-line length="100%" style="margin: 0 auto;"></u-line>
+			<view class="item">
+				<view class="title">行业</view>
+				<view class="desc"><input v-model="userInfo.user_industry"/></view>
+			</view>
+
+			<u-line length="100%" style="margin: 0 auto;"></u-line>
+			<view class="item">
+				<view class="title">公司</view>
+				<view class="desc"><input v-model="userInfo.user_company_name"/></view>
+			</view>
+			<u-line length="100%" style="margin: 0 auto;"></u-line>
+			<view class="update" style="width: 100px; margin: 0 auto; margin-top: 25px;">
+                <u-button type="primary" text="更新"></u-button>
+            </view>
 		</view>
 	</view>
 </template>
@@ -45,6 +69,19 @@
 		name:"newsHotDetails",
 		data() {
 			return {
+				userInfo: {
+					user_id: '1111111',
+					user_name: '杨洋样',
+					user_sex: '男',
+					user_avatarimg: 'https://img.36krcdn.com/20200410/v2_6905947498bc4ec0af228afed409f771_img_png',
+					user_desc: '自动驾驶自动驾驶自动驾驾驶',
+					user_power: '普通用户',
+					user_phone: '123123123',
+					user_email: 'XXXXXXXXXXXXXXXX',
+					user_birthday: '1990-12-12',
+					user_industry: '汽车',
+					user_company_name: 'xxx汽车有限公司'
+				},
 				userData: {
 					sex: '男',
 					id: '',
@@ -62,6 +99,9 @@
 				}
 			};
 		},
+		onShow(){
+
+		},
 		methods: {
 			leftClick(){
 				uni.navigateBack({
@@ -69,6 +109,9 @@
 					animationType: 'pop-out',
     				animationDuration: 200
 				});
+			},
+			getUserInfo(){
+				
 			}
 		},
 	}

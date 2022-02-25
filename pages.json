@@ -36,7 +36,7 @@
 		{
 			"path": "pages/monitor/index",
 			"style": {
-				"navigationBarTitleText": "监控",
+				"navigationBarTitleText": "追踪",
 				"navigationStyle":"custom",//隐藏top导航栏
 				"navigationBarTextStyle": "white" // 状态栏字体为白色
 			}
@@ -189,7 +189,7 @@
 				"pagePath": "pages/monitor/index",
 				"iconPath": "static/tabber/monitor.png",
 				"selectedIconPath": "static/tabber/imonitor.png",
-				"text": "监控"
+				"text": "追踪"
 			},
 			{
 				"pagePath": "pages/user/index",

@@ -8,7 +8,8 @@
             </view>
             <view class="avatar-div">
                 <view class="user-img">
-                    <image :src="userData.userImg" mode=""></image>
+                    <image v-if="userInfo" :src="userInfo.user_avatarimg" mode=""></image>
+                    <image src="../../static/unlogin.png" v-else></image>
                 </view>
                 <view class="user-operation">
 					<view class="opera star"><u-icon style="display: inline-block;" name="thumb-up" size="22" color="#999999"></u-icon><span class="data">9</span></view>
@@ -17,14 +18,17 @@
 				
             </view>
             <view class="user-content">
-                <view class="user-name">
-                    {{ userData.userName }}
+                <view class="user-name" v-if="userInfo">
+                    {{ userInfo.user_name }}
                 </view>
+                <view class="user-name" v-else>
+							未登录
+				</view>
                 <view class="user-sub">
                     <text space="nbsp" class="user-data">普通用户 未认证</text>
                 </view>
                 <view class="user-info">
-                    <text space="nbsp" class="user-data">自我介绍自我介绍自我介绍</text>
+                    <text space="nbsp" class="user-data">自我介绍</text>
                 </view>
             </view>
         </view>
@@ -48,7 +52,7 @@
             <view class="info school">
                 <u-icon name="bookmark" size="40"></u-icon>
                 <view class="data">
-                    <span class="title">学校</span>
+                    <span class="title">邮箱</span>
                     <span class="detail">去完善></span>
                 </view>
             </view>
@@ -97,6 +101,7 @@ export default {
     },
     data() {
         return {
+            userInfo:undefined,
             userData: {
                 id: '',
                 userImg:
@@ -189,6 +194,11 @@ export default {
             title: 'Hello',
         };
     },
+    onShow(){
+		console.log('当前页面',this.$mp.page.route)
+		this.indexPage = this.$mp.page.route
+		this.userInfo = uni.getStorageSync('userInfo')
+	},
     onLoad() {
         console.log(uni.$u.config.v);
     },

@@ -41,12 +41,12 @@ export default {
 			tabIndex: "currentAdvice",
 			tabBars:[
 				{
-					name: "监控建议",
+					name: "追踪建议",
 					id: "currentAdvice",
 					index: 0
 				},
 				{
-					name:"监控日报",
+					name:"追踪日报",
 					id:"currentDaily",
 					index: 1
 				},
