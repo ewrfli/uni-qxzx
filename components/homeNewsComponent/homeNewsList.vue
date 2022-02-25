@@ -22,7 +22,7 @@
 						<view class="news-sub">
 							<view class="point"></view>
 							<view class="news-times">
-								<text space="nbsp" class="user-data">{{data.article_updatedAt}}    热度 {{data.article_read_count}}</text>
+								<text space="nbsp" class="user-data">{{data.updatedAt}}    热度 {{data.article_read_count}}</text>
 							</view>
 						</view>
 					</view>
