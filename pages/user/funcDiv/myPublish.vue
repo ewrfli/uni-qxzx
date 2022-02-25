@@ -9,15 +9,15 @@
 		</view>
 		<view class="top">
 			<view class="num-div">
-				<view class="num">00</view>
+				<view class="num">140</view>
 				<view class="title">获赞</view>
 			</view>
 			<view class="num-div">
-				<view class="num">00</view>
+				<view class="num">06</view>
 				<view class="title">发帖</view>
 			</view>
 			<view class="num-div">
-				<view class="num">00</view>
+				<view class="num">56</view>
 				<view class="title">回复</view>
 			</view>
 		</view>

@@ -38,7 +38,7 @@
             <view class="info profession">
                 <u-icon name="coupon" size="40"></u-icon>
                 <view class="data">
-                    <span class="title">行业</span>
+                    <span class="title">生日</span>
                     <span class="detail">去完善></span>
                 </view>
             </view>
@@ -61,20 +61,20 @@
         <view class="low">
             <view class="low-title">我参与的话题</view>
             <u-line length="100%" style="margin: 0 auto;"></u-line>
-            <view class="tabs-item" v-for="data in themeList">
+            <view class="tabs-item" v-for="data in themeList2">
                 <view class="item">
                     <view class="flexDiv">
                         <view class="left-img">
-                            <image style="width: 36px; height: 36px; border-radius: 4px;" :src="data.img" mode=""></image>
+                            <image style="width: 36px; height: 36px; border-radius: 4px;" :src="data.tag_coverimg" mode=""></image>
                         </view>
                         <view class="title">
                             <view class="Content-title">
                                 <view class="Content-title-left">
-                                    #{{data.name}}
+                                    #{{data.tag_name}}
                                 </view>
                             </view>
                             <view class="sub-title">
-                                {{data.prompt}}
+                                {{data.tag_desc}}
                             </view>
                         </view>
                     </view>
@@ -118,6 +118,7 @@ export default {
                 likeNum: 99,
                 icon: '',
             },
+            themeList2:[],
             themeList: [
                 {
                     name: '北京华峰车空峰车空科技公司1',
@@ -146,49 +147,7 @@ export default {
                     prompt: '新增一条公告调研报告',
                     describe: '1',
                     img: 'https://cdn.uviewui.com/uview/goods/4.jpg',
-                },
-                 {
-                    name: '4北京华峰车空峰车空科技公司',
-                    tag: '热门公司4',
-                    prompt: '新增一条公告调研报告',
-                    describe: '1',
-                    img: 'https://cdn.uviewui.com/uview/goods/4.jpg',
-                },
-                 {
-                    name: '4北京华峰车空峰车空科技公司',
-                    tag: '热门公司4',
-                    prompt: '新增一条公告调研报告',
-                    describe: '1',
-                    img: 'https://cdn.uviewui.com/uview/goods/4.jpg',
-                },
-                 {
-                    name: '4北京华峰车空峰车空科技公司',
-                    tag: '热门公司4',
-                    prompt: '新增一条公告调研报告',
-                    describe: '1',
-                    img: 'https://cdn.uviewui.com/uview/goods/4.jpg',
-                },
-                 {
-                    name: '4北京华峰车空峰车空科技公司',
-                    tag: '热门公司4',
-                    prompt: '新增一条公告调研报告',
-                    describe: '1',
-                    img: 'https://cdn.uviewui.com/uview/goods/4.jpg',
-                },
-                 {
-                    name: '4北京华峰车空峰车空科技公司',
-                    tag: '热门公司4',
-                    prompt: '新增一条公告调研报告',
-                    describe: '1',
-                    img: 'https://cdn.uviewui.com/uview/goods/4.jpg',
-                },
-                 {
-                    name: '4北京华峰车空峰车空科技公司',
-                    tag: '热门公司4',
-                    prompt: '新增一条公告调研报告',
-                    describe: '1',
-                    img: 'https://cdn.uviewui.com/uview/goods/4.jpg',
-                },
+                }
             ],
             totalTips: ['未认证', 123, 22, 33],
             title: 'Hello',
@@ -198,6 +157,7 @@ export default {
 		console.log('当前页面',this.$mp.page.route)
 		this.indexPage = this.$mp.page.route
 		this.userInfo = uni.getStorageSync('userInfo')
+        this.getmyList()
 	},
     onLoad() {
         console.log(uni.$u.config.v);
@@ -218,6 +178,25 @@ export default {
 				url: '/pages/user/editUserData'
 			});
         },
+        getmyList(){
+            uni.request({
+                url: `${this.$baseUrl}/star/mytaglist?user_id=1`,  //这里的lid,page,pagesize只能是数字或字母
+                method: 'GET',
+                success: (res)=>{
+                    console.log(res.data.data)
+                    // this.themeList2 = res.data.data
+                    res.data.data.forEach(item => {
+                        // console.log(item)
+                        this.themeList2.push(item.qx_tag)
+                    })
+                    console.log('this.themeList2 ',this.themeList2)
+                },
+                fail: (err)=>{
+                    console.log(err)
+                }
+        
+            })
+        }
     },
 };
 </script>

@@ -10,7 +10,7 @@
 		</u-navbar>
 		<view class="top-card">	
 			<view class="avatar">
-				<image :src="userInfo.user_avatarimg" mode=""></image>
+				<image :src="userInfo ? userInfo.user_avatarimg : 'xxx'" mode=""></image>
 			</view>
 			<view class="right-div">
 				<view class="name">{{userInfo.user_name}}</view>
@@ -100,7 +100,7 @@
 			};
 		},
 		onShow(){
-
+			this.getUserInfo()
 		},
 		methods: {
 			leftClick(){
@@ -111,7 +111,19 @@
 				});
 			},
 			getUserInfo(){
-				
+				uni.request({
+					url: `${this.$baseUrl}/user/findone?user_id=1`,  //这里的lid,page,pagesize只能是数字或字母
+					method: 'GET',
+					success: (res)=>{
+						console.log(res.data.data)
+						this.userInfo = res.data.data
+						console.log('this.themeList2 ',this.userInfo)
+					},
+					fail: (err)=>{
+						console.log(err)
+					}
+			
+				})
 			}
 		},
 	}
