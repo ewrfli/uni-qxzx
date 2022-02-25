@@ -15,7 +15,7 @@
 
 						<view class="Card">
                             <view class="topDiv">
-                                <view class="card-title">本地优质企业</view>
+                                <view class="card-title">优质企业</view>
                                 <view class="card-sub">TOP 10</view>
                             </view>
 
@@ -48,28 +48,28 @@
 			return {
 				 companyList: [
 					{
-						name: "北京华峰车空峰车空科技公司",
+						name: "北京xxxxxx空科技公司",
 						tag: "热门公司",
 						prompt: "新增一条公告调研报告",
 						describe: "",
 						img: "https://cdn.uviewui.com/uview/goods/1.jpg"
 					}, 
 					{
-						name: "北京华峰车空xx北京华峰车空峰车空科技公司",
+						name: "北京xxxxx空科技公司",
 						tag: "热门公司",
 						prompt: "新增一条公告调研报告",
 						describe: "",
 						img: "https://cdn.uviewui.com/uview/goods/2.jpg"
 					}, 
 					{
-						name: "北京华峰车空峰车空科技公司",
+						name: "北京xxxx科技公司",
 						tag: "热门公司",
 						prompt: "新增一条公告调研报告",
 						describe: "",
 						img: "https://cdn.uviewui.com/uview/goods/3.jpg"
 					}, 
 					{
-						name: "北京华峰车空峰车空科技公司",
+						name: "北京xxxxx科技公司",
 						tag: "热门公司",
 						prompt: "新增一条公告调研报告",
 						describe: "",

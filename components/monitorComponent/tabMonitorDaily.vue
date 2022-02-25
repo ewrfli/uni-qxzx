@@ -50,7 +50,7 @@
 						</view>
 					</view>
 					<view class="right-hotIcon">
-						<u-icon name="photo" color="#F63A34" size="20"></u-icon>
+						<image style="width: 16px; height: 16px;" src="../../static/message.png" mode=""></image>
 					</view>
 				</view>
 			</view>
@@ -65,33 +65,33 @@
 			return {
 				listData:[
 					{
-						date: '2021-12-23',
-						totalTips: [0, 1 ,22, 33],
+						date: '2022-02-23',
+						totalTips: [0, 1 ,12, 23],
 						content: [
 							{
-								name: "北京华峰车空峰车空科技公司",
+								name: "北京xxxxx科技公司",
 								tips: [0, 1 ,2, 3],
 								tag: "热门公司",
 								prompt: "新增一条公告调研报告",
 								describe: "",
-								img: "https://cdn.uviewui.com/uview/goods/1.jpg"
+								img: "https://cdn.uviewui.com/uview/goods/4.jpg"
 							},
 							{
-								name: "上海晶上车空峰车空科技公司",
+								name: "上海xxxxxx科技公司",
 								tips: [0, 2 ,21, 3],
 								tag: "热门公司",
 								prompt: "新增一条公告调研报告",
 								describe: "",
-								img: "https://cdn.uviewui.com/uview/goods/1.jpg"
+								img: "https://cdn.uviewui.com/uview/goods/3.jpg"
 							}
 						]
 					},
 					{
-						date: '2021-12-22',
+						date: '2022-2-22',
 						totalTips: [0, 1 ,22, 33],
 						content: [
 							{
-								name: "北京华峰车空峰车空科技公司",
+								name: "杭州xxxxxx科技公司",
 								tips: [0, 1 ,2, 3],
 								tag: "热门公司",
 								prompt: "新增一条公告调研报告",
@@ -99,12 +99,12 @@
 								img: "https://cdn.uviewui.com/uview/goods/1.jpg"
 							},
 							{
-								name: "上海晶上车空峰车空科技公司",
+								name: "上海xxxxxx科技公司",
 								tips: [0, 11 ,2, 3],
 								tag: "热门公司",
 								prompt: "新增一条公告调研报告",
 								describe: "",
-								img: "https://cdn.uviewui.com/uview/goods/1.jpg"
+								img: "https://cdn.uviewui.com/uview/goods/2.jpg"
 							}
 						]
 					}

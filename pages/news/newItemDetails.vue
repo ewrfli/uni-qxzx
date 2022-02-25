@@ -14,11 +14,11 @@
 				<view class="up-block">
 					<view class="user-img">
 						<!--  v-for="(user, index) in data.qx_user" -->
-						<image :src="newsItem2.qx_user ? newsItem2.qx_user.user_avatarimg : 'xxx'" mode=""></image>
+						<image :src="newsItem2.qx_user ? newsItem2.qx_user.user_avatarimg : '../../static/qxzxlogo.png'" mode=""></image>
 					</view>
 					<view class="user-content">
 						<view class="user-name">
-							{{newsItem2.qx_user ? newsItem2.qx_user.user_name : 'xxx'}}
+							{{newsItem2.qx_user ? newsItem2.qx_user.user_name : '企险资讯'}}
 							<u-icon class="username-v" name="level" color="#007aff" size="20"></u-icon>
 						</view>
 						
@@ -39,8 +39,8 @@
 				<view class="low-block">
 					<view class="companyDiv">
 						<span>
-							<text class="companyFont">{{newsItem2.article_tag}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
-							<text class="companyFont">{{newsItem2.article_company}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
+							<text v-if="newsItem2.article_tag" class="companyFont">{{newsItem2.article_tag}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
+							<text v-if="newsItem2.article_company" class="companyFont">{{newsItem2.article_company}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
 						</span>
 						<text class="star">
 							<u-icon style="display: inline-block; margin-left: 4px;" name="thumb-up" color="#565656" size="20"></u-icon>
@@ -207,13 +207,12 @@ import newItemComment from "../../components/newItemComment/newItemComment.vue";
 					.companyFont {
 						margin-right: 4px;
 						line-height: 23px;
-						width: 90px;
 						font-size: 12px;
-						color: #565656;
+						color: #007AFF;
 						display: inline-block;
 						padding: 1px 6px;
 						border-radius: 4px;
-						background-color: #e5e5e5;	
+						background-color: #dfeeff;		
 						white-space: nowrap;
 						overflow: hidden;
 						text-overflow: ellipsis;

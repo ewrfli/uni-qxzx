@@ -54,35 +54,35 @@
 			return {
 				 MonitorAdviceList: [
 					{
-						name: "北京华峰车空峰车空科技公司",
+						name: "北京xxxxx科技公司",
 						tag: "热门公司",
 						prompt: "新增一条公告调研报告",
 						describe: "",
 						img: "https://cdn.uviewui.com/uview/goods/1.jpg"
 					}, 
 					{
-						name: "北京华峰车空xx北京华峰车空峰车空科技公司",
+						name: "天津华峰车空xx北京华峰车空峰车空科技公司",
 						tag: "热门公司",
 						prompt: "新增一条公告调研报告",
 						describe: "",
 						img: "https://cdn.uviewui.com/uview/goods/2.jpg"
 					}, 
 					{
-						name: "北京华峰车空峰车空科技公司",
+						name: "杭州xxxxxx科技公司",
 						tag: "热门公司",
 						prompt: "新增一条公告调研报告",
 						describe: "",
 						img: "https://cdn.uviewui.com/uview/goods/3.jpg"
 					}, 
 					{
-						name: "北京华峰车空峰车空科技公司",
+						name: "宁波xxxxxxx科技公司",
 						tag: "热门公司",
 						prompt: "新增一条公告调研报告",
 						describe: "",
 						img: "https://cdn.uviewui.com/uview/goods/4.jpg"
 					}, 
 					{
-						name: "北京华峰车空xx科技公司",
+						name: "上海xxxxx科技公司",
 						tag: "热门公司",
 						prompt: "新增一条公告调研报告",
 						describe: "",

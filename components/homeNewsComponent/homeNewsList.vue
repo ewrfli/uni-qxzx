@@ -36,8 +36,8 @@
 					<!-- 底部 -->
 					<view class="low-block">
 						<view class="companyDiv">
-							<text class="companyFont">{{data.article_tag}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
-							<text class="companyFont">{{data.article_company}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
+							<text v-if="data.article_tag" class="companyFont">{{data.article_tag}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
+							<text v-if="data.article_company" class="companyFont">{{data.article_company}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
 						</view>
 					</view>
 				</view>
@@ -183,7 +183,7 @@
     		position: relative;
 		}
 		.newsItem {
-			padding: 0px 10px;
+			padding: 5px 10px;
 			background-color: $uni-color-content;
 			margin-bottom: 26px;
 			margin-left: 6px;
@@ -210,6 +210,7 @@
 			.low-block {
 				display: flex;
 				flex-direction: column;
+				padding-bottom: 5px;
 				.companyDiv {
 					.companyFont {
 						margin-right: 6px;

@@ -88,7 +88,7 @@
 			},
 			getList(){
 			    uni.request({
-			          url: `${this.$baseUrl}/article/list?article_category=热点榜&pageNo=1&pageSize=30`,  //这里的lid,page,pagesize只能是数字或字母
+			          url: `${this.$baseUrl}/article/list?article_category=热点榜&pageNo=1&pageSize=4`,  //这里的lid,page,pagesize只能是数字或字母
 			          method: 'GET',
 			          success: (res)=>{
 						  console.log(res.data.data)
@@ -143,12 +143,21 @@
 				}
 				.title {
 					margin-left: 8px;
+
 					.Content-title {
+						width: 300px;
 						font-size: 14px;
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
 					}
 					.sub-title {
+						width: 180px;
 						font-size: 10px;
 						margin-top: 3px;
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
 					}
 				}
 			}

@@ -13,12 +13,12 @@
 				<!-- 头部 -->
 				<view class="up-block">
 					<view class="user-img">
-						<image :src="data.qx_user ? data.qx_user.user_avatarimg : 'xxx'" mode=""></image>
+						<image :src="data.qx_user ? data.qx_user.user_avatarimg : '../../static/qxzxlogo.png'" mode=""></image>
 						<!-- <u-icon class="user-v" name="level" color="#007aff" size="20"></u-icon> -->
 					</view>
 					<view class="user-content">
 						<view class="user-name">
-							{{data.qx_user ? data.qx_user.user_name : 'xxx'}}
+							{{data.qx_user ? data.qx_user.user_name : '企险资讯'}}
 							<u-icon class="username-v" name="level" color="#007aff" size="20"></u-icon>
 						</view>
 						<view class="user-sub">
@@ -34,8 +34,8 @@
 				<!-- 底部 -->
 				<view class="low-block">
 					<view class="companyDiv">
-						<!-- <text class="companyFont">{{data.article_tag}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text> -->
-						<text class="companyFont">{{data.article_company}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
+						<text v-if="data.article_tag" class="companyFont">{{data.article_tag}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
+						<text v-if="data.article_company" class="companyFont">{{data.article_company}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
 					</view>
 					<view class="threeIcon">
 						<view class="threeIcon1">
