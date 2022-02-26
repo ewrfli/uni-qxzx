@@ -5,7 +5,7 @@
                 <u-icon name="arrow-left" size="22" color="#007aff"></u-icon>
             </view>
 			<view class="u-nav-slot" slot="right">
-                <u-button type="primary" text="更新"></u-button>
+                <u-button type="primary" text="更新" @click="updateUserInfo"></u-button>
             </view>
 		</u-navbar>
 		<view class="top-card">	
@@ -58,9 +58,12 @@
 			</view>
 			<u-line length="100%" style="margin: 0 auto;"></u-line>
 			<view class="update" style="width: 100px; margin: 0 auto; margin-top: 25px;">
-                <u-button type="primary" text="更新"></u-button>
+                <u-button type="primary" text="更新" @click="updateUserInfo"></u-button>
             </view>
 		</view>
+		<view class="toast">
+            <u-toast ref="uToast"></u-toast>
+        </view>
 	</view>
 </template>
 
@@ -69,18 +72,8 @@
 		name:"newsHotDetails",
 		data() {
 			return {
+				localStorageUserInfo:{},
 				userInfo: {
-					user_id: '1111111',
-					user_name: '杨洋样',
-					user_sex: '男',
-					user_avatarimg: 'https://img.36krcdn.com/20200410/v2_6905947498bc4ec0af228afed409f771_img_png',
-					user_desc: '自动驾驶自动驾驶自动驾驾驶',
-					user_power: '普通用户',
-					user_phone: '123123123',
-					user_email: 'XXXXXXXXXXXXXXXX',
-					user_birthday: '1990-12-12',
-					user_industry: '汽车',
-					user_company_name: 'xxx汽车有限公司'
 				},
 				userData: {
 					sex: '男',
@@ -100,6 +93,8 @@
 			};
 		},
 		onShow(){
+			this.localStorageUserInfo = uni.getStorageSync('userInfo')
+			console.log(this.localStorageUserInfo.user_id)
 			this.getUserInfo()
 		},
 		methods: {
@@ -111,13 +106,49 @@
 				});
 			},
 			getUserInfo(){
+				let token = uni.getStorageSync('token')
 				uni.request({
-					url: `${this.$baseUrl}/user/findone?user_id=1`,  //这里的lid,page,pagesize只能是数字或字母
+					url: `${this.$baseUrl}/user/findone?user_id=${this.localStorageUserInfo.user_id}`,  //这里的lid,page,pagesize只能是数字或字母
 					method: 'GET',
+					header:{Authorization: 'Bearer ' + token},
 					success: (res)=>{
 						console.log(res.data.data)
 						this.userInfo = res.data.data
-						console.log('this.themeList2 ',this.userInfo)
+						console.log('findonethis.success ',this.userInfo)
+					},
+					fail: (err)=>{
+						console.log(err)
+					}
+			
+				})
+			},
+			updateUserInfo(){
+				let token = uni.getStorageSync('token')
+				uni.request({
+					url: `${this.$baseUrl}/user/update?user_id=${this.localStorageUserInfo.user_id}`,  //这里的lid,page,pagesize只能是数字或字母
+					method: 'POST',
+					header: {Authorization: 'Bearer ' + token},
+					data: this.userInfo,
+					success: (res)=>{
+						if(res.data.code == 200){
+							this.$refs.uToast.show({
+								type: 'success',
+								title: '修改成功',
+								message: "修改成功",
+								iconUrl: 'https://cdn.uviewui.com/uview/demo/toast/success.png',
+							})
+							console.log('修改成功',res.data.data)
+							this.userInfo = res.data.data
+							this.getUserInfo()
+
+						}else{
+							this.$refs.uToast.show({
+                                type: 'error',
+                                title: res.data.msg,
+                                message: res.data.msg,
+                                iconUrl: 'https://cdn.uviewui.com/uview/demo/toast/error.png',
+                            })
+						}
 					},
 					fail: (err)=>{
 						console.log(err)

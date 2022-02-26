@@ -137,7 +137,7 @@ export default {
                             })
                         }else{
                             this.$refs.uToast.show({
-                                type: 'console.error();',
+                                type: 'error',
                                 title: res.data.msg,
                                 message: res.data.msg,
                                 iconUrl: 'https://cdn.uviewui.com/uview/demo/toast/error.png',
