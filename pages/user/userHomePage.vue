@@ -28,7 +28,7 @@
                     <text space="nbsp" class="user-data">普通用户 未认证</text>
                 </view>
                 <view class="user-info">
-                    <text space="nbsp" class="user-data">自我介绍</text>
+                    <text space="nbsp" class="user-data">自我介绍：{{!userInfo ? '暂无' : userInfo.user_desc}}</text>
                 </view>
             </view>
         </view>
@@ -39,21 +39,21 @@
                 <u-icon name="coupon" size="40"></u-icon>
                 <view class="data">
                     <span class="title">生日</span>
-                    <span class="detail">去完善></span>
+                    <span class="detail">{{!userInfo ? '去完善>' : userInfo.user_birthday}}</span>
                 </view>
             </view>
             <view class="info company">
                 <u-icon name="calendar" size="40"></u-icon>
                 <view class="data">
                     <span class="title">公司</span>
-                    <span class="detail">去完善></span>
+                    <span class="detail">{{!userInfo ? '去完善>' : userInfo.user_company_name}}</span>
                 </view>
             </view>
             <view class="info school">
                 <u-icon name="bookmark" size="40"></u-icon>
                 <view class="data">
                     <span class="title">邮箱</span>
-                    <span class="detail">去完善></span>
+                    <span class="detail">{{!userInfo ? '去完善>' : userInfo.user_email}}</span>
                 </view>
             </view>
         </view>
@@ -180,7 +180,7 @@ export default {
         },
         getmyList(){
             uni.request({
-                url: `${this.$baseUrl}/star/mytaglist?user_id=1`,  //这里的lid,page,pagesize只能是数字或字母
+                url: `${this.$baseUrl}/star/mytaglist?user_id=${this.userInfo.user_id}`,  //这里的lid,page,pagesize只能是数字或字母
                 method: 'GET',
                 success: (res)=>{
                     console.log(res.data.data)

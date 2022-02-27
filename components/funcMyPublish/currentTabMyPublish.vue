@@ -16,7 +16,7 @@
 		</u-navbar>
 		<view class="card">	
 			<view class="itemList">
-				<view class="newsItem" v-for="(data, index) in newItemList2" @click="toNewDetails">
+				<view class="newsItem" v-for="(data, index) in newItemList2" @click="toNewDetails(data.article_id)">
 					<!-- 头部 -->
 					<!-- <view class="up-block">
 						<view class="user-img">
@@ -40,7 +40,7 @@
 						</view> 
 						<view class="time">{{data.updatedAt}}</view>
 						<view class="article-desc" space="nbsp">{{data.article_desc}}</view>
-						<view class="mid-coverimg" v-if="data.article_coverimg">
+						<view class="mid-coverimg">
 							<image :src="data.article_coverimg" mode=""></image>
 						</view>
 					</view>
@@ -76,6 +76,7 @@
 		name:"newsHotDetails",
 		data() {
 			return {
+				userInfo: undefined,
 				newItemList2:[],
 				newItemList:[
 					{
@@ -96,12 +97,13 @@
 			};
 		},
 		mounted() {
-			this.getmyList()
+			this.userInfo = uni.getStorageSync('userInfo')
+			this.getmyList(this.userInfo.user_id)
 		},
 		methods: {
-			toNewDetails(){
+			toNewDetails(id){
 				uni.navigateTo({
-					url: '/pages/news/newItemDetails'
+					url: '/pages/news/newItemDetails?id='+id
 				});
 			},
 			leftClick(){
@@ -111,9 +113,9 @@
     				animationDuration: 200
 				});
 			},
-			getmyList(){
+			getmyList(id){
 				uni.request({
-					url: `${this.$baseUrl}/star/myarticlelist?user_id=1`,  //这里的lid,page,pagesize只能是数字或字母
+					url: `${this.$baseUrl}/star/myarticlelist?user_id=${id}`,  //这里的lid,page,pagesize只能是数字或字母
 					method: 'GET',
 					success: (res)=>{
 						console.log(res.data.data)

@@ -20,21 +20,21 @@
 					<view class="item">
 						<view class="flexDiv">
 							<view class="left-img">
-								<image style="width: 36px; height: 36px; border-radius: 18px;" :src="data.user_avatarimg" mode=""></image>
+								<image style="width: 36px; height: 36px; border-radius: 18px;" :src="data.qx_user.user_avatarimg" mode=""></image>
 							</view>
 							<view class="title">
 								<view class="Content-title">
 									<view class="Content-title-left">
-									{{data.user_name}}
+									{{data.qx_user.user_name}}
 									</view>
 								</view>
 								<view class="sub-title">
-									介绍：{{data.user_desc}}
+									介绍：{{data.qx_user.user_desc}}
 								</view>
 							</view>
 						</view>
 						<view class="right-hotIcon">
-							<u-button v-if="data.user_email" :plain="true" text="关注"></u-button>
+							<u-button v-if="data.user_category==1" :plain="true" text="关注"></u-button>
 							<u-button v-else :plain="true" text="互相关注"></u-button>
 							
 						</view>                
@@ -50,6 +50,7 @@
 		name:"newsHotDetails",
 		data() {
 			return {
+				myuserInfo:undefined,
 				userInfo: [{
 					user_id: '1111111',
 					user_name: '杨洋样',
@@ -92,6 +93,11 @@
 				}],
 			};
 		},
+		mounted() {
+			console.log('App mounted newlist')
+			this.myuserInfo = uni.getStorageSync('userInfo')
+			this.getList()
+		},
 		methods: {
 			leftClick(){
 				uni.navigateBack({
@@ -99,6 +105,25 @@
 					animationType: 'pop-out',
     				animationDuration: 200
 				});
+			},
+			getList(){
+			    uni.request({
+			          url: `${this.$baseUrl}/fans/findone`,  //这里的lid,page,pagesize只能是数字或字母
+			          method: 'POST',
+					 data:{
+                        attention_user_id : this.myuserInfo.user_id,
+                     },
+			          success: (res)=>{
+						console.log(res.data.data)
+						this.userInfo = res.data.data
+						console.log('this.newItemList2资讯列表',this.userInfo)
+					  },
+			          fail: (err)=>{
+						  console.log(err)
+					  }
+			
+			    })
+			
 			}
 		},
 	}

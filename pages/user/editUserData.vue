@@ -10,7 +10,8 @@
 		</u-navbar>
 		<view class="top-card">	
 			<view class="avatar">
-				<image :src="userInfo ? userInfo.user_avatarimg : 'xxx'" mode=""></image>
+				<image :src="userInfo ? userInfo.user_avatarimg : '../../static/unlogin.png'" mode=""></image>
+				<u-button style="height: 20px; width: 60px;" type="primary" text="上传" @click="chooseImage"></u-button>
 			</view>
 			<view class="right-div">
 				<view class="name">{{userInfo.user_name}}</view>
@@ -20,6 +21,11 @@
 		</view>
 		<view class="mid-card">
 			<view class="mid-title">基本信息</view>
+			<u-line length="100%" style="margin: 0 auto;"></u-line>
+			<view class="item">
+				<view class="title">姓名</view>
+				<view class="desc"><input v-model="userInfo.user_name"/></view>
+			</view>
             <u-line length="100%" style="margin: 0 auto;"></u-line>
 			<view class="item">
 				<view class="title">介绍</view>
@@ -72,23 +78,9 @@
 		name:"newsHotDetails",
 		data() {
 			return {
+				fileList1: [],
 				localStorageUserInfo:{},
 				userInfo: {
-				},
-				userData: {
-					sex: '男',
-					id: '',
-					userImg: 'https://img.36krcdn.com/20200410/v2_6905947498bc4ec0af228afed409f771_img_png',
-					userName: '杨洋样',
-					time: 2,
-					readNum: 2233,
-					contentTitle: '自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶自动驾驶',
-					contentText: 'XXXXXXXXXXXXXXXX',
-					relatedCompany: '自动驾驶',
-					repostNum: 11,
-					commentNum: 22,
-					likeNum: 99,
-					icon: ''
 				}
 			};
 		},
@@ -97,7 +89,49 @@
 			console.log(this.localStorageUserInfo.user_id)
 			this.getUserInfo()
 		},
-		methods: {
+		methods: {	
+			// 新增图片
+			chooseImage(event) {
+				let token = uni.getStorageSync('token')
+				uni.chooseImage({
+					success: (chooseImageRes) => {
+						const tempFilePaths = chooseImageRes.tempFilePaths;
+						uni.uploadFile({
+							url: 'http://127.0.0.1:3002/upload/img',							
+							name: 'myfile',
+							header:{Authorization: 'Bearer ' + token},
+							filePath: tempFilePaths[0],
+							formData: {
+								'myfile': 'myfile'
+							},
+							success: (uploadFileRes) => {
+								this.userInfo.user_avatarimg = JSON.parse(uploadFileRes.data).path
+								console.log(JSON.parse(uploadFileRes.data).path);
+								console.log(this.userInfo)
+							}
+						});
+					}
+				});
+			},
+			uploadFilePromise(url) {
+				let token = uni.getStorageSync('token')
+				return new Promise((resolve, reject) => {
+					let a = uni.uploadFile({
+						url: 'http://127.0.0.1:3002/upload/img', // 仅为示例，非真实的接口地址
+						filePath: url,
+						name: 'myfile',
+						header:{Authorization: 'Bearer ' + token},
+						formData: {
+							myfile: 'myfile'
+						},
+						success: (res) => {
+							setTimeout(() => {
+								resolve('上传成功',res.data.data)
+							}, 100)
+						}
+					});
+				})
+			},
 			leftClick(){
 				uni.navigateBack({
 					delta: 1,
@@ -115,6 +149,7 @@
 						console.log(res.data.data)
 						this.userInfo = res.data.data
 						console.log('findonethis.success ',this.userInfo)
+						uni.setStorageSync('userInfo',this.userInfo);	// 将用户信息存储在手机硬盘中
 					},
 					fail: (err)=>{
 						console.log(err)
@@ -140,6 +175,7 @@
 							console.log('修改成功',res.data.data)
 							this.userInfo = res.data.data
 							this.getUserInfo()
+
 
 						}else{
 							this.$refs.uToast.show({
