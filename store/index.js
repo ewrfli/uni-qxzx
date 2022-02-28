@@ -12,15 +12,15 @@ export default new Vuex.Store({
         registerUserDate:{} //用户注册成功信息
     },
     mutations: {
-        setHasLogin(state, value){
+        setHasLogin(state, value){  //
             state.hasLogin = value
             console.log('设置vuex state的值',state.hasLogin)
         },
-        setCurArticleId(state, value){
+        setCurArticleId(state, value){  //文章详情页面id同步到下面评论组件
             state.curArticleId = value
             console.log('设置vuex state curArticleId的值',state.curArticleId)
         },
-        setRegisterUserDate(state, value){
+        setRegisterUserDate(state, value){  //注册信息同步到login页面
             state.registerUserDate = value
             console.log('设置vuex state registerUserDate',state.registerUserDate)
         }

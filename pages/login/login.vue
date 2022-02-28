@@ -122,7 +122,7 @@ export default {
                         this.userInfo = res.data.data
                         console.log('this用户信息',this.userInfo)
                         if(res.data.code === 200){
-                            uni.setStorageSync('token', res.data.token);	// 将登录信息以token的方式存在手机硬盘中
+                            uni.setStorageSync('token', res.data.token);	// 将登录token的方式存在手机硬盘中
 							uni.setStorageSync('userInfo',res.data.data);	// 将用户信息存储在手机硬盘中
                             this.$refs.uToast.show({
                                 type: 'success',

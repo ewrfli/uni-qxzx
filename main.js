@@ -4,6 +4,7 @@ import store from './store'
 
 import uView from '@/uni_modules/uview-ui'
 import bottomTabBar from "components/bottomTabBar/bottomTabBar.vue"//引入我们自己定义的tabBar组件
+
 Vue.component('bottomTabBar', bottomTabBar)//使用全局tabBar组件
 Vue.use(uView)
 

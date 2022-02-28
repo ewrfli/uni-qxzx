@@ -43,7 +43,15 @@
 		{
 			"path": "pages/monitor/index",
 			"style": {
-				"navigationBarTitleText": "追踪",
+				"navigationBarTitleText": "监控",
+				"navigationStyle":"custom",//隐藏top导航栏
+				"navigationBarTextStyle": "white" // 状态栏字体为白色
+			}
+		},
+		{
+			"path": "pages/monitor/company",
+			"style": {
+				"navigationBarTitleText": "公司详情",
 				"navigationStyle":"custom",//隐藏top导航栏
 				"navigationBarTextStyle": "white" // 状态栏字体为白色
 			}

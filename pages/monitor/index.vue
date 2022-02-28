@@ -2,19 +2,24 @@
 	<view class="warp">
 		<u-sticky offset-top="0" customNavHeight="0" bgColor="#007aff">
 			<view class="u-search"><u-search :disabled=true @click="toSearch" shape="square" placeholder="搜索公司/新闻/话题" :show-action="false"></u-search></view>
+			<topTabbar :tabBars="tabBars" @TarTap="TarData" :tabIndex="tabIndex" ></topTabbar>
 		</u-sticky>
 		<view class="curtab" v-if="islogin">
 			<!-- <topTabbar :tabBars="tabBars" @TarTap="TarData" :tabIndex="tabIndex" ></topTabbar> -->
 			<!-- 每个tab标题对应的具体组件内容 v-show="currentTabComponent=='currentAdvice'"-->
-			<view class="currentTabNews">
+			<view v-show="currentTabComponent=='currentAdvice'" class="currentTabNews">
 				<tabMonitorAdvice></tabMonitorAdvice>
-				<!-- <companyRankList></companyRankList> -->
 				<tabMonitorDaily></tabMonitorDaily>
 			</view>
 
+			<view v-show="currentTabComponent=='currentDaily'" class="currentTabNews">
+				<followCompanyList></followCompanyList>
+			</view>
+
+
 		</view>
 
-		<view class="nologin" v-else> 
+		<view class="nologin" v-else>  
 			<view class="showmsg">需登录才能查看</view>
 			<view class="tologin">
 				<u-button type="primary" shape="circle" text="登录" @click="toLogin"></u-button>
@@ -27,12 +32,13 @@
 import topTabbar from '../../components/topTabbar/topTabbar.vue'
 import tabMonitorAdvice from '../../components/monitorComponent/tabMonitorAdvice.vue'
 import tabMonitorDaily from '../../components/monitorComponent/tabMonitorDaily.vue'
-
+import followCompanyList from '../../components/monitorComponent/followCompanyList.vue'
 export default {
 	components: {
 		topTabbar,
 		tabMonitorAdvice,
-		tabMonitorDaily
+		tabMonitorDaily,
+		followCompanyList
 	},
 	data() {
 		return {
@@ -41,12 +47,12 @@ export default {
 			tabIndex: "currentAdvice",
 			tabBars:[
 				{
-					name: "追踪建议",
+					name: "监控日报",
 					id: "currentAdvice",
 					index: 0
 				},
 				{
-					name:"追踪日报",
+					name:"监控列表",
 					id:"currentDaily",
 					index: 1
 				},
@@ -58,8 +64,7 @@ export default {
 		};
 	},
 	onShow(){
-		this.islogin = uni.getStorageSync('token')
-		console.log('this.islogin',this.islogin)
+		this.islogin = uni.getStorageSync('token')//判断用户是否登录
 	},
 	onLoad(option) {
 	
@@ -101,6 +106,7 @@ export default {
 		padding: 5px 5px 5px 5px;
 	}
 	.nologin {
+		height: 52vh;
 		margin-top: 50%;
 		.showmsg{
 			font-size: 20px;
