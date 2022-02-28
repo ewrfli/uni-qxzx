@@ -20,7 +20,7 @@
 					<text style="color: #ffaa00;">{{data.totalTips[1]}}</text>
 				</view>
 				<view class="div1">
-					<text class="div1-text">追踪</text>
+					<text class="div1-text">提示</text>
 					<text style="color: #515256;">{{data.totalTips[2]}}</text>
 				</view>
 				<!-- <view class="div1">
