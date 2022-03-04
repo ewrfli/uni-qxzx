@@ -52,28 +52,28 @@
         </view>
         <!-- 监控日报 -->
         	<view class="ComponentMonitorDaily">
-                <view class="item-card" v-for="(data, index) in listData">
+                <view class="item-card" v-for="(value, key) in newDateRiskList" :key="key">
                     <view class="top-div">
                         <view class="left-title">
-                            追踪日报<text style="font-size: 14px; color: #000000; ">{{data.date}}</text>
+                            追踪日报<text style="font-size: 14px; color: #000000; ">{{value[0]}}</text>
                         </view>
                         <view class="right-title">
-                            共<text style="font-size: 14px; color: #000000;">{{data.totalTips[0] + data.totalTips[1] + data.totalTips[2] + data.totalTips[3]}}</text>条动态
+                            共<text style="font-size: 14px; color: #000000;">{{value[1].length}}</text>条动态
                         </view>
                     </view>
                     
                     <view class="tips-div">
                         <view class="div1">
                             <text class="div1-text">风险</text>
-                            <text style="color: #ff0000;">{{data.totalTips[0]}}</text>
+                            <text style="color: #ff0000;">11</text>
                         </view>
                         <view class="div1">
                             <text class="div1-text">警示</text>
-                            <text style="color: #ffaa00;">{{data.totalTips[1]}}</text>
+                            <text style="color: #ffaa00;">22</text>
                         </view>
                         <view class="div1">
                             <text class="div1-text">提示</text>
-                            <text style="color: #515256;">{{data.totalTips[2]}}</text>
+                            <text style="color: #515256;">33</text>
                         </view>
                         <!-- <view class="div1">
                             <text class="div1-text">利好</text>
@@ -82,22 +82,19 @@
                     </view>
                     
                     <view class="content-div">
-                        <view class="item" v-for="(item, index) in data.content">
+                        <view class="item" v-for="(item, index) in value[1]">   
                             <view class="flexDiv">
                                 <view class="left-img">
-                                    <image style="width: 36px; height: 36px; border-radius: 4px;" :src="item.img" mode=""></image>
+                                    <image style="width: 36px; height: 36px; border-radius: 4px;" :src="item.risk_coverimg" mode=""></image>
                                 </view>
                                 <view class="title">
                                     <view class="Content-title">
                                         <view class="Content-title-left">
-                                            {{item.name}}
+                                            {{item.risk_name}}
                                         </view>
                                     </view>
                                     <view class="sub-title">
-                                        开庭公告<text class="item-tips-text">{{item.tips[0]}}</text>条
-                                        法律诉讼<text class="item-tips-text">{{item.tips[1]}}</text>条
-                                        立案信息<text class="item-tips-text">{{item.tips[2]}}</text>条
-                                        其他<text class="item-tips-text">{{item.tips[3]}}</text>条
+                                        {{item.risk_desc}}<text class="item-tips-text">1</text>条
                                     </view>
                                 </view>
                             </view>
@@ -212,7 +209,9 @@ import newItemComment from "../../components/newItemComment/newItemComment.vue";
 						]
 					}
 				],
-                qx_risks:[]
+                qx_risks:[],
+                risk_date:[],
+                newDateRiskList:{}
 			};
 		},
 		onLoad(option){
@@ -239,6 +238,28 @@ import newItemComment from "../../components/newItemComment/newItemComment.vue";
 						//   console.log(res.data.data)
 							this.companyItem = res.data.data
                             this.qx_risks = res.data.data.qx_risks
+                            let risk_date = []
+                            res.data.data.qx_risks.map( item =>{
+                                if(!risk_date.includes(item.risk_date)){
+                                    risk_date.push(item.risk_date)
+                                }
+                            }) //日期提取 去重 ['2022-02-28', '2022-02-27']
+                            this.risk_date = risk_date
+
+                            let newDateRiskList = new Map();
+                            risk_date.map( item => {
+                                let arrysameRiskList = []
+                                this.qx_risks.map( obj => {
+                                    if(item == obj.risk_date){
+                                        arrysameRiskList.push(obj)
+                                        newDateRiskList.set(item, arrysameRiskList)
+                                    }
+                                })
+                            })
+                            
+                            this.newDateRiskList = newDateRiskList
+                            console.log('newDateRiskList', this.newDateRiskList)
+                            console.log('risk_date', this.risk_date)
 						    console.log('风险详细',this.qx_risks)
 					  },
 			          fail: (err)=>{
