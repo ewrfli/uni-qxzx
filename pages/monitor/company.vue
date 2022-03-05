@@ -249,12 +249,18 @@ import newItemComment from "../../components/newItemComment/newItemComment.vue";
                             let newDateRiskList = new Map();
                             risk_date.map( item => {
                                 let arrysameRiskList = []
+                                // let arrylevel = []
+                                // let high = 0
+                                // let mid = 0
+                                // let bottom = 0
                                 this.qx_risks.map( obj => {
                                     if(item == obj.risk_date){
                                         arrysameRiskList.push(obj)
                                         newDateRiskList.set(item, arrysameRiskList)
+                                        console.log('obj',obj)
                                     }
                                 })
+                                console.log('item',item)
                             })
                             
                             this.newDateRiskList = newDateRiskList
