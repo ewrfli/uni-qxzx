@@ -51,29 +51,30 @@
             </view>
         </view>
         <!-- 监控日报 -->
-        	<view class="ComponentMonitorDaily">
+            <view v-if="risk_date.length<1" class="MonitorDailyNull">暂无监控信息</view>
+        	<view v-else class="ComponentMonitorDaily">
                 <view class="item-card" v-for="(value, key) in newDateRiskList" :key="key">
                     <view class="top-div">
                         <view class="left-title">
                             追踪日报<text style="font-size: 14px; color: #000000; ">{{value[0]}}</text>
                         </view>
                         <view class="right-title">
-                            共<text style="font-size: 14px; color: #000000;">{{value[1].length}}</text>条动态
+                            共<text style="font-size: 14px; color: #000000;">{{value[1].length - 1}}</text>条动态
                         </view>
                     </view>
                     
                     <view class="tips-div">
                         <view class="div1">
                             <text class="div1-text">风险</text>
-                            <text style="color: #ff0000;">11</text>
+                            <text style="color: #ff0000;">{{value[1][0].high}}</text>
                         </view>
                         <view class="div1">
                             <text class="div1-text">警示</text>
-                            <text style="color: #ffaa00;">22</text>
+                            <text style="color: #ffaa00;">{{value[1][0].mid}}</text>
                         </view>
                         <view class="div1">
                             <text class="div1-text">提示</text>
-                            <text style="color: #515256;">33</text>
+                            <text style="color: #007AFF;">{{value[1][0].bottom}}</text>
                         </view>
                         <!-- <view class="div1">
                             <text class="div1-text">利好</text>
@@ -82,7 +83,7 @@
                     </view>
                     
                     <view class="content-div">
-                        <view class="item" v-for="(item, index) in value[1]">   
+                        <view class="item" v-for="(item, index) in value[1].slice(1)">   
                             <view class="flexDiv">
                                 <view class="left-img">
                                     <image style="width: 36px; height: 36px; border-radius: 4px;" :src="item.risk_coverimg" mode=""></image>
@@ -99,12 +100,15 @@
                                 </view>
                             </view>
                             <view class="right-hotIcon">
-                                <image style="width: 16px; height: 16px;" src="../../static/message.png" mode=""></image>
+                                <image v-if="item.risk_grade==1" style="width: 16px; height: 16px;" src="../../static/message.png" mode=""></image>
+                                <image v-if="item.risk_grade==2" style="width: 16px; height: 16px;" src="../../static/message2.png" mode=""></image>
+                                <image v-if="item.risk_grade==3" style="width: 16px; height: 16px;" src="../../static/message3.png" mode=""></image>
                             </view>
                         </view>
                     </view>
                 </view>
             </view>
+
 	</view>
 </template>
 
@@ -249,17 +253,37 @@ import newItemComment from "../../components/newItemComment/newItemComment.vue";
                             let newDateRiskList = new Map();
                             risk_date.map( item => {
                                 let arrysameRiskList = []
-                                // let arrylevel = []
-                                // let high = 0
-                                // let mid = 0
-                                // let bottom = 0
+                                let arrylevel = {
+                                    high:0,
+                                    mid:0,
+                                    bottom:0    
+                                }
+                                let high = 0
+                                let mid = 0
+                                let bottom = 0
                                 this.qx_risks.map( obj => {
                                     if(item == obj.risk_date){
                                         arrysameRiskList.push(obj)
-                                        newDateRiskList.set(item, arrysameRiskList)
+                                        if(obj.risk_grade == 1){
+                                            bottom = bottom + 1
+                                            arrylevel.bottom = bottom
+                                        }
+                                        if(obj.risk_grade == 2){
+                                            mid = mid + 1
+                                            arrylevel.mid = mid
+                                        }
+                                        if(obj.risk_grade == 3){
+                                            high = high + 1
+                                            arrylevel.high = high
+                                        }
                                         console.log('obj',obj)
+                                        console.log('arrylevel',arrylevel)
+                                        
                                     }
+                                    
                                 })
+                                    arrysameRiskList.unshift(arrylevel)
+                                    newDateRiskList.set(item, arrysameRiskList)
                                 console.log('item',item)
                             })
                             
@@ -393,7 +417,12 @@ import newItemComment from "../../components/newItemComment/newItemComment.vue";
                 }
             }
         }
-        
+        .MonitorDailyNull {
+            padding-top: 60px;
+            text-align: center;
+            font-size: 20px;
+            color: #838386;
+        }
         .ComponentMonitorDaily {
             margin-top: 10px;
             .item-card {

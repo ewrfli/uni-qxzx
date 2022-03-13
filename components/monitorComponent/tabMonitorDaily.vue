@@ -140,6 +140,24 @@
 					}
 				]
 			};
+		},
+		onLoad(){
+			this.getList()
+		},
+		methods: {
+			getList(){
+				uni.request({
+			          url: `${this.$baseUrl}/risk/findall`,  //这里的lid,page,pagesize只能是数字或字母
+			          method: 'GET',
+			          success: (res)=>{
+						  console.log('risk',res.data.data)
+					  },
+			          fail: (err)=>{
+						  console.log(err)
+					  }
+			
+			    })
+			}
 		}
 	}
 </script>
