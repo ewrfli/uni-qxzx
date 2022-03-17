@@ -99,7 +99,15 @@
 		{
 			"path": "pages/news/addBlogArticle",
 			"style": {
-				"navigationBarTitleText": "发表讨论",
+				"navigationBarTitleText": "发表文章",
+				"navigationStyle":"custom",
+				"navigationBarTextStyle": "white" // 状态栏字体为白色
+			}
+		},
+		{
+			"path": "pages/news/addComment",
+			"style": {
+				"navigationBarTitleText": "发表评论",
 				"navigationStyle":"custom",
 				"navigationBarTextStyle": "white" // 状态栏字体为白色
 			}

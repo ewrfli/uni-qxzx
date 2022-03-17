@@ -101,7 +101,20 @@ import newItemComment from "../../components/newItemComment/newItemComment.vue";
 			this.getnewList(option.id)
 			this.$store.commit('setCurArticleId', option.id);//把setCurArticleId 传到 vuex 再到 comment子组件
 		},
+		// onShow(){
+		// 	this.newsItem2 = {
+		// 			qx_user: {}
+		// 	}
+		// 	this.getnewList(this.$store.state.curArticleId)
+		// },
 		methods: {
+			//floatbotton
+			trigger(){
+				console.log('trigger')
+				uni.navigateTo({
+					url: '/pages/news/addComment'
+				});
+			},
 			leftClick(){
 				uni.navigateBack({
 					delta: 1,
