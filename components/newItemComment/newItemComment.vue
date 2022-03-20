@@ -24,9 +24,13 @@
 							<view class="bottom-Div">
 								<text class="time">{{data.updatedAt}} </text>
 								<text class="answer">回复 </text>
-								<text class="star">
+								<text v-if="!like" class="star" @click="toLike(data.comment_id)" :key="data.comment_id">
 									<u-icon style="display: inline-block;" name="thumb-up" color="#565656" size="19"></u-icon>
 									<span style="line-height: 23px;">{{data.comment_like_count}}</span>
+								</text>
+								<text v-else class="star" @click="toLike(data.comment_id)">
+									<u-icon style="display: inline-block;" name="thumb-up" color="#007AFF" size="19"></u-icon>
+									<span style="line-height: 23px;">{{data.comment_like_count + 1}}</span>
 								</text>
 							</view>
 						</view>
@@ -45,6 +49,7 @@
 		name:"newItemDetails",
 		data() {
 			return {
+				like:false,
 				articleid: null,
                 commentItem2:[],
 				commentItem: [{
@@ -86,6 +91,21 @@
 			// this.getCommentList('评论组件onShow',this.$store.state.curArticleId)
 		},
 		methods: {
+			toLike(id){
+				uni.request({
+			          url: `${this.$baseUrl}/comment/like?id=${id}`,  //这里的lid,page,pagesize只能是数字或字母
+			          method: 'GET',
+			          success: (res)=>{
+						//   console.log(res.data.data)
+						  this.like = true
+						//   console.log('this.newsItem2详细',this.newsItem2)
+					  },
+			          fail: (err)=>{
+						  console.log(err)
+					  }
+			
+			    })
+			},
 			//刷新
 			refreshRequest(){
 				console.log('评论组件refreshRequest',this.$store.state.curArticleId)

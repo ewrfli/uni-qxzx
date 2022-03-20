@@ -42,9 +42,13 @@
 							<text v-if="newsItem2.article_tag" class="companyFont">{{newsItem2.article_tag}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
 							<text v-if="newsItem2.article_company" class="companyFont">{{newsItem2.article_company}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
 						</span>
-						<text class="star">
+						<text v-if="!like" class="star" @click="toLike">
 							<u-icon style="display: inline-block; margin-left: 4px;" name="thumb-up" color="#565656" size="20"></u-icon>
 							{{newsItem2.article_like_count || 0}}
+						</text>
+						<text v-else class="star" @click="toLike">
+							<u-icon style="display: inline-block; margin-left: 4px;" name="thumb-up" color="#007AFF" size="20"></u-icon>
+							{{newsItem2.article_like_count+1 || 0}}
 						</text>
 					</view>
 
@@ -73,6 +77,7 @@ import newItemComment from "../../components/newItemComment/newItemComment.vue";
 		},
 		data() {
 			return {
+				like:false,
 				newid: null,
 				newsItem2:{
 					qx_user: {}
@@ -101,14 +106,23 @@ import newItemComment from "../../components/newItemComment/newItemComment.vue";
 			this.getnewList(option.id)
 			this.$store.commit('setCurArticleId', option.id);//把setCurArticleId 传到 vuex 再到 comment子组件
 		},
-		// onShow(){
-		// 	this.newsItem2 = {
-		// 			qx_user: {}
-		// 	}
-		// 	this.getnewList(this.$store.state.curArticleId)
-		// 	this.$forceUpdate()
-		// },
+
 		methods: {
+			toLike(){
+				uni.request({
+			          url: `${this.$baseUrl}/article/like?id=${this.$store.state.curArticleId}`,  //这里的lid,page,pagesize只能是数字或字母
+			          method: 'GET',
+			          success: (res)=>{
+						//   console.log(res.data.data)
+						  this.like = true
+						//   console.log('this.newsItem2详细',this.newsItem2)
+					  },
+			          fail: (err)=>{
+						  console.log(err)
+					  }
+			
+			    })
+			},
 			//刷新
 			refreshRequest(){
 				console.log('refreshRequest',this.$store.state.curArticleId)
@@ -123,10 +137,13 @@ import newItemComment from "../../components/newItemComment/newItemComment.vue";
 				});
 			},
 			leftClick(){
+				let pages = getCurrentPages(); // 当前页面
+				let beforePage = pages[pages.length - 2]; // 前一个页面
 				uni.navigateBack({
 					delta: 1,
-					animationType: 'pop-out',
-					animationDuration: 200
+					success: function() {
+						beforePage.$vm.refreshRequest(); // 执行前一个页面的刷新
+					}
 				});
 				// uni.switchTab({
 				// 	url: '/pages/home/index'

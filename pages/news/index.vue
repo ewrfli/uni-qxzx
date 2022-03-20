@@ -70,6 +70,10 @@ export default {
 		console.log(uni.$u.config.v);
 	},
 	methods: {
+		refreshRequest() {
+			console.log('news index refreshRequest')
+			
+        },
 		//floatbotton
 		trigger(){
 			console.log('trigger')
