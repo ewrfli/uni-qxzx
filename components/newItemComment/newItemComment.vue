@@ -82,7 +82,16 @@
             console.log('评论列表组件', this.$store.state.curArticleId)
 			this.getCommentList(this.$store.state.curArticleId)
         },
+		onShow(){
+			// this.getCommentList('评论组件onShow',this.$store.state.curArticleId)
+		},
 		methods: {
+			//刷新
+			refreshRequest(){
+				console.log('评论组件refreshRequest',this.$store.state.curArticleId)
+				// this.getnewList(this.$store.state.curArticleId)
+				this.getCommentList(this.$store.state.curArticleId)
+			},
 			getCommentList(id){
 			    uni.request({
 			          url: `${this.$baseUrl}/comment/curarticle?id=${id}`,  //这里的lid,page,pagesize只能是数字或字母

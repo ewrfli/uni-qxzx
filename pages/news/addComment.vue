@@ -59,14 +59,18 @@ import jinEdit from '../../components/jin-edit/jin-edit.vue';
                                 message: "评论成功",
                                 iconUrl: 'https://cdn.uviewui.com/uview/demo/toast/success.png',
                                 complete() {
-									// uni.navigateBack({
-									// 	delta: 1,
-									// 	animationType: 'pop-out',
-									// 	animationDuration: 200
-									// });
-									uni.navigateTo({
-										url: '/pages/news/newItemDetails?id='+_this.curArticleId
+									// 返回上一页 并刷新上一页数据
+									let pages = getCurrentPages(); // 当前页面
+									let beforePage = pages[pages.length - 2]; // 前一个页面
+									uni.navigateBack({
+										delta: 1,
+										success: function() {
+											beforePage.$vm.refreshRequest(); // 执行前一个页面的刷新
+										}
 									});
+									// uni.navigateTo({
+									// 	url: '/pages/news/newItemDetails?id='+_this.curArticleId
+									// });
 									console.log('uToast this.curArticleId',_this.curArticleId)
                                 }
                             })

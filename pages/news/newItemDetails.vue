@@ -52,7 +52,7 @@
 			</view>
 
 			<view class="comment">
-				<newItemComment></newItemComment>
+				<newItemComment ref="newItemComment"></newItemComment>
 			</view>
 
 			<view class="float-button">
@@ -106,8 +106,15 @@ import newItemComment from "../../components/newItemComment/newItemComment.vue";
 		// 			qx_user: {}
 		// 	}
 		// 	this.getnewList(this.$store.state.curArticleId)
+		// 	this.$forceUpdate()
 		// },
 		methods: {
+			//刷新
+			refreshRequest(){
+				console.log('refreshRequest',this.$store.state.curArticleId)
+				this.$refs.newItemComment.refreshRequest()
+				// this.getnewList(this.$store.state.curArticleId)
+			},
 			//floatbotton
 			trigger(){
 				console.log('trigger')

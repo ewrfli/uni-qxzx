@@ -212,7 +212,7 @@
 				"pagePath": "pages/monitor/index",
 				"iconPath": "static/tabber/monitor.png",
 				"selectedIconPath": "static/tabber/imonitor.png",
-				"text": "追踪"
+				"text": "监控"
 			},
 			{
 				"pagePath": "pages/user/index",
