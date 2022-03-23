@@ -1,6 +1,6 @@
 <template>
 	<view class="wrap">
-		<u-navbar title="我的收藏" @leftClick="leftClick" :autoBack="true" :fixed="true">
+		<!-- <u-navbar title="我的收藏" @leftClick="leftClick" :autoBack="true" :fixed="true">
 			<view
                 class="u-nav-slot"
                 slot="left"
@@ -13,7 +13,7 @@
 
             </view>
 		
-		</u-navbar>
+		</u-navbar> -->
 		<view class="card">	
 			<view class="itemList">
 				<view class="newsItem" v-for="(data, index) in newItemList2" @click="toNewDetails(data.article_id)">
@@ -106,13 +106,13 @@
 					url: '/pages/news/newItemDetails?id='+id
 				});
 			},
-			leftClick(){
-				uni.navigateBack({
-					delta: 1,
-					animationType: 'pop-out',
-    				animationDuration: 200
-				});
-			},
+			// leftClick(){
+			// 	uni.navigateBack({
+			// 		delta: 1,
+			// 		animationType: 'pop-out',
+    		// 		animationDuration: 200
+			// 	});
+			// },
 			getmyList(id){
 				uni.request({
 					url: `${this.$baseUrl}/star/myarticlelist?user_id=${id}`,  //这里的lid,page,pagesize只能是数字或字母

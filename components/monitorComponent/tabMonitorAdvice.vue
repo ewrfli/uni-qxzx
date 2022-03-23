@@ -11,24 +11,24 @@
 		
 		<view class="itemList">
 			    <u-scroll-list :indicator="false">
-					<view class="itemCard" v-for="(item, index) in MonitorAdviceList" :key="index">
+					<view class="itemCard" @click="toCompany(item.company_id)" v-for="(item, index) in MonitorAdviceList2" :key="index">
 						<view class="close">
 							x
 						</view>
-						<view class="Card">
+						<view class="Card" >
 							<view class="topDiv">
 								<view class="img">
-									<image style="" :src="item.img"></image>
+									<image style="" :src="item.company_coverimg"></image>
 								</view>
 								<view class="content">
 									<text class="name">
-										{{item.name}}
+										{{item.company_name}}
 									</text>
 									<view class="tag">
-										{{item.tag}}
+										{{item.tag_name}}
 									</view>
 									<view class="prompt">
-										{{item.prompt}}
+										新增一条公告调研报告
 									</view>
 								</view>
 							</view>
@@ -52,6 +52,7 @@
 		name:"homeTabComponentMonitorAdvice",
 		data() {
 			return {
+				MonitorAdviceList2:[],
 				 MonitorAdviceList: [
 					{
 						name: "北京xxxxx科技公司",
@@ -89,6 +90,32 @@
 						img: "https://cdn.uviewui.com/uview/goods/5.jpg"
 					}]
 			};
+		},
+		mounted(){
+			this.getList()
+		},
+		methods: {
+			toCompany(id){
+				console.log(id)
+				uni.navigateTo({
+					url: '/pages/monitor/company?id='+id
+					
+				});
+			},
+			getList(){
+				uni.request({
+			          url: `${this.$baseUrl}/company/hlist?company_name=&pageNo=1&pageSize=6`,  //这里的lid,page,pagesize只能是数字或字母
+			          method: 'GET',
+			          success: (res)=>{
+						  console.log('monitor advice',res.data.data)
+						  this.MonitorAdviceList2 = res.data.data
+					  },
+			          fail: (err)=>{
+						  console.log(err)
+					  }
+			
+			    })
+			}
 		}
 	}
 </script>
