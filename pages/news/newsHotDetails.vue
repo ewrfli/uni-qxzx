@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<u-navbar title="热门榜单" @leftClick="leftClick" :autoBack="true" :fixed="true">
+		<u-navbar title="推荐热点" @leftClick="leftClick" :autoBack="true" :fixed="true">
 			<view
                 class="u-nav-slot"
                 slot="left"

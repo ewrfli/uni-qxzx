@@ -16,7 +16,7 @@
                         <view class="company-name">{{ companyItem.company_name }}</view>
                         <view class="company-sub">
                             <view class="company-tag">{{ companyItem.company_tag_name }}</view>
-                            <view class="company-tag">{{ companyItem.company_tag_name+'2' }}</view>
+                            <!-- <view class="company-tag">{{ companyItem.company_tag_name+'2' }}</view> -->
                             <view class="company-follownum">浏览量：{{ companyItem.company_follow_num }}</view>
                         </view>
                     </view>
@@ -28,7 +28,7 @@
             </view>
             <view class="company-content">
                 <view class="company-desc">
-                    <text space="nbsp" class="user-data">公司简介：{{!companyItem ? '暂无' : companyItem.company_desc}}啊就是罚款时代上次啊上帝啊是大奶上帝DS发上次u啊还是牛超死叉；是从i啊是从iA：HS哦i吃；oh SAI偶灰常ASIOH</text>
+                    <text space="nbsp" class="user-data">公司简介：{{!companyItem ? '暂无' : companyItem.company_desc}}</text>
                 </view>
                 <view class="tips-div">
                     <view class="div1">
