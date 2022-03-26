@@ -40,7 +40,7 @@
 					<view class="companyDiv">
 						<span>
 							<text v-if="newsItem2.article_tag" class="companyFont">{{newsItem2.article_tag}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
-							<text v-if="newsItem2.article_company" class="companyFont">{{newsItem2.article_company}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
+							<text @click="toCompany(newsItem2.article_company_id)" v-if="newsItem2.article_company" class="companyFont">{{newsItem2.article_company}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
 						</span>
 						<text v-if="!like" class="star" @click="toLike">
 							<u-icon style="display: inline-block; margin-left: 4px;" name="thumb-up" color="#565656" size="20"></u-icon>
@@ -108,6 +108,12 @@ import newItemComment from "../../components/newItemComment/newItemComment.vue";
 		},
 
 		methods: {
+			toCompany(id){
+				console.log('company',id)
+				uni.navigateTo({
+					url: '/pages/monitor/company?id='+id
+				});
+			},
 			toLike(){
 				uni.request({
 			          url: `${this.$baseUrl}/article/like?id=${this.$store.state.curArticleId}`,  //这里的lid,page,pagesize只能是数字或字母
