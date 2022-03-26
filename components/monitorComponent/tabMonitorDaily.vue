@@ -3,7 +3,7 @@
 		<view class="item-card" v-for="(value, key) in riskListData" :key="key">
 			<view class="top-div">
 				<view class="left-title">
-					追踪日报<text style="font-size: 14px; color: #000000; ">{{value[0]}}</text>
+					监控日报<text style="font-size: 14px; color: #000000; ">{{value[0]}}</text>
 				</view>
 				<view class="right-title">
 					共<text style="font-size: 14px; color: #000000;">{{value[1].length - 1}}</text>条动态

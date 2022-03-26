@@ -95,7 +95,7 @@ export default {
 					index: 0
 				},
 				{
-					name:"风险追踪",
+					name:"风险监控",
 					id:"homeTabComponentMonitor",
 					index: 1
 				},

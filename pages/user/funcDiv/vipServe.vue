@@ -25,14 +25,14 @@
 			</view>
 
 			<view class="top-div">
-				<view class="title">VIP特权2.追踪公司</view>
-				<view class="content">VIP用户无限次追踪各种公司相关信息，及时获取公司相关信息</view>
+				<view class="title">VIP特权2.监控公司</view>
+				<view class="content">VIP用户无限次监控各种公司相关信息，及时获取公司相关信息</view>
 				<view><image style="width: 300px; height: 100px; border-radius: 2px;" src="../../../static/bannner/banner2.png" mode=""></image></view>
 			</view>
 
 			<view class="top-div">
 				<view class="title">VIP特权3.及时推送</view>
-				<view class="content">VIP用户无限次及时推送追踪的相关信息，及时获取相关信息</view>
+				<view class="content">VIP用户无限次及时推送监控的相关信息，及时获取相关信息</view>
 				<view><image style="width: 300px; height: 100px; border-radius: 2px;" src="../../../static/bannner/banner4.png" mode=""></image></view>
 			</view>
 		</view>

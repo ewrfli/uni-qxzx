@@ -2,10 +2,10 @@
 	<view class="ComponentMA">
 		<view class="top-title">
 			<view class="left-title">
-				推荐追踪
+				推荐监控
 			</view>
 			<view class="right-title">
-				一键追踪
+				一键监控
 			</view>
 		</view>
 		
@@ -33,7 +33,7 @@
 								</view>
 							</view>
 							<view class="bottomDiv">
-								查看并追踪
+								查看并监控
 							</view>
 						</view>
 					</view>

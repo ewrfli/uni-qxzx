@@ -27,7 +27,7 @@
 				</view>
 				<view class="div1">
 					<text class="data-text">{{totalTips[1]}}</text>
-					<text class="div1-text">追踪动态</text>
+					<text class="div1-text">监控动态</text>
 				</view>
 				<view class="div1">
 					<text class="data-text">{{totalTips[2]}}</text>

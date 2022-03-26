@@ -7,7 +7,7 @@
 		>
 			<u-tabbar-item text="首页" icon="home"></u-tabbar-item>
 			<u-tabbar-item text="资讯" icon="photo" ></u-tabbar-item>
-			<u-tabbar-item text="追踪" icon="play-right" ></u-tabbar-item>
+			<u-tabbar-item text="监控" icon="play-right" ></u-tabbar-item>
 			<u-tabbar-item text="我的" icon="account" ></u-tabbar-item>
 		</u-tabbar>
 	
@@ -41,7 +41,7 @@
 					"pagePath": "pages/monitor/index",
 					iconPath: "https://cdn.uviewui.com/uview/common/min_button.png",
 					selectedIconPath: "https://cdn.uviewui.com/uview/common/min_button_select.png",
-					text: '追踪',
+					text: '监控',
 					midButton: true,
 					customIcon: false,
 					"count": 2,
