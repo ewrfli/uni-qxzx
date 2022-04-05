@@ -24,13 +24,13 @@
 							<view class="bottom-Div">
 								<text class="time">{{data.updatedAt}} </text>
 								<text class="answer">回复 </text>
-								<text v-if="!like" class="star" @click="toLike(data.comment_id)" :key="data.comment_id">
-									<u-icon style="display: inline-block;" name="thumb-up" color="#565656" size="19"></u-icon>
-									<span style="line-height: 23px;">{{data.comment_like_count}}</span>
+								<text v-if="data.islike" class="star" @click="toLike(data.comment_id)" :key="data.comment_id">
+									<u-icon style="display: inline-block;" name="thumb-up" color="#007AFF" size="19"></u-icon>
+									<span style="line-height: 23px; color: #007AFF;">{{data.comment_like_count + 1}}</span>
 								</text>
 								<text v-else class="star" @click="toLike(data.comment_id)">
-									<u-icon style="display: inline-block;" name="thumb-up" color="#007AFF" size="19"></u-icon>
-									<span style="line-height: 23px;">{{data.comment_like_count + 1}}</span>
+									<u-icon style="display: inline-block;" name="thumb-up" color="#565656" size="19"></u-icon>
+									<span style="line-height: 23px;">{{data.comment_like_count}}</span>
 								</text>
 							</view>
 						</view>
@@ -92,12 +92,16 @@
 		},
 		methods: {
 			toLike(id){
+				this.commentItem2.forEach(item => {
+					if(item.comment_id == id){
+						this.$set(item, 'islike', true)
+					}
+				})
 				uni.request({
 			          url: `${this.$baseUrl}/comment/like?id=${id}`,  //这里的lid,page,pagesize只能是数字或字母
 			          method: 'GET',
 			          success: (res)=>{
 						//   console.log(res.data.data)
-						  this.like = true
 						//   console.log('this.newsItem2详细',this.newsItem2)
 					  },
 			          fail: (err)=>{
@@ -117,9 +121,11 @@
 			          url: `${this.$baseUrl}/comment/curarticle?id=${id}`,  //这里的lid,page,pagesize只能是数字或字母
 			          method: 'GET',
 			          success: (res)=>{
-						  console.log(res.data.data)
+						  	console.log(res.data.data)
+							res.data.data.forEach(item => {
+								item.islike = false
+						  	})
 							this.commentItem2 = res.data.data
-						  
 						  console.log('this.commentItem2详情',this.commentItem2)
 					  },
 			          fail: (err)=>{

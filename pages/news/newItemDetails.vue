@@ -39,14 +39,19 @@
 				<view class="low-block">
 					<view class="companyDiv">
 						<span>
-							<text v-if="newsItem2.article_tag" class="companyFont">{{newsItem2.article_tag}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
+							<text @click="toTags(newsItem2.article_tag_id, newsItem2.article_tag)" v-if="newsItem2.article_tag" class="companyFont">{{newsItem2.article_tag}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
 							<text @click="toCompany(newsItem2.article_company_id)" v-if="newsItem2.article_company" class="companyFont">{{newsItem2.article_company}}<u-icon style="display: inline-block; margin-left: 4px;" name="arrow-right" color="#565656" size="12"></u-icon></text>
 						</span>
-						<text v-if="!like" class="star" @click="toLike">
+
+						<text class="star" >
+							<u-icon v-if="isStar" @click="toDelStar" class="star" style="display: inline-block; margin-left: 4px;" name="star-fill" color="#F8BA02" size="20"></u-icon>
+							<u-icon v-else @click="toStar" class="star" style="display: inline-block; margin-left: 4px;" name="star" color="#565656" size="20"></u-icon>
+						</text>
+						<text v-if="!like" class="like" @click="toLike">
 							<u-icon style="display: inline-block; margin-left: 4px;" name="thumb-up" color="#565656" size="20"></u-icon>
 							{{newsItem2.article_like_count || 0}}
 						</text>
-						<text v-else class="star" @click="toLike">
+						<text v-else class="like" style="color: #007AFF;" @click="toLike">
 							<u-icon style="display: inline-block; margin-left: 4px;" name="thumb-up" color="#007AFF" size="20"></u-icon>
 							{{newsItem2.article_like_count+1 || 0}}
 						</text>
@@ -77,7 +82,8 @@ import newItemComment from "../../components/newItemComment/newItemComment.vue";
 		},
 		data() {
 			return {
-				like:false,
+				isStar: false,
+				like: false,
 				newid: null,
 				newsItem2:{
 					qx_user: {}
@@ -96,7 +102,9 @@ import newItemComment from "../../components/newItemComment/newItemComment.vue";
 					commentNum:22,
 					likeNum: 99,
 					icon: ''
-				}]
+				}],
+				userInfo: null,
+            	user_id: 1,
 			};
 		},
 		onLoad(option){
@@ -106,13 +114,119 @@ import newItemComment from "../../components/newItemComment/newItemComment.vue";
 			this.getnewList(option.id)
 			this.$store.commit('setCurArticleId', option.id);//把setCurArticleId 传到 vuex 再到 comment子组件
 		},
-
+		mounted() {
+			this.userInfo = uni.getStorageSync('userInfo')
+        	this.user_id = this.userInfo.user_id
+			this.getMyStarArt()
+			console.log('获取vuex star id', this.$store.state.myStarArtIdList) //从vuex获取
+		},
 		methods: {
+			toTags(id, name){
+				uni.navigateTo({
+					url: '/pages/news/newTagItemList?id='+id+'&name='+name
+				});
+			},
 			toCompany(id){
 				console.log('company',id)
 				uni.navigateTo({
 					url: '/pages/monitor/company?id='+id
 				});
+			},
+			//获取当前用户收藏文章列表
+			getMyStarArt(){
+				uni.request({
+			          url: `${this.$baseUrl}/star/myarticlelist?user_id=${this.user_id}`,  //这里的lid,page,pagesize只能是数字或字母
+			          method: 'GET',
+			          success: (res)=>{
+						  let mystartartid = []
+						  res.data.data.forEach(item => {
+							  	console.log(item.article_id)
+								mystartartid.push(item.article_id)
+						  });
+							if(mystartartid.includes(Number(this.$store.state.curArticleId))){//判断当前文章是否在用户收藏列表里	mystartartid.includes(Number(this.$store.state.curArticleId))
+								console.log('已收藏',mystartartid.includes(Number(this.$store.state.curArticleId)))
+								this.isStar = true
+
+							}else{
+								console.log('未收藏')
+								this.isStar = false
+							}			  
+							this.$store.commit('setMyStarArtIdList', mystartartid);// 将star art id存vuex
+							console.log('获取vuex star id', this.$store.state.myStarArtIdList , this.$store.state.curArticleId) //从vuex获取
+					  },
+			          fail: (err)=>{
+						  console.log(err)
+					  }
+			
+			    })
+			},
+			toStar(){
+				console.log('toStar',Number(this.$store.state.curArticleId))
+            	uni.request({
+					url: `${this.$baseUrl}/star/add`, 
+					method: 'POST',
+					data: {
+                        user_id:this.userInfo.user_id,
+                        article_id: Number(this.$store.state.curArticleId)
+                    },
+					success: (res)=>{
+						if(res.data.code == 200){
+							this.isStar = true //更改页面显示
+							this.$refs.uToast.show({
+								type: 'success',
+								title: '收藏成功',
+								message: "收藏成功",
+								iconUrl: 'https://cdn.uviewui.com/uview/demo/toast/success.png'
+							})
+
+						}else{
+							this.$refs.uToast.show({
+                                type: 'error',
+                                title: res.data.msg,
+                                message: res.data.msg,
+                                iconUrl: 'https://cdn.uviewui.com/uview/demo/toast/error.png',
+                            })
+						}
+					},
+					fail: (err)=>{
+						console.log(err)
+					}
+			
+				})
+			},
+			toDelStar(){
+				console.log('toDelStar',Number(this.$store.state.curArticleId))
+				uni.request({
+					url: `${this.$baseUrl}/star/del`, 
+					method: 'POST',
+					data: {
+                        user_id:this.userInfo.user_id,
+                        article_id: Number(this.$store.state.curArticleId)
+                    },
+					success: (res)=>{
+						if(res.data.code == 200){
+							this.isStar = false //更改页面显示
+							this.$refs.uToast.show({
+								type: 'success',
+								title: '取消收藏',
+								message: "取消收藏",
+								iconUrl: 'https://cdn.uviewui.com/uview/demo/toast/success.png'
+							})
+
+						}else{
+							this.$refs.uToast.show({
+                                type: 'error',
+                                title: res.data.msg,
+                                message: res.data.msg,
+                                iconUrl: 'https://cdn.uviewui.com/uview/demo/toast/error.png',
+                            })
+						}
+					},
+					fail: (err)=>{
+						console.log(err)
+					}
+			
+				})
 			},
 			toLike(){
 				uni.request({
@@ -342,6 +456,10 @@ import newItemComment from "../../components/newItemComment/newItemComment.vue";
 							.answer {
 								margin-right: 146px;
 								color: #007aff;
+							}
+							.like{
+								line-height: 24px;
+								color: #565656;
 							}
 							.star{
 								line-height: 24px;

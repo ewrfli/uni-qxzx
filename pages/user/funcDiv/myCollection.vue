@@ -36,7 +36,7 @@
 					<view class="mid-block" >
 						<view class="title">
 							<text class="article-title" space="nbsp">{{data.article_title}}</text> 
-							<u-icon class="star" name="star-fill" color="#FFE793" size="20"></u-icon>
+							<u-icon class="star" name="star-fill" color="#F8BA02" size="20"></u-icon>
 						</view> 
 						<view class="time">{{data.updatedAt}}</view>
 						<view class="article-desc" space="nbsp">{{data.article_desc}}</view>
@@ -92,11 +92,15 @@
 						likeNum: 99,
 						icon: ''
 					}
-				]
+				],
+				userInfo: null,
+            	user_id: 1,
 			};
 		},
 		mounted() {
-			this.getmyList()
+			this.userInfo = uni.getStorageSync('userInfo')
+        	this.user_id = this.userInfo.user_id
+			this.getmyList(this.user_id)
 		},
 		methods: {
 			toNewDetails(id){
@@ -111,18 +115,24 @@
     				animationDuration: 200
 				});
 			},
-			getmyList(){
+			getmyList(id){
+				this.newItemList2 = []
 				uni.request({
-					url: `${this.$baseUrl}/star/myarticlelist?user_id=1`,  //这里的lid,page,pagesize只能是数字或字母
+					url: `${this.$baseUrl}/star/myarticlelist?user_id=${id}`,  //这里的lid,page,pagesize只能是数字或字母
 					method: 'GET',
 					success: (res)=>{
 						console.log(res.data.data)
 						// this.themeList2 = res.data.data
+						let mystartartid = []
 						res.data.data.forEach(item => {
-							// console.log(item)
+							console.log(item.article_id)
+							mystartartid.push(item.article_id)
 							this.newItemList2.push(item.qx_article)
 						})
-						console.log('this.newItemList2 ',this.newItemList2)
+						this.$store.commit('setMyStarArtIdList', mystartartid);// 将star art id存vuex
+						console.log('vuex star id', this.$store.state.myStarArtIdList) //从vuex获取
+						console.log('mystar mystartartid', mystartartid)
+						console.log('mystar this.newItemList2 ',this.newItemList2)
 					},
 					fail: (err)=>{
 						console.log(err)

@@ -9,7 +9,7 @@
 			</view>
 		</view>
 		<view class="itemList">
-			<view class="newsItem" v-for="(data, index) in newItemList2 || newItemList" @click="toNewDetails(data.article_id)">
+			<view class="newsItem" v-for="(data, index) in newItemList2 || newItemList" :key="data.article_id">
 				<!-- 头部 -->
 				<view class="up-block">
 					<view class="user-img">
@@ -27,7 +27,7 @@
 					</view>
 				</view>
 				<!-- 中间 -->
-				<view class="mid-block">
+				<view class="mid-block" @click="toNewDetails(data.article_id)">
 					<view class="article-title" style="font-weight: 600; margin-bottom: 4px;">{{data.article_title}}</view>
 					<text space="nbsp">{{data.article_desc}}</text>
 				</view>
@@ -46,9 +46,13 @@
 							<u-icon name="chat" color="#565656" size="20"></u-icon>
 							<text>{{data.article_comment_count}}</text>
 						</view>
-						<view class="threeIcon1">
+						<view class="threeIcon1" v-if="data.islike" @click="toLike(data.article_id)">
+							<u-icon name="thumb-up" color="#007AFF" size="20"></u-icon>
+							<text style="color: #007AFF;">{{data.article_like_count+1 || 0}}</text>
+						</view>
+						<view class="threeIcon1" v-else @click="toLike(data.article_id)">
 							<u-icon name="thumb-up" color="#565656" size="20"></u-icon>
-							<text>{{data.article_like_count}}</text>
+							<text>{{data.article_like_count || 0}}</text>
 						</view>
 					</view>
 				</view>
@@ -62,6 +66,7 @@
 		name:"tabNewsList",
 		data() {
 			return {
+				update: 1,
 				newItemList2:[],
 				newItemList:[
 					{
@@ -90,6 +95,29 @@
 			this.getList()
 		},
 		methods: {
+			toLike(id){
+				console.log('like',id)
+				this.newItemList2.forEach(item => {
+					if(item.article_id == id){
+						console.log('like',item)
+						// item.islisk = true//v-if无法监听
+						this.$set(item, 'islike', true)
+					}
+				})
+				console.log('like',this.newItemList2, this.update)
+				uni.request({
+			          url: `${this.$baseUrl}/article/like?id=${id}`,  //这里的lid,page,pagesize只能是数字或字母
+			          method: 'GET',
+			          success: (res)=>{
+						  console.log(res.data.data)
+						//   console.log('this.newsItem2详细',this.newsItem2)
+					  },
+			          fail: (err)=>{
+						  console.log(err)
+					  }
+			
+			    })
+			},
 			toNewDetails(id){
 				console.log(id)
 				uni.navigateTo({
@@ -97,14 +125,16 @@
 				});
 			},
 			getList(){
+				this.newItemList2 = []
 			    uni.request({
 			          url: `${this.$baseUrl}/article/list?article_category=&pageNo=1&pageSize=30`,  //这里的lid,page,pagesize只能是数字或字母
 			          method: 'GET',
 			          success: (res)=>{
 						  console.log(res.data.data)
 						  res.data.data.forEach(item => {
-							  	this.newItemList2.push(item)
+							  item.islike = false
 						  })
+						  this.newItemList2 = res.data.data
 						  console.log('this.newItemList2资讯列表',this.newItemList2)
 					  },
 			          fail: (err)=>{
