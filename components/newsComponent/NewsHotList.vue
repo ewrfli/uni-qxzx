@@ -10,7 +10,7 @@
 		</view> -->
 		
 		<view class="itemList">
-			<view class="item" v-for="(data, index) in newItemList2">
+			<view class="item" v-for="(data, index) in newItemList2" @click="toNewDetails(data.article_id)">
 				<view class="flexDiv">
 					<view class="left-img">
 						 <image style="width: 36px; height: 36px; border-radius: 4px;" :src="data.article_coverimg" mode=""></image>
@@ -77,6 +77,12 @@
 			this.getList()
 		},
 		methods: {
+			toNewDetails(id){
+				console.log(id)
+				uni.navigateTo({
+					url: '/pages/news/newItemDetails?id='+id
+				});
+			},
 			toNewsHotDetails(){
 				console.log('toNewsHotDetails热点榜')
 				uni.navigateTo({

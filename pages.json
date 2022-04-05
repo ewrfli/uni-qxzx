@@ -81,6 +81,14 @@
 			}
 		},
 		{
+			"path": "pages/news/newTagItemList",
+			"style": {
+				"navigationBarTitleText": "话题资讯",
+				"navigationStyle":"custom",
+				"navigationBarTextStyle": "white" // 状态栏字体为白色
+			}
+		},
+		{
 			"path": "pages/news/blogItemDetails",
 			"style": {
 				"navigationBarTitleText": "动态详情",

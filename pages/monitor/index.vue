@@ -1,7 +1,7 @@
 <template>
 	<view class="warp">
 		<u-sticky offset-top="0" customNavHeight="0" bgColor="#007aff">
-			<view class="u-search"><u-search :disabled=true @click="toSearch" shape="square" placeholder="搜索公司/新闻/话题" :show-action="false"></u-search></view>
+			<view class="u-search"><u-search :disabled=true @click="toSearch" shape="square" placeholder="搜索资讯/企业" :show-action="false"></u-search></view>
 			<topTabbar :tabBars="tabBars" @TarTap="TarData" :tabIndex="tabIndex" ></topTabbar>
 		</u-sticky>
 		<view class="curtab" v-if="islogin">

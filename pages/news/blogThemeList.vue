@@ -11,7 +11,7 @@
                 <custom-tab-pane v-for="item in topic2" :label="item">
                     <view class="tabs-item" v-for="data in themeList2">
                         <view class="item">
-                            <view class="flexDiv">
+                            <view class="flexDiv" @click="toTagArticle(data.tag_id,data.tag_name)">
                                 <view class="left-img">
                                     <image style="width: 36px; height: 36px; border-radius: 4px;" :src="data.tag_coverimg" mode=""></image>
                                 </view>
@@ -27,8 +27,8 @@
                                 </view>
                             </view>
                             <view class="right-hotIcon">
-                                <u-button v-if="data.updatedAt" type="primary" text="关注"></u-button>
-                                <u-button v-else :plain="true" text="已关注"></u-button>
+                                <u-button v-if="!data.ismystar" type="primary" text="关注" @click="toStar(data.tag_id)"></u-button>
+                                <u-button v-else :plain="true" text="已关注" @click="toDelStar(data.tag_id)"></u-button>
                                 
                             </view>                
                         </view> 
@@ -36,6 +36,9 @@
                     </view>
                 </custom-tab-pane>
             </custom-tabs>
+        </view>
+        <view class="toast">
+            <u-toast ref="uToast"></u-toast>
         </view>
     </view>
 </template>
@@ -45,43 +48,43 @@ export default {
     name: 'blogThemeList',
     data() {
         return {
-            current: 0,
-            swiperCurrent: 0,
-            tabsHeight: 0,
-            dx: 0,
             topic2:['我的关注'],
-            topic: ['推荐话题', '我关注的', '最近参与', '行业', '名企', '最新话题'],
+            // topic: ['推荐话题', '我关注的', '最近参与', '行业', '名企', '最新话题'],
             themeList2: [],
-            themeList: [
-                {
-                    name: '北京华峰车空峰车空科技公司1',
-                    tag: '热门公司1',
-                    prompt: '新增一条公告调研报告',
-                    describe: '',
-                    img: 'https://cdn.uviewui.com/uview/goods/1.jpg',
-                },
-                {
-                    name: '2北京华峰车空xx北京华峰车空峰车空科技公司',
-                    tag: '热门公司2',
-                    prompt: '新增一条公告调研报告',
-                    describe: '',
-                    img: 'https://cdn.uviewui.com/uview/goods/2.jpg',
-                },
-                {
-                    name: '3北京华峰车空峰车空科技公司',
-                    tag: '热门公司3',
-                    prompt: '新增一条公告调研报告',
-                    describe: '',
-                    img: 'https://cdn.uviewui.com/uview/goods/3.jpg',
-                },
-                {
-                    name: '4北京华峰车空峰车空科技公司',
-                    tag: '热门公司4',
-                    prompt: '新增一条公告调研报告',
-                    describe: '1',
-                    img: 'https://cdn.uviewui.com/uview/goods/4.jpg',
-                },
-            ],
+            // themeList: [
+            //     {
+            //         name: '北京华峰车空峰车空科技公司1',
+            //         tag: '热门公司1',
+            //         prompt: '新增一条公告调研报告',
+            //         describe: '',
+            //         img: 'https://cdn.uviewui.com/uview/goods/1.jpg',
+            //     },
+            //     {
+            //         name: '2北京华峰车空xx北京华峰车空峰车空科技公司',
+            //         tag: '热门公司2',
+            //         prompt: '新增一条公告调研报告',
+            //         describe: '',
+            //         img: 'https://cdn.uviewui.com/uview/goods/2.jpg',
+            //     },
+            //     {
+            //         name: '3北京华峰车空峰车空科技公司',
+            //         tag: '热门公司3',
+            //         prompt: '新增一条公告调研报告',
+            //         describe: '',
+            //         img: 'https://cdn.uviewui.com/uview/goods/3.jpg',
+            //     },
+            //     {
+            //         name: '4北京华峰车空峰车空科技公司',
+            //         tag: '热门公司4',
+            //         prompt: '新增一条公告调研报告',
+            //         describe: '1',
+            //         img: 'https://cdn.uviewui.com/uview/goods/4.jpg',
+            //     },
+            // ],
+            myStarTag: [],
+            userInfo: null,
+            user_id: 1,
+            TopTitleIndex: 0
         };
     },
     mounted() {
@@ -89,6 +92,8 @@ export default {
         this.getTopTitle()
         // this.getList(1)
         this.getmyList()
+        this.userInfo = uni.getStorageSync('userInfo')
+        this.user_id = this.userInfo.user_id
     },
     methods: {
         leftClick() {
@@ -107,7 +112,9 @@ export default {
                 this.themeList2 = []
                 this.getList(index)
             }
+            this.TopTitleIndex = index; //存储当前TopTitleIndex
             console.log('改变了index:', index);
+
         },
         async getTopTitle() {
             uni.request({
@@ -130,12 +137,15 @@ export default {
                 method: 'GET',
                 success: (res)=>{
                     console.log(res.data.data)
+                    res.data.data.forEach(item => {
+                        if(this.myStarTag.includes(item.tag_id)){ //判断我的收藏tag有没有这个tag 有这则item.ismystar = true
+                            item.ismystar = true
+                        }else{
+                            item.ismystar = false
+                        }
+                    })
                     this.themeList2 = res.data.data
-                    // res.data.data.forEach(item => {
-                    //     // console.log(item)
-                    //     this.themeList2.push(item)
-                    // })
-                    console.log('this.themeList2 ',this.themeList2)
+                    console.log('getList themeList2 ',this.themeList2)
                 },
                 fail: (err)=>{
                     console.log(err)
@@ -144,23 +154,124 @@ export default {
             })
         },
         getmyList(){
+            this.themeList2 = []
             uni.request({
-                url: `${this.$baseUrl}/star/mytaglist?user_id=1`,  //这里的lid,page,pagesize只能是数字或字母
+                url: `${this.$baseUrl}/star/mytaglist?user_id=${this.user_id}`,  //这里的lid,page,pagesize只能是数字或字母
                 method: 'GET',
                 success: (res)=>{
                     console.log(res.data.data)
                     // this.themeList2 = res.data.data
                     res.data.data.forEach(item => {
-                        // console.log(item)
+                        // console.log(item.tag_id)
+                        this.myStarTag.push(item.tag_id)
                         this.themeList2.push(item.qx_tag)
                     })
-                    console.log('this.themeList2 ',this.themeList2)
+                    this.themeList2.forEach(obj => { //当前列表下为个人收藏的tag
+                        obj.ismystar = true
+                    })
+                    this.myStarTag = [...new Set(this.myStarTag)]
+                    console.log('myStarTag',this.myStarTag)
+                    console.log('myStarTagthemeList2 ',this.themeList2)
                 },
                 fail: (err)=>{
                     console.log(err)
                 }
         
             })
+        },
+        toDelStar(date){
+            console.log(this.themeList2)
+            this.themeList2.forEach(obj => {
+                if(date === obj.tag_id){
+                    obj.ismystar = false //取消收藏
+                }
+            })
+            console.log('toDelStar',date)
+                uni.request({
+					url: `${this.$baseUrl}/star/del`,  //这里的lid,page,pagesize只能是数字或字母
+					method: 'POST',
+					data: {
+                        user_id:this.userInfo.user_id,
+                        tag_id: date
+                    },
+					success: (res)=>{
+						if(res.data.code == 200){
+                            console.log('TopTitleIndex',this.TopTitleIndex)//是否是在个人关注列表下点击取消关注
+                            if(this.TopTitleIndex === 0){
+
+                                this.getmyList()//重新从接口获取
+                            }
+                            this.myStarTag.splice(this.myStarTag.indexOf(date), 1) //如果date在this.myStarTag存在则删除
+
+							this.$refs.uToast.show({
+								type: 'success',
+								title: '取消关注',
+								message: "取消关注",
+								iconUrl: 'https://cdn.uviewui.com/uview/demo/toast/success.png',
+							})
+						}else{
+							this.$refs.uToast.show({
+                                type: 'error',
+                                title: res.data.msg,
+                                message: res.data.msg,
+                                iconUrl: 'https://cdn.uviewui.com/uview/demo/toast/error.png',
+                            })
+						}
+					},
+					fail: (err)=>{
+						console.log(err)
+					}
+			
+				})
+        },
+        toStar(date){ //date 是点击按钮 tag_id
+            console.log(this.themeList2)
+            this.themeList2.forEach(obj => {
+                if(date === obj.tag_id){
+                    obj.ismystar = true//确认收藏
+                }
+            })
+            console.log('toStar',date,this.userInfo.user_id)
+            	uni.request({
+					url: `${this.$baseUrl}/star/add`,  //这里的lid,page,pagesize只能是数字或字母
+					method: 'POST',
+					data: {
+                        user_id:this.userInfo.user_id,
+                        tag_id: date
+                    },
+					success: (res)=>{
+						if(res.data.code == 200){
+                            if(this.myStarTag.indexOf(date) == -1){ ////如果date在this.myStarTag不存在则添加
+                                this.myStarTag.push(date)
+                            }
+							this.$refs.uToast.show({
+								type: 'success',
+								title: '关注成功',
+								message: "关注成功",
+								iconUrl: 'https://cdn.uviewui.com/uview/demo/toast/success.png',
+							})
+
+						}else{
+							this.$refs.uToast.show({
+                                type: 'error',
+                                title: res.data.msg,
+                                message: res.data.msg,
+                                iconUrl: 'https://cdn.uviewui.com/uview/demo/toast/error.png',
+                            })
+						}
+					},
+					fail: (err)=>{
+						console.log(err)
+					}
+			
+				})
+
+        },
+        toTagArticle(id, name){
+            console.log('toTagArticle',id)
+            uni.navigateTo({
+                url: '/pages/news/newTagItemList?id='+id+'&name='+name
+            });
         }
     },
 };
@@ -173,6 +284,8 @@ export default {
 .tab {
     height: 90vh !important;
 }
+
+
 .item {
     padding: 4px 8px;
     background-color: $uni-color-content;

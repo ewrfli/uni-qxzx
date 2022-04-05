@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<u-sticky offset-top="0" customNavHeight="0" bgColor="#007aff">
-			<view class="u-search"><u-search :disabled=true @click="toSearch" shape="square" placeholder="搜索公司/新闻/话题" :show-action="false"></u-search></view>
+			<view class="u-search"><u-search :disabled=true @click="toSearch" shape="square" placeholder="搜索资讯/企业" :show-action="false"></u-search></view>
 		</u-sticky>
 		<view class="swiper">
 			<homeBanner></homeBanner>
