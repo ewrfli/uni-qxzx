@@ -5,7 +5,7 @@
 				<view class="list-card">
 					<view class="item" v-for="(data, index) in commentItem2">
 
-						<view class="up-block">
+						<view class="up-block" @click="toUserPage(data.qx_user)">
 							<view class="user-img">
 								<image :src="data.qx_user.user_avatarimg" mode=""></image>
 							</view>
@@ -91,6 +91,12 @@
 			// this.getCommentList('评论组件onShow',this.$store.state.curArticleId)
 		},
 		methods: {
+			toUserPage(id){ //去作者页
+				console.log('toUserPage', id.user_id)
+				uni.navigateTo({
+					url: '/pages/user/userHomePage?id=' + id.user_id
+				});
+			},
 			toLike(id){
 				this.commentItem2.forEach(item => {
 					if(item.comment_id == id){

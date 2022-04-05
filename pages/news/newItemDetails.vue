@@ -11,7 +11,7 @@
 
 			<view class="newsItem">
 				<!-- 头部 -->
-				<view class="up-block">
+				<view class="up-block" @click="toUserPage(newsItem2.qx_user)">
 					<view class="user-img">
 						<!--  v-for="(user, index) in data.qx_user" -->
 						<image :src="newsItem2.qx_user ? newsItem2.qx_user.user_avatarimg : '../../static/qxzxlogo.png'" mode=""></image>
@@ -126,6 +126,12 @@ import newItemComment from "../../components/newItemComment/newItemComment.vue";
 			console.log('获取vuex star id', this.$store.state.myStarArtIdList) //从vuex获取
 		},
 		methods: {
+			toUserPage(id){ //去作者页
+				console.log('toUserPage', id.user_id)
+				uni.navigateTo({
+					url: '/pages/user/userHomePage?id=' + id.user_id
+				});
+			},
 			toTags(id, name){
 				uni.navigateTo({
 					url: '/pages/news/newTagItemList?id='+id+'&name='+name
