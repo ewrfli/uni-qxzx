@@ -8,27 +8,28 @@
             </view>
             <view class="avatar-div">
                 <view class="user-img">
-                    <image v-if="userInfo" :src="userInfo.user_avatarimg" mode=""></image>
+                    <image v-if="userInfoList" :src="userInfoList.user_avatarimg" mode=""></image>
                     <image src="../../static/unlogin.png" v-else></image>
                 </view>
                 <view class="user-operation">
 					<view class="opera star"><u-icon style="display: inline-block;" name="thumb-up" size="22" color="#999999"></u-icon><span class="data">9</span></view>
-					<view class="opera toedit" @click="toEditUserData">编辑资料</view>
+					<view v-if="isMy" class="opera toedit" @click="toEditUserData">编辑资料</view>
 				</view>
 				
             </view>
             <view class="user-content">
-                <view class="user-name" v-if="userInfo">
-                    {{ userInfo.user_name }}
+                <view class="user-name" v-if="userInfoList">
+                    {{ userInfoList.user_name }}
                 </view>
                 <view class="user-name" v-else>
 							未登录
 				</view>
                 <view class="user-sub">
-                    <text space="nbsp" class="user-data">普通用户 未认证</text>
+                    <text style="color: #007AFF; font-weight: 600;" v-if="userInfoList&&userInfoList.user_power==1" space="nbsp" class="user-data">企业认证用户</text>
+                    <text v-else space="nbsp" class="user-data">普通用户 未认证</text>
                 </view>
                 <view class="user-info">
-                    <text space="nbsp" class="user-data">自我介绍：{{!userInfo ? '暂无' : userInfo.user_desc}}</text>
+                    <text space="nbsp" class="user-data">用户介绍：{{!userInfoList ? '暂无' : userInfoList.user_desc}}</text>
                 </view>
             </view>
         </view>
@@ -39,27 +40,27 @@
                 <u-icon name="coupon" size="40"></u-icon>
                 <view class="data">
                     <span class="title">生日</span>
-                    <span class="detail">{{!userInfo ? '去完善>' : userInfo.user_birthday}}</span>
+                    <span class="detail">{{!userInfoList ? '请完善>' : userInfoList.user_birthday}}</span>
                 </view>
             </view>
             <view class="info company">
                 <u-icon name="calendar" size="40"></u-icon>
                 <view class="data">
-                    <span class="title">公司</span>
-                    <span class="detail">{{!userInfo ? '去完善>' : userInfo.user_company_name}}</span>
+                    <span class="title">行业</span>
+                    <span class="detail">{{!userInfoList ? '请完善>' : userInfoList.user_industry}}</span>
                 </view>
             </view>
             <view class="info school">
                 <u-icon name="bookmark" size="40"></u-icon>
                 <view class="data">
                     <span class="title">邮箱</span>
-                    <span class="detail">{{!userInfo ? '去完善>' : userInfo.user_email}}</span>
+                    <span class="detail">{{!userInfoList ? '请完善>' : userInfoList.user_email}}</span>
                 </view>
             </view>
         </view>
 
         <view class="low">
-            <view class="low-title">我参与的话题</view>
+            <view class="low-title">参与的话题</view>
             <u-line length="100%" style="margin: 0 auto;"></u-line>
             <view class="tabs-item" v-for="data in themeList2">
                 <view class="item">
@@ -102,6 +103,8 @@ export default {
     data() {
         return {
             userInfo:undefined,
+            user_id:1,
+            userInfoList:undefined,
             userData: {
                 id: '',
                 userImg:
@@ -151,34 +154,62 @@ export default {
             ],
             totalTips: ['未认证', 123, 22, 33],
             title: 'Hello',
+            isMy: true
         };
     },
     onShow(){
 		console.log('当前页面',this.$mp.page.route)
 		this.indexPage = this.$mp.page.route
 		this.userInfo = uni.getStorageSync('userInfo')
-        this.getmyList()
+        this.user_id = this.userInfo.user_id
+        
+        this.getmyTagList()
 	},
-    onLoad() {
-        console.log(uni.$u.config.v);
+    onLoad(option) {
+        console.log('option',option.id);
+        if(option.id){
+            console.log('option')
+            this.getUserInfo(option.id)
+            this.isMy = false
+        }else{
+            console.log('user my')
+            this.getUserInfo(this.user_id)
+            this.isMy = true
+        }
     },
     methods: {
         leftClick() {
-            // uni.navigateBack({
-            //     delta: 1,
-            //     animationType: 'pop-out',
-            //     animationDuration: 200,
-            // });
-            uni.switchTab({
-				url: '/pages/user/index'
-			});
+            // uni.switchTab({
+			// 	url: '/pages/user/index'
+			// });
+            uni.navigateBack({
+                delta: 1,
+                animationType: 'pop-out',
+                animationDuration: 200
+            });
         },
         toEditUserData() {
             uni.navigateTo({
 				url: '/pages/user/editUserData'
 			});
         },
-        getmyList(){
+        getUserInfo(id){
+            let token = uni.getStorageSync('token')
+            uni.request({
+                url: `${this.$baseUrl}/user/findone?user_id=${id}`,  //这里的lid,page,pagesize只能是数字或字母
+                method: 'GET',
+                header:{Authorization: 'Bearer ' + token},
+                success: (res)=>{
+                    this.userInfoList = res.data.data
+                    console.log('getUserInfoList', this.userInfoList)
+                },
+                fail: (err)=>{
+                    console.log(err)
+                }
+        
+            })
+        },
+        getmyTagList(){
             uni.request({
                 url: `${this.$baseUrl}/star/mytaglist?user_id=${this.userInfo.user_id}`,  //这里的lid,page,pagesize只能是数字或字母
                 method: 'GET',

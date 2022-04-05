@@ -11,7 +11,7 @@
 		<view class="itemList">
 			<view class="newsItem" v-for="(data, index) in newItemList2 || newItemList" :key="data.article_id">
 				<!-- 头部 -->
-				<view class="up-block">
+				<view class="up-block" @click="toUserPage(data.qx_user)">
 					<view class="user-img">
 						<image :src="data.qx_user ? data.qx_user.user_avatarimg : '../../static/qxzxlogo.png'" mode=""></image>
 						<!-- <u-icon class="user-v" name="level" color="#007aff" size="20"></u-icon> -->
@@ -117,6 +117,12 @@
 					  }
 			
 			    })
+			},
+			toUserPage(id){
+				console.log('toUserPage', id.user_id)
+				uni.navigateTo({
+					url: '/pages/user/userHomePage?id=' + id.user_id
+				});
 			},
 			toNewDetails(id){
 				console.log(id)

@@ -20,20 +20,20 @@
 			</view>
 			<view class="top-div">
 				<view class="title">VIP特权1.关注话题</view>
+				<view class="img-div"><image src="../../../static/bannner/banner1.png" mode=""></image></view>
 				<view class="content">VIP用户无限关注各种话题，及时发布更新相关话题，及时获取信息</view>
-				<view><image style="width: 300px; height: 100px; border-radius: 2px;" src="../../../static/bannner/banner1.png" mode=""></image></view>
 			</view>
 
 			<view class="top-div">
 				<view class="title">VIP特权2.监控公司</view>
+				<view class="img-div"><image src="../../../static/bannner/banner2.png" mode=""></image></view>
 				<view class="content">VIP用户无限次监控各种公司相关信息，及时获取公司相关信息</view>
-				<view><image style="width: 300px; height: 100px; border-radius: 2px;" src="../../../static/bannner/banner2.png" mode=""></image></view>
 			</view>
 
 			<view class="top-div">
 				<view class="title">VIP特权3.及时推送</view>
+				<view class="img-div"><image src="../../../static/bannner/banner4.png" mode=""></image></view>
 				<view class="content">VIP用户无限次及时推送监控的相关信息，及时获取相关信息</view>
-				<view><image style="width: 300px; height: 100px; border-radius: 2px;" src="../../../static/bannner/banner4.png" mode=""></image></view>
 			</view>
 		</view>
 	</view>
@@ -75,8 +75,18 @@ import vipBanner from '../../../components/homeBanner/vipBanner.vue'
 				color: #EF893C;
 				font-size: 18px;
 			}
+			.img-div {
+				margin: 8px 0px;
+				image{
+					width: 300px; 
+					height: 100px; 
+					border-radius: 2px; 
+					margin-left: -150px; 
+					left: 50%;
+				}
+			}
 			.content{
-
+				margin: 8px 2px;
 			}
 		}
 	}

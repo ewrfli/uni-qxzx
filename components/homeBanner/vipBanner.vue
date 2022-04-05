@@ -5,7 +5,7 @@
             <view class="sub-title">您的会员已过期，请尽快续费</view>
         </view>
         <view class="right-div">
-            <u-button type="primary" color="linear-gradient(to right, #f19b51, #ee7f31)" text="立即开通"></u-button>
+            <u-button type="primary" color="linear-gradient(to right, #f19b51, #ee7f31)" text="立即开通" @click="tobeVip"></u-button>
         </view>
 	</view>
 </template>
@@ -17,7 +17,15 @@
 			return {
 
 			};
-		}
+		},
+        mounted() {
+            
+        },
+        methods: {
+            tobeVip(){
+                console.log('tobeVip')
+            }
+        }
 	}
 </script>
 

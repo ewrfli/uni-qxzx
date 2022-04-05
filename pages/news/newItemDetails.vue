@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<u-navbar title="资讯详情" @leftClick="leftClick" :autoBack="true" :fixed="true">
+		<u-navbar title="资讯详情" @leftClick="leftClick" @rightClick="rightClick" :autoBack="true" :fixed="true">
 			<view class="u-nav-slot" slot="left">
                 <u-icon name="arrow-left" size="22" color="#007aff"></u-icon>
             </view>
@@ -71,6 +71,10 @@
 				@fabClick="trigger"
 				></uni-fab>
 			</view>
+
+			<uni-popup ref="popup" type="share" background-color="#fff">
+				<uni-popup-share title="分享到"></uni-popup-share>
+			</uni-popup>
 	</view>
 </template>
 
@@ -82,6 +86,7 @@ import newItemComment from "../../components/newItemComment/newItemComment.vue";
 		},
 		data() {
 			return {
+				show: false,
 				isStar: false,
 				like: false,
 				newid: null,
@@ -265,11 +270,11 @@ import newItemComment from "../../components/newItemComment/newItemComment.vue";
 						beforePage.$vm.refreshRequest(); // 执行前一个页面的刷新
 					}
 				});
-				// uni.switchTab({
-				// 	url: '/pages/home/index'
-					
-				// })
-				
+			},
+
+			rightClick(e){
+				console.log('rightClick')
+				this.$refs.popup.open('bottom')
 			},
 			getnewList(id){
 				let _this = this
