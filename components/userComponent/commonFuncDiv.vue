@@ -45,7 +45,7 @@ export default {
                 },
                 {
                     name: 'hourglass',
-                    title: '我的消息',
+                    title: '监控信息',
                     page: 'pages/user/funcDiv/myMessage',
                     iconSrc: '../../static/funcdiv/message.png'
                 },

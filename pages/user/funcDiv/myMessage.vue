@@ -1,6 +1,6 @@
 <template>
 	<view class="wrap">
-		<u-navbar title="我的消息" @leftClick="leftClick" :autoBack="true" :fixed="true">
+		<u-navbar title="监控信息" @leftClick="leftClick" :autoBack="true" :fixed="true">
 			<view
                 class="u-nav-slot"
                 slot="left"
@@ -13,8 +13,10 @@
 
             </view>
 		</u-navbar>
-
-		<view class="card">	
+		<view class="card">
+			<tabMonitorDaily></tabMonitorDaily>
+		</view>
+		<!-- <view class="card">	
 			<u-line length="100%" style="margin: 0 auto;"></u-line>
 				<view class="tabs-item" v-for="(data, index) in userInfo">
 					<view class="item">
@@ -39,13 +41,17 @@
 					</view> 
 					<u-line style="margin: 0 10px;" length="98%"></u-line>     
 				</view>
-		</view>
+		</view> -->
 	</view>
 </template>
 
 <script>
+import tabMonitorDaily from '../../../components/monitorComponent/tabMonitorDaily.vue' //../../components/monitorComponent/tabMonitorDaily.vue
 	export default {
 		name:"newsHotDetails",
+		components: {
+			tabMonitorDaily
+		},
 		data() {
 			return {
 				userInfo: [{
@@ -103,7 +109,7 @@
 </script>
 
 <style lang="scss">
-	.content{
+	.wrap{
 		background-color: $uni-color-backgroundColor;
 	}
 	.card {

@@ -24,6 +24,9 @@
         methods: {
             tobeVip(){
                 console.log('tobeVip')
+                uni.navigateTo({
+				    url: '/pages/user/vipPay'
+			    });
             }
         }
 	}

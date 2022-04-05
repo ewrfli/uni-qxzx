@@ -163,7 +163,7 @@
 		{
 			"path": "pages/user/funcDiv/myMessage",
 			"style": {
-				"navigationBarTitleText": "我的消息",
+				"navigationBarTitleText": "监控信息",
 				"navigationStyle":"custom",
 				"navigationBarTextStyle": "white" // 状态栏字体为白色
 			}
@@ -188,6 +188,14 @@
 			"path": "pages/user/funcDiv/vipServe",
 			"style": {
 				"navigationBarTitleText": "VIP服务",
+				"navigationStyle":"custom",
+				"navigationBarTextStyle": "white" // 状态栏字体为白色
+			}
+		},
+		{
+			"path": "pages/user/vipPay",
+			"style": {
+				"navigationBarTitleText": "支付VIP",
 				"navigationStyle":"custom",
 				"navigationBarTextStyle": "white" // 状态栏字体为白色
 			}

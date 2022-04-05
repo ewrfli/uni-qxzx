@@ -86,6 +86,7 @@ import vipBanner from '../../../components/homeBanner/vipBanner.vue'
 				}
 			}
 			.content{
+				padding: 8px 8px;
 				margin: 8px 2px;
 			}
 		}
