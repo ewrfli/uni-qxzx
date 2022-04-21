@@ -83,7 +83,7 @@
                     </view>
                     
                     <view class="content-div">
-                        <view class="item" v-for="(item, index) in value[1].slice(1)">   
+                        <view class="item" v-for="(item, index) in value[1].slice(1)" @click="toNewDetails(item.risk_id)">   
                             <view class="flexDiv">
                                 <view class="left-img">
                                     <image style="width: 36px; height: 36px; border-radius: 4px;" :src="item.risk_coverimg" mode=""></image>
@@ -226,6 +226,12 @@ import newItemComment from "../../components/newItemComment/newItemComment.vue";
 			// this.$store.commit('setCurArticleId', option.id);//把setCurArticleId 传到 vuex 再到 comment子组件
 		},
 		methods: {
+            toNewDetails(id){
+				console.log(id)
+				uni.navigateTo({
+					url: '/pages/news/newItemDetails?id='+id
+				});
+			},
 			leftClick(){
 				uni.navigateBack({
 					delta: 1,
@@ -242,6 +248,7 @@ import newItemComment from "../../components/newItemComment/newItemComment.vue";
 						//   console.log(res.data.data)
 							this.companyItem = res.data.data
                             this.qx_risks = res.data.data.qx_risks
+                            
                             let risk_date = []
                             res.data.data.qx_risks.map( item =>{
                                 if(!risk_date.includes(item.risk_date)){
