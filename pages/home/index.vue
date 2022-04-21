@@ -8,7 +8,7 @@
 			<view class="top-subtitle">为用户实时了解最新风险信息及相关企业相关风险信息</view>
 		</view>
 		<u-sticky offset-top="0" customNavHeight="0" bgColor="#007aff">
-			<view class="u-search"><u-search :disabled=true @click="toSearch" shape="square" placeholder="搜索资讯/企业" v-model="keyword" :show-action="false"></u-search></view>
+			<view class="u-search"><u-search :disabled=true @click="toSearch" shape="square" placeholder="搜索资讯/关键词" v-model="keyword" :show-action="false"></u-search></view>
 		</u-sticky>
 
 		<view class="iconfunc">

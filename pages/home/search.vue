@@ -1,7 +1,7 @@
 <template>
 	<view class="warp">
 		<u-sticky offset-top="0" customNavHeight="0" bgColor="#007aff">
-			<view class="u-search"><u-search shape="square" placeholder="搜索资讯/企业" v-model="searchkeyword" :show-action="false" @search="toSearch" @clear="toClear"></u-search></view>
+			<view class="u-search"><u-search shape="square" placeholder="搜索资讯/关键词" v-model="searchkeyword" :show-action="false" @search="toSearch" @clear="toClear"></u-search></view>
 		</u-sticky>
 		<NewsHotList v-if="!searchArticleList"></NewsHotList>
 
