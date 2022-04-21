@@ -248,14 +248,14 @@ import newItemComment from "../../components/newItemComment/newItemComment.vue";
 						//   console.log(res.data.data)
 							this.companyItem = res.data.data
                             this.qx_risks = res.data.data.qx_risks
-                            
+
                             let risk_date = []
                             res.data.data.qx_risks.map( item =>{
                                 if(!risk_date.includes(item.risk_date)){
                                     risk_date.push(item.risk_date)
                                 }
                             }) //日期提取 去重 ['2022-02-28', '2022-02-27']
-                            this.risk_date = risk_date
+                            this.risk_date = risk_date.reverse()
 
                             let newDateRiskList = new Map();
                             risk_date.map( item => {
